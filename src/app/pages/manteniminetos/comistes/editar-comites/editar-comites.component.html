@@ -1,0 +1,26 @@
+<div class="container animate__animated animate__backInDown">
+    <div class="d-flex justify-content-between align-items-center">
+        <h1 class="text-center">Editar Comité</h1>
+        <button (click)="volverInicio()" class="btn btn-outline-secondary">
+            <i class="fa fa-arrow-left" aria-hidden="true"></i>
+        </button>
+    </div>
+    <form class="p-2" [formGroup]="comiteForm"  (submit)="editarComite()">
+        <div class="row mb-3">
+            <label for="nombre" class="col-sm-2 col-form-label">Nombre:</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="nombre" name="nombre" formControlName="nombre">
+            </div>
+            @if (comiteForm.get('nombre')?.hasError('pattern')){
+                <div>
+                    El campo debe tener el formato: xxx.xxx (donde x es un número).
+                </div>
+            }
+        </div>
+        <div class="text-center">
+            <button type="submit" class="btn btn-outline-primary m-2">
+                <i class="fas fa-save"></i>
+            </button>
+        </div>
+    </form>
+</div>

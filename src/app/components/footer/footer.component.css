@@ -1,0 +1,4 @@
+.finalfooter {
+    min-height: calc(90vh - (2rem + 3.5rem)); /* Ajusta el valor según sea necesario */
+    padding-bottom: 3.5rem; /* Igual al alto del footer */
+}

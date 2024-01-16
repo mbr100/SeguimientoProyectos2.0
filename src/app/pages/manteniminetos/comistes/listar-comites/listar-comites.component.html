@@ -1,0 +1,73 @@
+<div class="row animate__animated animate__backInDown">
+    <div class="col-10">
+        <div class="card">
+            <div class="card-body">
+                <input type="text" class="form-control" placeholder="Buscar Consultor....." #txtTermino (keyup)="buscar(txtTermino.value)">
+            </div>
+        </div>
+    </div>
+    <div class="col-2">
+        <div class="card">
+            <div class="card-body">
+                Comites {{numerosComites()}}
+            </div>
+        </div>
+    </div>
+</div>
+@if (busqueda){
+    <table class="table table-striped animate__animated animate__backInDown" style="z-index: -2;">
+        <thead>
+        <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Nombre</th>
+            <th class="text-center text-nowrap col-1" scope="col">Acciones</th>
+        </tr>
+        </thead>
+        <tbody>
+            @for (comite of comitesFiltrados; track comite){
+                <tr>
+                    <th scope="row">{{comite.id}}</th>
+                    <td>{{comite.nombre}}</td>
+                    <td class="text-center text-nowrap col-1">
+                        <button type="button" class="btn btn-outline-primary m-2" (click)="editarComite(comite)">
+                            <i class="fa fa-pencil" aria-hidden="true"></i>
+                        </button>
+                        <button type="button" class="btn btn-outline-danger" (click)="eliminarComite(comite)">
+                            <i class="fa fa-trash" aria-hidden="true"></i>
+                        </button>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+} @else {
+    <table class="table table-striped animate__animated animate__backInDown" style="z-index: -2;">
+        <thead>
+        <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Nombre</th>
+            <th class="text-center text-nowrap col-1" scope="col">Acciones</th>
+        </tr>
+        </thead>
+        <tbody>
+            @for (comite of comites; track comite){
+                <tr>
+                    <th scope="row">{{comite.id}}</th>
+                    <td>{{comite.nombre}}</td>
+                    <td class="text-center text-nowrap col-1">
+                        <button type="button" class="btn btn-outline-primary m-2" (click)="editarComite(comite)">
+                            <i class="fa fa-pencil" aria-hidden="true"></i>
+                        </button>
+                        <button type="button" class="btn btn-outline-danger" (click)="eliminarComite(comite)">
+                            <i class="fa fa-trash" aria-hidden="true"></i>
+                        </button>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+<div class="text-center animate__animated animate__backInDown">
+    <button type="button" class="btn btn-outline-primary" (click)="agregarComite()">Añadir Comite</button>
+</div>

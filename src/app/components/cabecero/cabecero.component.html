@@ -1,0 +1,53 @@
+<nav class="navbar navbar-expand-sm navbar-dark bg-dark mb-2 p-2 animate__animated animate__slideInDown container-fluid" style="z-index: 1000;">
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <a class="navbar-brand ms-3" routerLink="/" aria-label="Home" style="cursor: pointer">
+        <div class="row">
+            <h1 class="ms-2">
+                <img src="../../../assets/1.jpg" alt="logo" height="50"> Seguimiento de Proyectos
+            </h1>
+        </div>
+    </a>
+    @if (mostrarLogOut){
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link" routerLink="/" aria-label="Home">Home</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="proyectosDesplegable" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Proyectos
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="proyectosDesplegable">
+                        <li><a class="dropdown-item" (click)="iraHisotricos()" aria-label="Proyectos Historico">Proyectos Historico</a></li>
+                        <li><a class="dropdown-item" (click)="iraArchivados()" aria-label="Proyectos Historico">Proyectos Archivados</a></li>
+
+                    </ul>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="mantenimientosDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Mantenimientos
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="mantenimientosDropdown">
+                        <li><a class="dropdown-item" routerLink="/mantenimientos/expertos-tecnicos/listarET">Expertos Técnicos</a></li>
+                        <li><a class="dropdown-item" routerLink="/mantenimientos/expertos-comite/listarEcomite">Expertos Comité</a></li>
+                        <li><a class="dropdown-item" routerLink="/mantenimientos/consultores/listadoConsultores">Consultores</a></li>
+                        <li><a class="dropdown-item" routerLink="mantenimientos/comites/listarComites">Comités</a></li>
+                    </ul>
+                </li>
+            </ul>
+
+            <div class="dropdown">
+                <a class="nav-link dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false" aria-label="User Options" style="position: relative; z-index: 10000;">
+                    <img src="../../../assets/1.jpg" alt="Profile" width="30" height="30" style="border-radius: 50%;">
+                </a>
+                <ul class="dropdown-menu dropdown-menu-dark" style="position: absolute; right: 0; left: auto;">
+                    <li><a class="dropdown-item text-center" href="#" aria-label="Profile">Profile</a></li>
+                    <li><a class="dropdown-item text-center" href="#" aria-label="Logout" (click)="logout()">Logout</a></li>
+                </ul>
+            </div>
+        </div>
+    }
+
+</nav>

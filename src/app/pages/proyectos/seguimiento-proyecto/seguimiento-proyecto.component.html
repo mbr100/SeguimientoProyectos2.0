@@ -1,0 +1,217 @@
+<div class="container-fluid animate__animated animate__slideInDown">
+    <div class="row bg-secondary p-3">
+        <div class="col-6">
+            <h1 class="text-white">Proyecto: {{ codigoproyecto() }}</h1>
+        </div>
+        <div class="col-6 d-flex align-items-center justify-content-end">
+            <button class="btn btn-outline-danger m-2" (click)="archivarProyecto()">Archivar</button>
+            <button class="btn btn-outline-light" (click)="volver()">Volver</button>
+        </div>
+    </div>
+</div>
+<br>
+
+<div class="container-fluid animate__animated animate__slideInDown">
+    <div class="row">
+        <div class="col">
+            <div class="row mb-3">
+                <label for="codigo" class="col-sm-2 col-form-label">Código:</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" id="codigo" name="codigo" [(ngModel)]="proyecto.codigo">
+                </div>
+            </div>
+            <div class="row mb-3">
+                <label for="acronimo" class="col-sm-2 col-form-label">Acrónimo:</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" id="acronimo" name="acronimo" [(ngModel)]="proyecto.acronimo">
+                </div>
+            </div>
+            <div class="row mb-3">
+                <label for="titulo" class="col-sm-2 col-form-label">Título:</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" id="titulo" name="titulo" [(ngModel)]="proyecto.titulo">
+                </div>
+            </div>
+            <div class="row mb-3">
+                <label for="cliente" class="col-sm-2 col-form-label">Cliente:</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" id="cliente" name="cliente" [(ngModel)]="proyecto.cliente">
+                </div>
+            </div>
+            <div class="row mb-3">
+                <label for="ejercicio" class="col-sm-2 col-form-label">Ejercicio:</label>
+                <div class="col-sm-10">
+                    <input type="number" step="any" class="form-control" id="ejercicio" name="ejercicio" [(ngModel)]="proyecto.ejercicio">
+                </div>
+            </div>
+
+            <div class="row mb-3">
+                <label for="IMV" class="col-sm-2 col-form-label">IMV:</label>
+                <div class="col-sm-10">
+                    <input type="checkbox" class="form-check-input" id="IMV" name="IMV" [(ngModel)]="proyecto.IMV">
+                </div>
+            </div>
+            <div class="row mb-3">
+                <label for="precioOfertado" class="col-sm-2 col-form-label">Precio Oferta:</label>
+                <div class="col-sm-10">
+                    <input type="number" class="form-control" id="precioOfertado" name="precioOfertado" [(ngModel)]="proyecto.precioOfertado">
+                </div>
+            </div>
+            <div class="row mb-3">
+                <label for="codigoUnesco" class="col-sm-2 col-form-label">Codigo Unesco:</label>
+                <div class="col-sm-10">
+                    <input type="number" class="form-control" id="codigoUnesco" name="codigoUnesco" [(ngModel)]="proyecto.codigoUnesco">
+                </div>
+            </div>
+            <div class="row mb-3">
+                <label for="proyectoPrincipal" class="col-sm-2 col-form-label">Proyecto Principal:</label>
+                <div class="col-sm-10">
+                    <div class="form-check form-switch">
+                        <input disabled type="checkbox" class="form-check-input" id="proyectoPrincipal" name="proyectoPrincipal" [(ngModel)]="proyecto.proyectoPrincipal">
+                    </div>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <label for="tipoProyecto" class="col-sm-2 col-form-label">Tipo Proyecto:</label>
+                <div class="col-sm-10">
+                    <input disabled type="text" class="form-control" id="tipoProyecto" name="tipoProyecto" [(ngModel)]="proyecto.tipoProyecto">
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="row">
+                <div class="col-sm-6 mb-3 mb-sm-0">
+                    @if (expertoProyecto.id != undefined) {
+                        <div class="card w-100">
+                            <div class="card-header">
+                                Experto Tecnico
+                            </div>
+                            <div class="card-body">
+                                <p class="card-text">Nombre: {{ expertoProyecto.nombre + " " + expertoProyecto.apellido1 + " " + expertoProyecto.apellido2 }}</p>
+                                <p class="card-text">Telefono: {{ expertoProyecto.telefono }}</p>
+                                <p class="card-text">Email: {{ expertoProyecto.email }}</p>
+                            </div>
+                        </div>
+                        <br>
+                        <div class="card w-100">
+                            <div class="card-header">
+                                Experto Tecnico emails
+                            </div>
+                            <div class="card-body">
+                                <button class="btn btn-outline-success m-2" (click)="enviarEmailAperturaExpertoTecnico()">Enviar Email Apertura</button>
+                                <button class="btn btn-outline-success m-2" (click)="enviarEmailCierreExpertoTecnico()">Enviar Email Cierre</button>
+                            </div>
+                        </div>
+                    } @else {
+                        <label class="col-form-label">Experto Tecnico:</label>
+                        <div class="row mb-3">
+                            <select class="form-select" aria-label="Default select example" id="consultores" [(ngModel)]="proyecto.expertoTecnico">
+                                <option selected>Selecciona un ET</option>
+                                @for (et of elegirET;track et) {
+                                    <option value="{{et.id}}">{{ et.nombre + "" + et.apellido1 }}</option>
+                                }
+                            </select>
+                        </div>
+                    }
+                </div>
+                <div class="col-sm-6">
+                    <div class="card w-100">
+                        <div class="card-header">
+                            Consultor
+                        </div>
+                        <div class="card-body">
+                            <p class="card-text">Nombre: {{ consultorProyecto.nombre }}</p>
+                            <p class="card-text">Telefono: {{ consultorProyecto.telefono }}</p>
+                            <p class="card-text">Email: {{ consultorProyecto.email }}</p>
+                            <p class="card-text">Consultora: {{ consultorProyecto.consultora }}</p>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="card w-100">
+                        <div class="card-header">
+                            Emails Consultor
+                        </div>
+                        <div class="card-body">
+                            <button class="btn btn-outline-success m-2" (click)="enviarEmailCertificadoCliente()">Enviar Certificado</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div class="card">
+        <div class="card-header">
+            Comite
+        </div>
+        <div class="card-body">
+            @if (proyecto.fechaComite === null){
+                <div class="row mb-3">
+                    <label for="fechaComite" class="col-sm-2 col-form-label">Fecha Inicio Comite:</label>
+                    <div class="col-sm-10">
+                        <button id="fechaComite" class="btn btn-outline-success m-2" (click)="inicioComite()">Inicio Comite</button>
+                    </div>
+                </div>
+            }
+            @if (proyecto.fechaComite !== null){
+            <div class="row mb-3">
+                <div class="row mb-3">
+                    <label for="coordinador" class="col-sm-2 col-form-label">Coordinador:</label>
+                    <div class="col-sm-10">
+                        <select class="form-select" aria-label="Default select example" id="coordinador" [(ngModel)]="proyecto.coordinadorComite">
+                            <option selected>Selecciona un Coordinador</option>
+                            @for (coordinador of coordinadoresComite;track coordinador) {
+                                <option value="{{coordinador.id}}">{{ coordinador.nombre }}</option>
+                            }
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <label for="fechaFinComite" class="col-sm-2 col-form-label">Fecha Fin Comite:</label>
+                <div class="col-sm-10">
+                    <button id="fechaFinComite" class="btn btn-outline-success m-2" (click)="finDeComite()">Fin de Comite</button>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <label for="numeroVersionComite" class="col-sm-2 col-form-label">Versión Comite:</label>
+                <div class="col-sm-10">
+                    <input type="number" class="form-control" id="numeroVersionComite" name="numeroVersionComite" [(ngModel)]="proyecto.numeroVersionComite">
+                </div>
+            </div>
+            }
+        </div>
+    </div>
+    <div class="card">
+        <div class="card-header">
+            Experto Comite
+        </div>
+        <div class="card-body">
+            @if (proyecto.experto4D === '') {
+                <div class="row mb-3">
+                    <label for="experto4D" class="col-sm-2 col-form-label">Experto 4D:</label>
+                    <div class="col-sm-10">
+                        <select class="form-select" aria-label="Default select example" id="experto4D" (change)="actualizarproyecto()" [(ngModel)]="proyecto.experto4D">
+                            <option selected>Selecciona un Experto 4D</option>
+                            @for (experto4D of expertos4D;track experto4D) {
+                                <option value="{{experto4D.id}}">{{ experto4D.nombre }}</option>
+                            }
+                        </select>
+                    </div>
+                </div>
+            } @else {
+                <div class="card-body">
+                    <p class="card-text">Nombre: {{ expertoComite.nombre + " " + expertoComite.apellido1 + " " + expertoComite.apellido2 }}</p>
+                    <p class="card-text">Telefono: {{ expertoComite.telefono }}</p>
+                    <p class="card-text">Email: {{ expertoComite.email }}</p>
+                </div>
+                <div class="card-body">
+                    <button class="btn btn-outline-success m-2" (click)="enviarEmailAperturaComite()">Enviar Email Apertura</button>
+                    <button class="btn btn-outline-success m-2" (click)="enviarEmailCycComite()">Enviar CYC</button>
+                </div>
+            }
+        </div>
+
+        <button type="submit" class="btn btn-outline-success btn-lg btn-block" (click)="actualizarproyecto()">Actualizar</button>
+    </div>
+</div>

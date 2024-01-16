@@ -1,0 +1,54 @@
+<div class="row animate__animated animate__backInDown">
+    <div class="col-10">
+        <div class="card">
+            <div class="card-body">
+                <input type="text" class="form-control" placeholder="Buscar Proyecto....." #txtTermino>
+            </div>
+        </div>
+    </div>
+    <div class="col-2">
+        <div class="card">
+            <div class="card-body">
+                Proyectos en activo {{proyectosArchivados.length}}
+            </div>
+        </div>
+    </div>
+</div>
+
+<table class="table table-striped animate__animated animate__backInDown" style="z-index: -2;">
+    <thead>
+    <tr>
+        <th scope="col">Codigo</th>
+        <th scope="col">Proyecto</th>
+        <th scope="col">Cliente</th>
+        <th scope="col">Ejercicio</th>
+        <th scope="col">Fecha Inicio /comite</th>
+    </tr>
+    </thead>
+    <tbody>
+        @for (proyecto of proyectosArchivados; track proyecto){
+            <tr>
+                <td>{{proyecto.codigo}}</td>
+                <td>
+                    <div class="row">Acronimo: {{proyecto.acronimo}}</div>
+                    <div class="row">Titulo: {{proyecto.titulo}}</div>
+                </td>
+                <td>{{proyecto.cliente}}</td>
+                <td>{{proyecto.ejercicio}}</td>
+                <td>
+                    <div class="row">{{proyecto.fechaInicioProyecto | date:'dd/MM/yyyy'}}</div>
+                    @if (proyecto.fechaComite){
+                        <div class="row">{{proyecto.fechaComite | date:'dd/MM/yyyy'}}</div>
+                    } @else {
+                        <div class="row">No hay Comite</div>
+                    }
+                </td>
+            </tr>
+        } @empty {
+            <tr>
+                <td colspan="8" class="text-center">No hay proyectos</td>
+            </tr>
+        }
+
+    </tbody>
+</table>

@@ -1,0 +1,81 @@
+<div class="container animate__animated animate__backInDown">
+    <div class="d-flex justify-content-between align-items-center">
+        <h1 class="text-center">Editar Experto Tecnico</h1>
+        <button (click)="volverInicio()" class="btn btn-outline-secondary">
+            <i class="fa fa-arrow-left" aria-hidden="true"></i>
+        </button>
+    </div>
+    <form class="p-2" [formGroup]="expertoTecnicoForm"  (submit)="agregar()">
+        <div class="row mb-3">
+            <label for="idexperto" class="col-sm-2 col-form-label">ID Experto:</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="idexperto" name="idexperto" formControlName="idexperto">
+            </div>
+            @if (expertoTecnicoForm.get('codigo')?.hasError('pattern')){
+                <div>
+                    El campo debe tener el formato: xxx.xxx (donde x es un número).
+                </div>
+            }
+        </div>
+        <div class="row mb-3">
+            <label for="nombre" class="col-sm-2 col-form-label">Nombre:</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="nombre" name="nombre" formControlName="nombre">
+            </div>
+            @if (expertoTecnicoForm.get('nombre')?.hasError('pattern')){
+                <div>
+                    El campo debe tener el formato: xxx.xxx (donde x es un número).
+                </div>
+            }
+        </div>
+        <div class="row mb-3">
+            <label for="apellido1" class="col-sm-2 col-form-label">Apellido 1:</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="apellido1" name="apellido1" formControlName="apellido1">
+            </div>
+            @if (expertoTecnicoForm.get('apellido1')?.hasError('pattern')){
+                <div>
+                    El campo debe tener el formato: xxx.xxx (donde x es un número).
+                </div>
+            }
+        </div>
+        <div class="row mb-3">
+            <label for="apellido2" class="col-sm-2 col-form-label">Apellido 2:</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="apellido2" name="apellido2" formControlName="apellido2">
+            </div>
+            @if (expertoTecnicoForm.get('apellido1')?.hasError('pattern')){
+                <div>
+                    El campo debe tener el formato: xxx.xxx (donde x es un número).
+                </div>
+            }
+        </div>
+        <div class="row mb-3">
+            <label for="email" class="col-sm-2 col-form-label">Email:</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="email" name="email" formControlName="email">
+            </div>
+            @if (expertoTecnicoForm.get('email')?.hasError('pattern')){
+                <div>
+                    El campo debe tener el formato: xxx.xxx (donde x es un número).
+                </div>
+            }
+        </div>
+        <div class="row mb-3">
+            <label for="telefono" class="col-sm-2 col-form-label">Telefono:</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="telefono" name="telefono" formControlName="telefono">
+            </div>
+            @if (expertoTecnicoForm.get('telefono')?.hasError('pattern')){
+                <div>
+                    El campo debe tener el formato: xxx.xxx (donde x es un número).
+                </div>
+            }
+        </div>
+        <div class="text-center">
+            <button type="submit" class="btn btn-outline-primary m-2">
+                <i class="fas fa-save"></i>
+            </button>
+        </div>
+    </form>
+</div>
