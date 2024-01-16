@@ -4,18 +4,22 @@ import {Router, RouterLink} from "@angular/router";
 import {Proyecto} from "../../../models/proyecto.model";
 import {ProyectoService} from "../../../services/proyecto.service";
 import {Consultores} from "../../../models/consultores.model";
+import {MostrarconsultorfnComponent} from "../../../components/mostrarconsultorfn/mostrarconsultorfn.component";
+import {MostrarexpertoComponent} from "../../../components/mostrarexperto/mostrarexperto.component";
 
 @Component({
-  selector: 'app-listado-proyectos',
-  standalone: true,
+    selector: 'app-listado-proyectos',
+    standalone: true,
     imports: [
         DatePipe,
-        RouterLink
+        RouterLink,
+        MostrarconsultorfnComponent,
+        MostrarexpertoComponent
     ],
-  templateUrl: './listado-proyectos.component.html',
-  styleUrl: './listado-proyectos.component.css'
+    templateUrl: './listado-proyectos.component.html',
+    styleUrl: './listado-proyectos.component.css'
 })
-export class ListadoProyectosComponent implements OnInit{
+export class ListadoProyectosComponent implements OnInit {
     public proyectos: Proyecto[];
     public proyectosBusqueda: Proyecto[];
     public consultores: Consultores[];

@@ -37,6 +37,10 @@
                         </button>
                     </td>
                 </tr>
+            } @empty {
+                <tr>
+                    <td colspan="3" class="text-center">No hay comites</td>
+                </tr>
             }
         </tbody>
     </table>
@@ -62,6 +66,10 @@
                             <i class="fa fa-trash" aria-hidden="true"></i>
                         </button>
                     </td>
+                </tr>
+            } @empty {
+                <tr>
+                    <td colspan="3" class="text-center">No hay comites en la busqueda</td>
                 </tr>
             }
         </tbody>

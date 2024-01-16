@@ -19,10 +19,12 @@
     <thead>
     <tr>
         <th scope="col">Codigo</th>
-        <th scope="col">Proyecto</th>
+        <th scope="col" style="width: 40%; word-wrap: break-word;">Proyecto</th>
         <th scope="col">Cliente</th>
         <th scope="col">Ejercicio</th>
-        <th scope="col">Fecha Inicio /comite</th>
+        <th scope="col">Fecha comite</th>
+        <th scope="col">Consultor</th>
+        <th scope="col">Experto</th>
         <th class="text-center" scope="col">Acciones</th>
     </tr>
     </thead>
@@ -44,6 +46,12 @@
                         } @else {
                             <div class="row">No hay Comite</div>
                         }
+                    </td>
+                    <td>
+                        <app-mostrarconsultorfn [idConsultor]="proyecto.consultor"></app-mostrarconsultorfn>
+                    </td>
+                    <td>
+                        <app-mostrarexperto [idExperto]="proyecto.expertoTecnico"></app-mostrarexperto>
                     </td>
                     <td class="text-center text-nowrap">
                         <button type="button" class="btn btn-outline-primary m-2" (click)="seguimientoProyecto(proyecto)">
@@ -70,12 +78,12 @@
                     </td>
                     <td>{{proyecto.cliente}}</td>
                     <td>{{proyecto.ejercicio}}</td>
-                    <td>
-                        <div class="row">{{proyecto.fechaInicioProyecto | date:'dd/MM/yyyy'}}</div>
+                    <td class="text-center align-middle">
+                        <div>{{proyecto.fechaInicioProyecto | date:'dd/MM/yyyy'}}</div>
                         @if (proyecto.fechaComite){
-                            <div class="row">{{proyecto.fechaComite | date:'dd/MM/yyyy'}}</div>
+                            <div>{{proyecto.fechaComite | date:'dd/MM/yyyy'}}</div>
                         } @else {
-                            <div class="row">No hay Comite</div>
+                            <div>No hay Comite</div>
                         }
                     </td>
                     <td class="text-center text-nowrap">

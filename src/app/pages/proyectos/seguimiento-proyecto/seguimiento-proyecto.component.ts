@@ -127,7 +127,7 @@ export class SeguimientoProyectoComponent implements OnInit {
     }
 
     public volver(): void {
-        this.router.navigate(['/proyectos']).then();
+        this.router.navigate(['/proyectos/listadoProyectos']).then();
     }
 
     public inicioComite(): void {

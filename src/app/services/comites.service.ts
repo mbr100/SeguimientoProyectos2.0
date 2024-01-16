@@ -11,7 +11,7 @@ export class ComitesService {
     private comiteDoc!: AngularFirestoreDocument<Comite>;
     private comites!: Observable<Comite[]>;
     constructor(private db: AngularFirestore ) {
-        this.comitesCollection = db.collection<Comite>('comites');
+        this.comitesCollection = this.db.collection<Comite>('comites');
     }
 
     public agregarComite(comite: Comite): Promise<any>{

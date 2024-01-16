@@ -14,11 +14,11 @@ export class ProyectoService {
     private proyectoDoc!: AngularFirestoreDocument<Proyecto>;
 
     constructor(private db: AngularFirestore) {
-        this.proyectosCollection = db.collection<Proyecto>('proyectos', ref =>
+        this.proyectosCollection = this.db.collection<Proyecto>('proyectos', ref =>
             ref.where('estado', '==', 'ACTIVO').orderBy('codigo', 'asc'));
-        this.proyectosCertificadosCollection = db.collection<Proyecto>('proyectos', ref =>
+        this.proyectosCertificadosCollection = this.db.collection<Proyecto>('proyectos', ref =>
             ref.where('estado', '==', 'Certificado').orderBy('codigo', 'asc'));
-        this.proyectosArchivadosCollection = db.collection<Proyecto>('proyectos', ref =>
+        this.proyectosArchivadosCollection = this.db.collection<Proyecto>('proyectos', ref =>
             ref.where('estado', '==', 'Archivado').orderBy('codigo', 'asc'));
     }
 

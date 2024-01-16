@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import {Router, RouterLink} from "@angular/router";
-import {NgClass} from "@angular/common";
+import {NgClass, NgOptimizedImage} from "@angular/common";
 import firebase from "firebase/compat";
 import {AuthService} from "../../services/auth.service";
 
@@ -10,7 +10,8 @@ import {AuthService} from "../../services/auth.service";
   standalone: true,
     imports: [
         NgClass,
-        RouterLink
+        RouterLink,
+        NgOptimizedImage
     ],
   templateUrl: './cabecero.component.html',
   styles: ``

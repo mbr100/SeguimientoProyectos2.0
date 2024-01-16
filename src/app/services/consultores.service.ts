@@ -1,9 +1,8 @@
 import {Injectable} from '@angular/core';
-import {AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument, DocumentSnapshot} from "@angular/fire/compat/firestore";
+import {AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument} from "@angular/fire/compat/firestore";
 import {Consultores} from "../models/consultores.model";
 import {map, Observable} from "rxjs";
-import {ExpertoTecnico} from "../models/expertoTecnico.model";
-import {Action} from "rxjs/internal/scheduler/Action";
+
 
 @Injectable({
     providedIn: 'root'
@@ -14,7 +13,7 @@ export class ConsultoresService {
     private consultorDoc!: AngularFirestoreDocument<Consultores>;
 
     constructor(private db: AngularFirestore) {
-        this.consultoresCollection = db.collection<Consultores>('consultores');
+        this.consultoresCollection = this.db.collection<Consultores>('consultores');
     }
 
     public getConsultores(): Observable<Consultores[]> {

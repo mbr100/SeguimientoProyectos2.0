@@ -1,6 +1,5 @@
 import { Routes } from '@angular/router';
 import {ListadoProyectosComponent} from "./pages/proyectos/listado-proyectos/listado-proyectos.component";
-import {canActivate} from "@angular/fire/auth-guard";
 import {LoginComponent} from "./pages/authentication/login/login.component";
 import {AgregarproyectoComponent} from "./pages/proyectos/agregarproyecto/agregarproyecto.component";
 import {SeguimientoProyectoComponent} from "./pages/proyectos/seguimiento-proyecto/seguimiento-proyecto.component";
