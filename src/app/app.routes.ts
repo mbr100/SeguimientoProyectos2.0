@@ -1,10 +1,10 @@
 import { Routes } from '@angular/router';
-import {ListadoProyectosComponent} from "./pages/proyectos/listado-proyectos/listado-proyectos.component";
+import {ListadoProyectosComponent} from "./pages/gestionProyectos/proyectos/listado-proyectos/listado-proyectos.component";
 import {LoginComponent} from "./pages/authentication/login/login.component";
-import {AgregarproyectoComponent} from "./pages/proyectos/agregarproyecto/agregarproyecto.component";
-import {SeguimientoProyectoComponent} from "./pages/proyectos/seguimiento-proyecto/seguimiento-proyecto.component";
-import {ListarProyectosCertificadosComponent} from "./pages/proyectosCertificados/listar-proyectos-certificados/listar-proyectos-certificados.component";
-import {ListarProyectosArchivadosComponent} from "./pages/proyectosArchivados/listar-proyectos-archivados/listar-proyectos-archivados.component";
+import {AgregarproyectoComponent} from "./pages/gestionProyectos/proyectos/agregarproyecto/agregarproyecto.component";
+import {SeguimientoProyectoComponent} from "./pages/gestionProyectos/proyectos/seguimiento-proyecto/seguimiento-proyecto.component";
+import {ListarProyectosCertificadosComponent} from "./pages/gestionProyectos/proyectosCertificados/listar-proyectos-certificados/listar-proyectos-certificados.component";
+import {ListarProyectosArchivadosComponent} from "./pages/gestionProyectos/proyectosArchivados/listar-proyectos-archivados/listar-proyectos-archivados.component";
 import {ListarETComponent} from "./pages/manteniminetos/expertoTecnico/listar-et/listar-et.component";
 import {AgregarETComponent} from "./pages/manteniminetos/expertoTecnico/agregar-et/agregar-et.component";
 import {EditarETComponent} from "./pages/manteniminetos/expertoTecnico/editar-et/editar-et.component";

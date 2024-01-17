@@ -1,5 +1,5 @@
 import {ApplicationConfig, importProvidersFrom} from '@angular/core';
-import {provideRouter, withHashLocation} from '@angular/router';
+import {provideRouter} from '@angular/router';
 
 import {routes} from './app.routes';
 import {provideClientHydration} from "@angular/platform-browser";
@@ -13,9 +13,9 @@ export const appConfig: ApplicationConfig = {
     providers: [
         provideRouter(routes),
         provideClientHydration(),
-        importProvidersFrom(provideFirebaseApp(() => initializeApp(environment.firebase), 'seguimientoproyectos2mbr')),
-        importProvidersFrom(AngularFireModule.initializeApp(environment.firebase, 'seguimientoproyectos2mbr')),
+        importProvidersFrom(provideFirebaseApp(() => initializeApp(environment.firebase), environment.nombreApp)),
+        importProvidersFrom(AngularFireModule.initializeApp(environment.firebase, environment.nombreApp)),
         importProvidersFrom(provideAuth(() => getAuth())),
-        importProvidersFrom(provideFirestore(() => getFirestore())),
-    ],
+        importProvidersFrom(provideFirestore(() => getFirestore()))
+    ]
 };

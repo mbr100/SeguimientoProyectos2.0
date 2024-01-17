@@ -1,8 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {DatePipe} from "@angular/common";
-import {Proyecto} from "../../../models/proyecto.model";
-import {ProyectoService} from "../../../services/proyecto.service";
-import {Router} from "@angular/router";
+import {Proyecto} from "../../../../models/proyecto.model";
+import {ProyectoService} from "../../../../services/proyecto.service";
 
 @Component({
   selector: 'app-listar-proyectos-archivados',
@@ -16,7 +15,7 @@ import {Router} from "@angular/router";
 export class ListarProyectosArchivadosComponent implements OnInit{
     public proyectosArchivados: Proyecto[];
 
-    constructor(private proyectosService: ProyectoService, private router: Router) {
+    constructor(private proyectosService: ProyectoService) {
         this.proyectosArchivados = [];
     }
 

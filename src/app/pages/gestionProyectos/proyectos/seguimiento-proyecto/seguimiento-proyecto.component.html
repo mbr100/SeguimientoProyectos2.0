@@ -145,7 +145,7 @@
             Comite
         </div>
         <div class="card-body">
-            @if (proyecto.fechaComite === null){
+            @if (proyecto.fechaComite === null) {
                 <div class="row mb-3">
                     <label for="fechaComite" class="col-sm-2 col-form-label">Fecha Inicio Comite:</label>
                     <div class="col-sm-10">
@@ -153,32 +153,38 @@
                     </div>
                 </div>
             }
-            @if (proyecto.fechaComite !== null){
-            <div class="row mb-3">
-                <div class="row mb-3">
-                    <label for="coordinador" class="col-sm-2 col-form-label">Coordinador:</label>
-                    <div class="col-sm-10">
-                        <select class="form-select" aria-label="Default select example" id="coordinador" [(ngModel)]="proyecto.coordinadorComite">
-                            <option selected>Selecciona un Coordinador</option>
-                            @for (coordinador of coordinadoresComite;track coordinador) {
-                                <option value="{{coordinador.id}}">{{ coordinador.nombre }}</option>
-                            }
-                        </select>
+            @if (proyecto.fechaComite !== null) {
+                @if (proyecto.fechaFinComite === null){
+                    <div class="row mb-3">
+                        <div class="row mb-3">
+                            <label for="coordinador" class="col-sm-2 col-form-label">Coordinador:</label>
+                            <div class="col-sm-10">
+                                <select class="form-select" aria-label="Default select example" id="coordinador" [(ngModel)]="proyecto.coordinadorComite">
+                                    <option selected>Selecciona un Coordinador</option>
+                                    @for (coordinador of coordinadoresComite;track coordinador) {
+                                        <option value="{{coordinador.id}}">{{ coordinador.nombre }}</option>
+                                    }
+                                </select>
+                            </div>
+                        </div>
                     </div>
-                </div>
-            </div>
-            <div class="row mb-3">
-                <label for="fechaFinComite" class="col-sm-2 col-form-label">Fecha Fin Comite:</label>
-                <div class="col-sm-10">
-                    <button id="fechaFinComite" class="btn btn-outline-success m-2" (click)="finDeComite()">Fin de Comite</button>
-                </div>
-            </div>
-            <div class="row mb-3">
-                <label for="numeroVersionComite" class="col-sm-2 col-form-label">Versión Comite:</label>
-                <div class="col-sm-10">
-                    <input type="number" class="form-control" id="numeroVersionComite" name="numeroVersionComite" [(ngModel)]="proyecto.numeroVersionComite">
-                </div>
-            </div>
+                    <div class="row mb-3">
+                        <label for="fechaFinComite" class="col-sm-2 col-form-label">Fecha Fin Comite:</label>
+                        <div class="col-sm-10">
+                            <button id="fechaFinComite" class="btn btn-outline-success m-2" (click)="finDeComite()">Fin de Comite</button>
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <label for="numeroVersionComite" class="col-sm-2 col-form-label">Versión Comite:</label>
+                        <div class="col-sm-10">
+                            <input type="number" class="form-control" id="numeroVersionComite" name="numeroVersionComite" [(ngModel)]="proyecto.numeroVersionComite">
+                        </div>
+                    </div>
+                } @else {
+                    <div class="row mb-3">
+                        <p>Comite Interno Finalizado</p>
+                    </div>
+                }
             }
         </div>
     </div>

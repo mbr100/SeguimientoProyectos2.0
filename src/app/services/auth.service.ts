@@ -11,8 +11,8 @@ import Swal from "sweetalert2";
 })
 export class AuthService {
 
-    user$!: Observable<firebase.User|null>;
-    isLoggedIn = false;
+    public user$!: Observable<firebase.User|null>;
+    public isLoggedIn:boolean = false;
 
     constructor(private authService: AngularFireAuth, private router: Router) {
         this.user$ = authService.authState;

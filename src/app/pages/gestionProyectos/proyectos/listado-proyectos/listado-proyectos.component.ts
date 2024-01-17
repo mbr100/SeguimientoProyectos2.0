@@ -1,11 +1,12 @@
 import {Component, OnInit} from '@angular/core';
 import {DatePipe} from "@angular/common";
 import {Router, RouterLink} from "@angular/router";
-import {Proyecto} from "../../../models/proyecto.model";
-import {ProyectoService} from "../../../services/proyecto.service";
-import {Consultores} from "../../../models/consultores.model";
-import {MostrarconsultorfnComponent} from "../../../components/mostrarconsultorfn/mostrarconsultorfn.component";
-import {MostrarexpertoComponent} from "../../../components/mostrarexperto/mostrarexperto.component";
+import {Proyecto} from "../../../../models/proyecto.model";
+import {ProyectoService} from "../../../../services/proyecto.service";
+import {Consultores} from "../../../../models/consultores.model";
+import {MostrarconsultorfnComponent} from "../../../../components/mostrarconsultorfn/mostrarconsultorfn.component";
+import {MostrarexpertoComponent} from "../../../../components/mostrarexperto/mostrarexperto.component";
+import Swal from "sweetalert2";
 
 @Component({
     selector: 'app-listado-proyectos',
@@ -31,8 +32,7 @@ export class ListadoProyectosComponent implements OnInit {
         this.busqueda = false;
         this.proyectosBusqueda = [];
     }
-
-    ngOnInit() {
+    public ngOnInit(): void {
         this.proyectoService.getProyectos().subscribe(proyectos => {
             this.proyectos = proyectos;
         });
@@ -47,10 +47,30 @@ export class ListadoProyectosComponent implements OnInit {
     }
 
     public certificarProyecto(proyecto: Proyecto): void {
-        this.proyectoService.certificarProyecto(proyecto).then(() =>
-            this.router.navigateByUrl('proyectos/listadoProyectos')
-        );
-    }
+        Swal.fire({
+            title: '¿Está seguro de certificar el proyecto?',
+            text: 'Esta acción no se puede deshacer',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Certificar',
+            cancelButtonText: 'Cancelar'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                proyecto.fechaFinProyecto = new Date();
+                this.proyectoService.certificarProyecto(proyecto).then(() =>
+                    this.router.navigateByUrl('proyectos/listadoProyectos')
+                );
+            }
+            if (result.isDismissed) {
+                Swal.fire({
+                    title: 'Certificación cancelada',
+                    text: 'El proyecto no ha sido certificado',
+                    icon: 'info',
+                    confirmButtonText: 'Aceptar'
+                }).then();
+            }
+        });
+        }
 
     public buscar(value: string): void {
         this.busqueda = true;

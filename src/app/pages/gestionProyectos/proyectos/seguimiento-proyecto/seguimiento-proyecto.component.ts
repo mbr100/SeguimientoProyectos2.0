@@ -1,15 +1,15 @@
 import {Component, OnInit, signal} from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
-import {Proyecto} from "../../../models/proyecto.model";
-import {ProyectoService} from "../../../services/proyecto.service";
-import {Consultores} from "../../../models/consultores.model";
-import {ConsultoresService} from "../../../services/consultores.service";
-import {ExpertoTecnicoService} from "../../../services/experto-tecnico.service";
-import {ExpertoComiteService} from "../../../services/experto-comite.service";
-import {ComitesService} from "../../../services/comites.service";
-import {ExpertoTecnico} from "../../../models/expertoTecnico.model";
-import {Comite} from "../../../models/comite.model";
-import {ExpertoComite} from "../../../models/experto-comite.model";
+import {Proyecto} from "../../../../models/proyecto.model";
+import {ProyectoService} from "../../../../services/proyecto.service";
+import {Consultores} from "../../../../models/consultores.model";
+import {ConsultoresService} from "../../../../services/consultores.service";
+import {ExpertoTecnicoService} from "../../../../services/experto-tecnico.service";
+import {ExpertoComiteService} from "../../../../services/experto-comite.service";
+import {ComitesService} from "../../../../services/comites.service";
+import {ExpertoTecnico} from "../../../../models/expertoTecnico.model";
+import {Comite} from "../../../../models/comite.model";
+import {ExpertoComite} from "../../../../models/experto-comite.model";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import Swal from "sweetalert2";
 
@@ -162,13 +162,14 @@ export class SeguimientoProyectoComponent implements OnInit {
 
 
     public enviarEmailAperturaComite(): void {
-        const subject = 'Proyecto ' + this.proyecto.codigo + ': ' + this.proyecto.titulo+' - Apertura Comite';
-        const body ='Buenos días, ' + this.comiteProyecto.nombre+ '\n\n' +
+        const subject = 'Comité  ' + this.proyecto.codigo;
+        const body ='Buenos días, ' + this.expertoComite.nombre+ '\n\n' +
             'Mi nombre es Mario Borrego de EQA y seré el gestor del proyecto'+this.proyecto.codigo+' de la empresa' +this.proyecto.cliente+'. ' +
             'Le adjunto la documentación necesaria para su evaluación.\n\n' +
             'Si le surge alguna duda no dude en contactarme, quedo a su disposición.\n\n'+
             'Un saludo, Mario Borrego';
-        window.location.href = 'mailto:' + this.expertoProyecto.email + '?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
+        console.log(this.expertoComite)
+        window.location.href = 'mailto:' + this.expertoComite.email + '?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
 
     }
 
@@ -177,6 +178,7 @@ export class SeguimientoProyectoComponent implements OnInit {
             'Mi nombre es Mario Borrego de EQA y seré el gestor del proyecto'+this.proyecto.codigo+'de la empresa '+this.proyecto.cliente+'. Le adjunto la CYC 4D para que me devuelva cumplimentada previo al envío de la' +
             'documentación necesaria para la evaluación de comité. Si le surge alguna duda no dude en contactarme, quedo a su disposición.\n\n' +
             'Un saludo, Mario Borrego.';
+        console.log(this.expertoComite)
         window.location.href = 'mailto:' + this.expertoComite.email + '?subject=' + encodeURIComponent('CYC proyecto ' + this.proyecto.codigo) + '&body=' + encodeURIComponent(body);
     }
 

@@ -1,9 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, FormsModule, ReactiveFormsModule} from "@angular/forms";
-import {ProyectoService} from "../../../services/proyecto.service";
+import {ProyectoService} from "../../../../services/proyecto.service";
 import {Router} from "@angular/router";
-import {Consultores} from "../../../models/consultores.model";
-import {ConsultoresService} from "../../../services/consultores.service";
+import {Consultores} from "../../../../models/consultores.model";
+import {ConsultoresService} from "../../../../services/consultores.service";
 
 @Component({
   selector: 'app-agregarproyecto',
@@ -61,7 +61,7 @@ export class AgregarproyectoComponent implements OnInit{
     }
 
     public agregar(): void {
-         this.proyectoService.agregarProyecto(this.proyectoForm.value).then(proyecto => {
+         this.proyectoService.agregarProyecto(this.proyectoForm.value).then(_ => {
              this.router.navigate(['/']).then();
          });
     }

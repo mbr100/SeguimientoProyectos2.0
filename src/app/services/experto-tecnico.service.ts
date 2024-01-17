@@ -12,7 +12,7 @@ export class ExpertoTecnicoService {
     private expertoTecnicoDoc!: AngularFirestoreDocument<ExpertoTecnico>;
     private expertoTecnico!: Observable<ExpertoTecnico>;
     constructor(private db: AngularFirestore) {
-        this.expertoTecnicoCollection = db.collection<ExpertoTecnico>('expertosTecnicos');
+        this.expertoTecnicoCollection = this.db.collection<ExpertoTecnico>('expertosTecnicos');
     }
 
     public agregarExpertoTecnico(expertoTecnico: ExpertoTecnico): Promise<any> {
