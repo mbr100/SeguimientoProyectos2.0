@@ -1,6 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {Consultores} from "../../models/consultores.model";
-import {ConsultoresService} from "../../services/consultores.service";
+import {Consultores} from "../../../models/consultores.model";
+import {ConsultoresService} from "../../../services/consultores.service";
 
 @Component({
   selector: 'app-mostrarconsultorfn',
@@ -12,7 +12,9 @@ import {ConsultoresService} from "../../services/consultores.service";
 export class MostrarconsultorfnComponent implements OnInit{
     @Input() idConsultor?: string;
     public consultor!: Consultores;
-    constructor(private consultorService: ConsultoresService) {}
+    constructor(private consultorService: ConsultoresService) {
+        this.consultor = new Consultores();
+    }
 
     ngOnInit() {
         this.consultorService.getConsultor(this.idConsultor!).subscribe(value => {

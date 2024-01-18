@@ -1,29 +1,38 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, signal, WritableSignal} from '@angular/core';
 import {ProyectoService} from "../../../../services/proyecto.service";
 import {Proyecto} from "../../../../models/proyecto.model";
 import {DatePipe} from "@angular/common";
 import {Router} from "@angular/router";
 import Swal from "sweetalert2";
+import {MostrarconsultorfnComponent} from "../../../../components/proyectos/mostrarconsultorfn/mostrarconsultorfn.component";
+import {MostrarexpertoComponent} from "../../../../components/proyectos/mostrarexperto/mostrarexperto.component";
 
 @Component({
     selector: 'app-listar-proyectos-certificados',
     standalone: true,
     imports: [
-        DatePipe
+        DatePipe,
+        MostrarconsultorfnComponent,
+        MostrarexpertoComponent
     ],
     templateUrl: './listar-proyectos-certificados.component.html',
     styles: ``
 })
 export class ListarProyectosCertificadosComponent implements OnInit {
-    public proyectosCertificados: Proyecto[];
+    private proyectosCertificados: Proyecto[];
+    public proyectosCertificadosMostar: Proyecto[];
+    public numeroProyectosCertificados: WritableSignal<number> = signal<number>(0);
 
     constructor(private proyectosService: ProyectoService, private router: Router) {
         this.proyectosCertificados = [];
+        this.proyectosCertificadosMostar = [];
     }
 
     ngOnInit() {
         this.proyectosService.getProyectosCertificados().subscribe(proyectos => {
             this.proyectosCertificados = proyectos;
+            this.proyectosCertificadosMostar = proyectos;
+            this.numeroProyectosCertificados.set(proyectos.length);
         });
     }
 
@@ -44,5 +53,9 @@ export class ListarProyectosCertificadosComponent implements OnInit {
                 });
             }
         });
+    }
+
+    public buscar(value: string): void {
+        this.proyectosCertificadosMostar = this.proyectosCertificados.filter(proyecto => proyecto.codigo!.includes(value));
     }
 }

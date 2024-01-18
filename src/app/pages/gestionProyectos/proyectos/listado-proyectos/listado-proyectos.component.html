@@ -9,7 +9,7 @@
     <div class="col-2">
         <div class="card">
             <div class="card-body">
-                Proyectos en activo {{proyectos.length}}
+                Proyectos en activo {{ numeroProyectos() }}
             </div>
         </div>
     </div>
@@ -29,86 +29,51 @@
     </tr>
     </thead>
     <tbody>
-        @if (!busqueda){
-            @for (proyecto of proyectos; track proyecto){
-                <tr>
-                    <td>{{proyecto.codigo}}</td>
-                    <td>
-                        <div class="row">Acronimo: {{proyecto.acronimo}}</div>
-                        <div class="row">Titulo: {{proyecto.titulo}}</div>
-                    </td>
-                    <td>{{proyecto.cliente}}</td>
-                    <td>{{proyecto.ejercicio}}</td>
-                    <td>
-                        <div class="row">{{proyecto.fechaInicioProyecto | date:'dd/MM/yyyy'}}</div>
-                        @if (proyecto.fechaComite){
-                            <div class="row">{{proyecto.fechaComite | date:'dd/MM/yyyy'}}</div>
-                        } @else {
-                            <div class="row">No hay Comite</div>
-                        }
-                    </td>
-                    @if (proyecto.consultor){
-                        <td>
-                            <app-mostrarconsultorfn [idConsultor]="proyecto.consultor"></app-mostrarconsultorfn>
-                        </td>
+        @for (proyecto of proyectosMostrar;track proyecto) {
+            <tr>
+                <td>{{ proyecto.codigo }}</td>
+                <td>
+                    <div class="row">Acronimo: {{ proyecto.acronimo }}</div>
+                    <div class="row">Titulo: {{ proyecto.titulo }}</div>
+                </td>
+                <td>{{ proyecto.cliente }}</td>
+                <td>{{ proyecto.ejercicio }}</td>
+                <td>
+                    <div class="row">{{ proyecto.fechaInicioProyecto | date:'dd/MM/yyyy' }}</div>
+                    @if (proyecto.fechaComite) {
+                        <div class="row">{{ proyecto.fechaComite | date:'dd/MM/yyyy' }}</div>
                     } @else {
-                        <td>No hay consultor</td>
+                        <div class="row">No hay Comite</div>
                     }
-                    @if (proyecto.expertoTecnico){
-                        <td>
-                            <app-mostrarexperto [idExperto]="proyecto.expertoTecnico"></app-mostrarexperto>
-                        </td>
-                    } @else {
-                        <td>No hay experto</td>
-                    }
+                </td>
+                @if (proyecto.consultor) {
+                    <td>
+                        <app-mostrarconsultorfn [idConsultor]="proyecto.consultor"></app-mostrarconsultorfn>
+                    </td>
+                } @else {
+                    <td>No hay consultor</td>
+                }
+                @if (proyecto.expertoTecnico) {
+                    <td>
+                        <app-mostrarexperto [idExperto]="proyecto.expertoTecnico"></app-mostrarexperto>
+                    </td>
+                } @else {
+                    <td>No hay experto</td>
+                }
 
-                    <td class="text-center text-nowrap">
-                        <button type="button" class="btn btn-outline-primary m-2" (click)="seguimientoProyecto(proyecto)">
-                            <i class="fa fa-pencil" aria-hidden="true"></i>
-                        </button>
-                        <button type="button" class="btn btn-outline-danger" (click)="certificarProyecto(proyecto)">
-                            <i class="fa fa-book" aria-hidden="true"></i>
-                        </button>
-                    </td>
-                </tr>
-            } @empty {
-                <tr>
-                    <td colspan="8" class="text-center">No hay proyectos</td>
-                </tr>
-            }
-        }
-        @if (busqueda){
-            @for (proyecto of proyectosBusqueda; track proyecto){
-                <tr>
-                    <td>{{proyecto.codigo}}</td>
-                    <td>
-                        <div class="row">Acronimo: {{proyecto.acronimo}}</div>
-                        <div class="row">Titulo: {{proyecto.titulo}}</div>
-                    </td>
-                    <td>{{proyecto.cliente}}</td>
-                    <td>{{proyecto.ejercicio}}</td>
-                    <td class="text-center align-middle">
-                        <div>{{proyecto.fechaInicioProyecto | date:'dd/MM/yyyy'}}</div>
-                        @if (proyecto.fechaComite){
-                            <div>{{proyecto.fechaComite | date:'dd/MM/yyyy'}}</div>
-                        } @else {
-                            <div>No hay Comite</div>
-                        }
-                    </td>
-                    <td class="text-center text-nowrap">
-                        <button type="button" class="btn btn-outline-primary m-2" (click)="seguimientoProyecto(proyecto)">
-                            <i class="fa fa-pencil" aria-hidden="true"></i>
-                        </button>
-                        <button type="button" class="btn btn-outline-danger" (click)="certificarProyecto(proyecto)">
-                            <i class="fa fa-book" aria-hidden="true"></i>
-                        </button>
-                    </td>
-                </tr>
-            } @empty {
-                <tr>
-                    <td colspan="8" class="text-center">No hay proyectos</td>
-                </tr>
-            }
+                <td class="text-center text-nowrap">
+                    <button type="button" class="btn btn-outline-primary m-2" (click)="seguimientoProyecto(proyecto)">
+                        <i class="fa fa-pencil" aria-hidden="true"></i>
+                    </button>
+                    <button type="button" class="btn btn-outline-danger" (click)="certificarProyecto(proyecto)">
+                        <i class="fa fa-book" aria-hidden="true"></i>
+                    </button>
+                </td>
+            </tr>
+        } @empty {
+            <tr>
+                <td colspan="8" class="text-center">No hay proyectos</td>
+            </tr>
         }
     </tbody>
 </table>

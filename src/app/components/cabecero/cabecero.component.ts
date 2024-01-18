@@ -1,27 +1,25 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 import {Router, RouterLink} from "@angular/router";
 import {NgClass, NgOptimizedImage} from "@angular/common";
 import firebase from "firebase/compat";
 import {AuthService} from "../../services/auth.service";
 
-
 @Component({
-  selector: 'app-cabecero',
-  standalone: true,
+    selector: 'app-cabecero',
+    standalone: true,
     imports: [
         NgClass,
         RouterLink,
         NgOptimizedImage
     ],
-  templateUrl: './cabecero.component.html',
-  styles: ``
+    templateUrl: './cabecero.component.html',
+    styles: ``
 })
 export class CabeceroComponent {
     public mostrarLogOut: boolean = false;
     private _user?: firebase.User;
 
     constructor(private router: Router, private authService: AuthService) {
-        console.log(this.mostrarLogOut);
         this.authService.user$.subscribe(user => {
             this.mostrarLogOut = !!user;
             if (user) {
@@ -29,11 +27,13 @@ export class CabeceroComponent {
             }
         });
     }
+
     public logout(): void {
         this.authService.logout();
     }
+
     public recargar(): void {
-        this.router.navigateByUrl('/').then( _ =>_);
+        this.router.navigateByUrl('/').then(_ => _);
     }
 
     public iraHisotricos(): void {

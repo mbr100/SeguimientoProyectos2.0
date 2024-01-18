@@ -6,20 +6,21 @@ import {Consultores} from "../../../../models/consultores.model";
 import {ConsultoresService} from "../../../../services/consultores.service";
 
 @Component({
-  selector: 'app-agregarproyecto',
-  standalone: true,
+    selector: 'app-agregarproyecto',
+    standalone: true,
     imports: [
         FormsModule,
         ReactiveFormsModule
     ],
-  templateUrl: './agregarproyecto.component.html',
-  styles: ``
+    templateUrl: './agregarproyecto.component.html',
+    styles: ``
 })
-export class AgregarproyectoComponent implements OnInit{
+export class AgregarproyectoComponent implements OnInit {
     public proyectoForm!: FormGroup;
     public consultoras: string[] = [];
     public consultoraSelecionado: Consultores[] = [];
     public consultores!: Consultores[];
+
     constructor(private fb: FormBuilder, private proyectoService: ProyectoService, private router: Router, private consultoresService: ConsultoresService) {
         this.consultoresService.getConsultores().subscribe(consultores => {
             this.consultores = consultores;
@@ -61,9 +62,9 @@ export class AgregarproyectoComponent implements OnInit{
     }
 
     public agregar(): void {
-         this.proyectoService.agregarProyecto(this.proyectoForm.value).then(_ => {
-             this.router.navigate(['/']).then();
-         });
+        this.proyectoService.agregarProyecto(this.proyectoForm.value).then(_ => {
+            this.router.navigate(['/']).then();
+        });
     }
 
     public mostrarConsultores(consultora: HTMLSelectElement): void {

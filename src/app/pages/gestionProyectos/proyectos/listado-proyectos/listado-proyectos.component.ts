@@ -1,11 +1,11 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, signal, WritableSignal} from '@angular/core';
 import {DatePipe} from "@angular/common";
 import {Router, RouterLink} from "@angular/router";
 import {Proyecto} from "../../../../models/proyecto.model";
 import {ProyectoService} from "../../../../services/proyecto.service";
 import {Consultores} from "../../../../models/consultores.model";
-import {MostrarconsultorfnComponent} from "../../../../components/mostrarconsultorfn/mostrarconsultorfn.component";
-import {MostrarexpertoComponent} from "../../../../components/mostrarexperto/mostrarexperto.component";
+import {MostrarconsultorfnComponent} from "../../../../components/proyectos/mostrarconsultorfn/mostrarconsultorfn.component";
+import {MostrarexpertoComponent} from "../../../../components/proyectos/mostrarexperto/mostrarexperto.component";
 import Swal from "sweetalert2";
 
 @Component({
@@ -21,20 +21,24 @@ import Swal from "sweetalert2";
     styleUrl: './listado-proyectos.component.css'
 })
 export class ListadoProyectosComponent implements OnInit {
-    public proyectos: Proyecto[];
-    public proyectosBusqueda: Proyecto[];
+    private proyectos: Proyecto[];
+    public proyectosMostrar: Proyecto[];
     public consultores: Consultores[];
     public busqueda: boolean;
+    public numeroProyectos: WritableSignal<number> = signal<number>(0);
+
 
     constructor(private proyectoService: ProyectoService, private router: Router) {
-        this.proyectos = [];
-        this.consultores = [];
+        this.proyectos = new Array<Proyecto>();
+        this.consultores = new Array<Consultores>();
         this.busqueda = false;
-        this.proyectosBusqueda = [];
+        this.proyectosMostrar = new Array<Proyecto>();
     }
     public ngOnInit(): void {
         this.proyectoService.getProyectos().subscribe(proyectos => {
             this.proyectos = proyectos;
+            this.proyectosMostrar = proyectos;
+            this.numeroProyectos.set(proyectos.length);
         });
     }
 
@@ -74,6 +78,6 @@ export class ListadoProyectosComponent implements OnInit {
 
     public buscar(value: string): void {
         this.busqueda = true;
-        this.proyectosBusqueda = this.proyectos.filter(proyecto => proyecto.codigo!.includes(value));
+        this.proyectosMostrar = this.proyectos.filter(proyecto => proyecto.codigo!.includes(value));
     }
 }

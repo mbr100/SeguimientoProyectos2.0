@@ -9,7 +9,6 @@ export const authGuard: CanActivateFn = () => {
     const afAuth: AngularFireAuth = inject(AngularFireAuth);
     return afAuth.authState.pipe(
         map (auth => {
-          console.log(auth);
             if (!auth) {
                 router.navigateByUrl('/login').then(_ => {
                     Swal.fire({

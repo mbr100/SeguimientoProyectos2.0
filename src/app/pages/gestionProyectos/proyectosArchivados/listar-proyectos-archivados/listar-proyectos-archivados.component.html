@@ -9,46 +9,62 @@
     <div class="col-2">
         <div class="card">
             <div class="card-body">
-                Proyectos en activo {{proyectosArchivados.length}}
+                Proyectos Archivados {{numeroProyectosArchivados()}}
             </div>
         </div>
     </div>
 </div>
 
+
 <table class="table table-striped animate__animated animate__backInDown" style="z-index: -2;">
     <thead>
     <tr>
         <th scope="col">Codigo</th>
-        <th scope="col">Proyecto</th>
+        <th scope="col" style="width: 40%; word-wrap: break-word;">Proyecto</th>
         <th scope="col">Cliente</th>
         <th scope="col">Ejercicio</th>
-        <th scope="col">Fecha Inicio /comite</th>
+        <th scope="col">Fecha comite</th>
+        <th scope="col">Consultor</th>
+        <th scope="col">Experto</th>
     </tr>
     </thead>
     <tbody>
-        @for (proyecto of proyectosArchivados; track proyecto){
+        @for (proyecto of proyectosArchivadosMostar;track proyecto) {
             <tr>
-                <td>{{proyecto.codigo}}</td>
+                <td>{{ proyecto.codigo }}</td>
                 <td>
-                    <div class="row">Acronimo: {{proyecto.acronimo}}</div>
-                    <div class="row">Titulo: {{proyecto.titulo}}</div>
+                    <div class="row">Acronimo: {{ proyecto.acronimo }}</div>
+                    <div class="row">Titulo: {{ proyecto.titulo }}</div>
                 </td>
-                <td>{{proyecto.cliente}}</td>
-                <td>{{proyecto.ejercicio}}</td>
+                <td>{{ proyecto.cliente }}</td>
+                <td>{{ proyecto.ejercicio }}</td>
                 <td>
-                    <div class="row">{{proyecto.fechaInicioProyecto | date:'dd/MM/yyyy'}}</div>
-                    @if (proyecto.fechaComite){
-                        <div class="row">{{proyecto.fechaComite | date:'dd/MM/yyyy'}}</div>
+                    <div class="row">{{ proyecto.fechaInicioProyecto | date:'dd/MM/yyyy' }}</div>
+                    @if (proyecto.fechaComite) {
+                        <div class="row">{{ proyecto.fechaComite | date:'dd/MM/yyyy' }}</div>
                     } @else {
                         <div class="row">No hay Comite</div>
                     }
                 </td>
+                @if (proyecto.consultor) {
+                    <td>
+                        <app-mostrarconsultorfn [idConsultor]="proyecto.consultor"></app-mostrarconsultorfn>
+                    </td>
+                } @else {
+                    <td>No hay consultor</td>
+                }
+                @if (proyecto.expertoTecnico) {
+                    <td>
+                        <app-mostrarexperto [idExperto]="proyecto.expertoTecnico"></app-mostrarexperto>
+                    </td>
+                } @else {
+                    <td>No hay experto</td>
+                }
             </tr>
         } @empty {
             <tr>
-                <td colspan="8" class="text-center">No hay proyectos</td>
+                <td colspan="8" class="text-center">No hay proyectos Certificados</td>
             </tr>
         }
-
     </tbody>
 </table>
