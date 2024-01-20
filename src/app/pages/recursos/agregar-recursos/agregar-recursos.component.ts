@@ -1,8 +1,10 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, ReactiveFormsModule} from "@angular/forms";
 import Swal, {SweetAlertResult} from "sweetalert2";
 import {Router} from "@angular/router";
 import {RecursosService} from "../../../services/recursos.service";
+import {TipoRecurso} from "../../../models/tipoRecurso.model";
+import {TipoRecusoService} from "../../../services/tipoRecuso.service";
 
 @Component({
   selector: 'app-agregar-recursos',
@@ -13,14 +15,21 @@ import {RecursosService} from "../../../services/recursos.service";
   templateUrl: './agregar-recursos.component.html',
   styles: ``
 })
-export class AgregarRecursosComponent {
+export class AgregarRecursosComponent implements OnInit{
     public recursosForm: FormGroup;
-
-    constructor(private router: Router, private fb: FormBuilder, private recursosService: RecursosService) {
+    public tipoRecursos: TipoRecurso[];
+    constructor(private router: Router, private fb: FormBuilder, private recursosService: RecursosService, private tipoRecursoService: TipoRecusoService) {
         this.recursosForm = this.fb.group({
             tipo: [''],
             contenido: [''],
             tipoProyecto: ['']
+        });
+        this.tipoRecursos = new Array<TipoRecurso>();
+    }
+
+    public ngOnInit(): void {
+        this.tipoRecursoService.listarTipoRecursos().subscribe((tipoRecursos: TipoRecurso[]) => {
+            this.tipoRecursos = tipoRecursos;
         });
     }
 

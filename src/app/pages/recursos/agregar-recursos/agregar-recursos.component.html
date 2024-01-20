@@ -13,15 +13,20 @@
             </div>
         </div>
         <div class="row mb-3">
-            <label for="contenido" class="col-sm-2 col-form-label">Nombre:</label>
+            <label for="contenido" class="col-sm-2 col-form-label">Contenido:</label>
             <div class="col-sm-10">
-                <input type="text" class="form-control" id="contenido" name="contenido" formControlName="contenido">
+                <textarea type="text" class="form-control" rows="3" id="contenido" formControlName="contenido"></textarea>
             </div>
         </div>
         <div class="row mb-3">
-            <label for="tipoProyecto" class="col-sm-2 col-form-label">Nombre:</label>
+            <label for="tipoProyecto" class="col-sm-2 col-form-label">Tipo Proyecto:</label>
             <div class="col-sm-10">
-                <input type="text" class="form-control" id="tipoProyecto" name="tipoProyecto" formControlName="tipoProyecto">
+                <select class="form-select" aria-label="Default select example" id="tipoProyecto" name="tipoProyecto" formControlName="tipoProyecto">
+                    <option selected>Selecciona un consultor</option>
+                    @for (tipo of tipoRecursos; track tipo){
+                        <option value="{{tipo.tipoRecursp}}">{{tipo.tipoRecursp}}</option>
+                    }
+                </select>
             </div>
         </div>
         <div class="text-center">

@@ -1,1 +1,21 @@
-<p>agregar-tipo-recurso works!</p>
+<div class="container animate__animated animate__backInDown">
+    <div class="d-flex justify-content-between align-items-center">
+        <h1 class="text-center">Añadir Tipo de Recurso</h1>
+        <button (click)="volverInicio()" class="btn btn-outline-secondary">
+            <i class="fa fa-arrow-left" aria-hidden="true"></i>
+        </button>
+    </div>
+    <form class="p-2" [formGroup]="tipoRecursoForm"  (submit)="agregar()">
+        <div class="row mb-3">
+            <label for="tipoRecursp" class="col-sm-2 col-form-label">Nombre:</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="tipoRecursp" name="tipoRecursp" formControlName="tipoRecursp">
+            </div>
+        </div>
+        <div class="text-center">
+            <button type="submit" class="btn btn-outline-primary m-2">
+                <i class="fas fa-save"></i>
+            </button>
+        </div>
+    </form>
+</div>

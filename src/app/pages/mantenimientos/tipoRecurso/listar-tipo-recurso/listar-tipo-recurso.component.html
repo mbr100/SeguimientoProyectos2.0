@@ -1,1 +1,48 @@
-<p>listar-tipo-recurso works!</p>
+<div class="row animate__animated animate__backInDown">
+    <div class="col-10">
+        <div class="card">
+            <div class="card-body">
+                <input type="text" class="form-control" placeholder="Buscar Consultor....." #txtTermino (keyup)="buscar(txtTermino.value)">
+            </div>
+        </div>
+    </div>
+    <div class="col-2">
+        <div class="card">
+            <div class="card-body">
+                Comites {{ numeroTipoRecursos() }}
+            </div>
+        </div>
+    </div>
+</div>
+
+<table class="table table-striped animate__animated animate__backInDown" style="z-index: -2;">
+    <thead>
+    <tr>
+        <th scope="col">ID</th>
+        <th scope="col">Nombre</th>
+        <th class="text-center text-nowrap col-1" scope="col">Acciones</th>
+    </tr>
+    </thead>
+    <tbody>
+        @for (tipoRecurso of tipoRecursosMostrar; track tipoRecurso) {
+            <tr>
+                <th scope="row">{{ tipoRecurso.id }}</th>
+                <td>{{ tipoRecurso.tipoRecursp }}</td>
+                <td class="text-center text-nowrap col-1">
+                    <button type="button" class="btn btn-outline-danger" (click)="eliminarTipoRecurso(tipoRecurso)">
+                        <i class="fa fa-trash" aria-hidden="true"></i>
+                    </button>
+                </td>
+            </tr>
+        } @empty {
+            <tr>
+                <td colspan="3" class="text-center">No hay Tipo de Recursos</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+
+<div class="text-center animate__animated animate__backInDown">
+    <button type="button" class="btn btn-outline-primary" (click)="agregarTipoRecurso()">Añadir Comite</button>
+</div>

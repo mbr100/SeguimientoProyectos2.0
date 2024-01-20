@@ -51,4 +51,16 @@ export class CabeceroComponent {
     public iraArchivados(): void {
         this.router.navigateByUrl('/archivados').then();
     }
+
+    public get photoUrl(): string {
+        return this._user?.photoURL || '';
+    }
+
+    public get displayName(): string {
+        return this._user?.displayName!;
+    }
+
+    public irPerfil(): void {
+        this.router.navigateByUrl('/user').then();
+    }
 }

@@ -26,6 +26,15 @@
                     </ul>
                 </li>
                 <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="recursosDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Recursos
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="recursosDropdown">
+                        <li><a class="dropdown-item" routerLink="/recursos/listarRecursos">Listar Recursos</a></li>
+                        <li><a class="dropdown-item" routerLink="/recursos/agregarRecurso">Agregar Recursos </a></li>
+                    </ul>
+                </li>
+                <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="mantenimientosDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                         Mantenimientos
                     </a>
@@ -34,17 +43,19 @@
                         <li><a class="dropdown-item" routerLink="/mantenimientos/expertos-comite/listarEcomite">Expertos Comité</a></li>
                         <li><a class="dropdown-item" routerLink="/mantenimientos/consultores/listadoConsultores">Consultores</a></li>
                         <li><a class="dropdown-item" routerLink="mantenimientos/comites/listarComites">Comités</a></li>
+                        <li><a class="dropdown-item" routerLink="/mantenimientos/tipoRecurso/listarTipoRecurso">Tipo de Recurso</a></li>
                     </ul>
                 </li>
             </ul>
 
             <div class="dropdown">
-                <a class="nav-link dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false" aria-label="User Options" style="position: relative; z-index: 10000;">
-                    <img ngSrc="../../../assets/1.jpg" alt="Profile" width="30" height="30" style="border-radius: 50%;">
+                <a class="nav-link dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false" style="position: relative; z-index: 10000; color: #fff;">
+                    <img [src]="photoUrl" alt="Profile" width="30" height="30" style="border-radius: 50%;">
+                    {{displayName}}
                 </a>
                 <ul class="dropdown-menu dropdown-menu-dark" style="position: absolute; right: 0; left: auto;">
-                    <li><a class="dropdown-item text-center" href="#" aria-label="Profile">Profile</a></li>
-                    <li><a class="dropdown-item text-center" href="#" aria-label="Logout" (click)="logout()">Logout</a></li>
+                    <li><a class="dropdown-item text-center" aria-label="Profile" (click)="irPerfil()">Profile</a></li>
+                    <li><a class="dropdown-item text-center" aria-label="Logout" (click)="logout()">Logout</a></li>
                 </ul>
             </div>
         </div>

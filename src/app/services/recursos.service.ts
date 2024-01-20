@@ -31,4 +31,7 @@ export class RecursosService {
         return this.recursos;
     }
 
+    public deleteRecurso(id: string | undefined): Promise<void> {
+        return this.recursosCollection.doc(id).delete();
+    }
 }

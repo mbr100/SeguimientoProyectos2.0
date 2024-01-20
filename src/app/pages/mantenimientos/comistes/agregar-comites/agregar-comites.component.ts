@@ -25,7 +25,7 @@ export class AgregarComitesComponent {
     }
 
     public volverInicio(): void {
-        this.router.navigateByUrl('mantenimientos/comites/listarComites').then(r => {
+        this.router.navigateByUrl('mantenimientos/tipo-recurso/listarTipoRecurso').then(r => {
             if (!r) {
                 Swal.fire({
                     title: 'Error',
