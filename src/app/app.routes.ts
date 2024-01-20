@@ -23,6 +23,7 @@ import {EditarComitesComponent} from "./pages/mantenimientos/comistes/editar-com
 import {ListarRecursosComponent} from "./pages/recursos/listar-recursos/listar-recursos.component";
 import {AgregarRecursosComponent} from "./pages/recursos/agregar-recursos/agregar-recursos.component";
 import {UserComponent} from "./pages/user/user.component";
+import {EditarRecursosComponent} from "./pages/recursos/editar-recursos/editar-recursos.component";
 
 // export const routes: Routes = [
 //     //Login
@@ -112,11 +113,12 @@ export const routes: Routes = [
     },
     {path: 'recursos', canActivate: [authGuard], children: [
             {path: 'listarRecursos', component: ListarRecursosComponent, canActivate: [authGuard]},
-            {path: 'agregarRecurso', component: AgregarRecursosComponent, canActivate: [authGuard]}]
-    },
+            {path: 'agregarRecurso', component: AgregarRecursosComponent, canActivate: [authGuard]},
+            {path: 'editarRecurso/:id', component: EditarRecursosComponent, canActivate: [authGuard]}
+        ]},
     { path: 'user', component: UserComponent, canActivate: [authGuard] },
     // Default and fallback routes
-    {path: '', redirectTo: 'proyectos/listadoProyectos', pathMatch: 'full'},
+    {path: '', component:ListadoProyectosComponent, canActivate: [authGuard]},
     {path: '**', redirectTo: ''}
 ];
 

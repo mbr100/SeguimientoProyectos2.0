@@ -31,7 +31,20 @@ export class RecursosService {
         return this.recursos;
     }
 
+    public getRecurso(id: string): Observable<Recurso> {
+        return this.recursosCollection.doc<Recurso>(id).snapshotChanges().pipe(
+            map(accion => {
+                const data = accion.payload.data() as Recurso;
+                data.id = accion.payload.id;
+                return data;
+            }));
+    }
+
     public deleteRecurso(id: string | undefined): Promise<void> {
         return this.recursosCollection.doc(id).delete();
+    }
+
+    public actualizarRecurso(recurso: Recurso): Promise<void> {
+        return this.recursosCollection.doc(recurso.id).update(recurso);
     }
 }

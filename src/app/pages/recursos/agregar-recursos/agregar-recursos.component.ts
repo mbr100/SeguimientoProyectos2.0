@@ -34,7 +34,7 @@ export class AgregarRecursosComponent implements OnInit{
     }
 
     public volverInicio(): void {
-        this.router.navigateByUrl('mantenimientos/comites/listarComites').then(r => {
+        this.router.navigateByUrl('recursos/listarRecursos').then(r => {
             if (!r) {
                 Swal.fire({
                     title: 'Error',

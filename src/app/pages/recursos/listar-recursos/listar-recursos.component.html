@@ -15,8 +15,10 @@
             <h5 class="card-title">{{recurso.tipoProyecto}}t</h5>
             <p class="card-text">{{recurso.contenido}}</p>
             <button type="button" class="btn btn-danger" (click)="eliminar(recurso)">Eliminar</button>
+            <button type="button" class="btn btn-warning m-lg-2" (click)="editar(recurso)">Editar</button>
         </div>
     </div>
+    <br>
 } @empty {
     <div class="alert alert-danger animate__animated animate__backInDown" role="alert">
         No se encontraron recursos

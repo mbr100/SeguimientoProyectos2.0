@@ -19,7 +19,6 @@ export class EditarETComponent implements OnInit{
 
     constructor(private router: Router, private fb: FormBuilder, private expertoTecnicoService: ExpertoTecnicoService, private route: ActivatedRoute) {
         this.idExperto = this.route.snapshot.paramMap.get('id') || '';
-        console.log(this.idExperto);
         this.expertoTecnicoService.getExpertoTecnico(this.idExperto).subscribe(resp => {
             this.expertoTecnicoForm.setValue(resp);
             console.log(resp);
@@ -51,8 +50,7 @@ export class EditarETComponent implements OnInit{
         });
     }
 
-    public agregar(): void {
-        console.log(this.expertoTecnicoForm.value);
+    public editar(): void {
         this.expertoTecnicoService.actualizarExpertoTecnico(this.expertoTecnicoForm.value).then(_ => {
             Swal.fire({
                 title: 'Experto técnico Actualizado',
