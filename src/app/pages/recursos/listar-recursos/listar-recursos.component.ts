@@ -40,7 +40,7 @@ export class ListarRecursosComponent implements OnInit{
                 icon: 'success',
                 confirmButtonText: 'Aceptar'
             }).then(() => {
-                this.router.navigateByUrl('tipoRecursos/listarTipoRecurso').then();
+                this.router.navigateByUrl('recursos/listarRecursos').then();
             });
         });
     }

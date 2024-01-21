@@ -5,6 +5,8 @@
 /tmp
 /out-tsc
 /bazel-out
+.firebaserc
+.firebase
 
 # Node
 /node_modules
@@ -42,5 +44,3 @@ testem.log
 Thumbs.db
 
 .angular
-.firebase
-.firebaserc
