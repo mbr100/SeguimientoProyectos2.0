@@ -1,9 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {RecursosService} from "../../../services/recursos.service";
 import {Recurso} from "../../../models/recurso.model";
-import Swal from "sweetalert2";
 import {Router} from "@angular/router";
-
+import Swal from "sweetalert2";
 @Component({
   selector: 'app-listar-recursos',
   standalone: true,

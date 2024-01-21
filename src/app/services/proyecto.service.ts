@@ -12,6 +12,7 @@ export class ProyectoService {
     private proyectosArchivadosCollection: AngularFirestoreCollection<Proyecto>;
     private proyectos!: Observable<Proyecto[]>;
     private proyectoDoc!: AngularFirestoreDocument<Proyecto>;
+    private proyectosCollectionEstadisticas!: AngularFirestoreCollection<Proyecto>;
 
     constructor(private db: AngularFirestore) {
         this.proyectosCollection = this.db.collection<Proyecto>('proyectos', ref =>
@@ -24,6 +25,35 @@ export class ProyectoService {
 
     public agregarProyecto(proyecto: Proyecto): Promise<DocumentReference<Proyecto>> {
         return this.proyectosCollection.add(proyecto);
+    }
+
+    public getProyectosPorAno(anoCertitificacion: number): Observable<Proyecto[]> {
+        this.proyectosCollectionEstadisticas = this.db.collection<Proyecto>('proyectos', ref =>
+            ref.where('estado', '==', 'Certificado')
+                .where('anoCertificacion', '==', anoCertitificacion)
+                .orderBy('codigo', 'asc'));
+        return this.proyectosCollectionEstadisticas.snapshotChanges().pipe(
+            map(accion => {
+                return accion.map(datos => {
+                    const data = datos.payload.doc.data() as Proyecto;
+                    const fechaini = datos.payload.doc.data().fechaInicioProyecto as any;
+                    const fechaf = datos.payload.doc.data().fechaFinProyecto as any;
+                    const fechac = datos.payload.doc.data().fechaComite as any;
+                    const fechafcomite = datos.payload.doc.data().fechaFinComite as any;
+                    data.fechaInicioProyecto = fechaini.toDate();
+                    if (fechaf != null) {
+                        data.fechaFinProyecto = fechaf.toDate();
+                    }
+                    if (fechac != null) {
+                        data.fechaComite = fechac.toDate();
+                    }
+                    if (fechafcomite != null) {
+                        data.fechaFinComite = fechafcomite.toDate();
+                    }
+                    data.id = datos.payload.doc.id;
+                    return data;
+                });
+            }));
     }
 
     public getProyectos(): Observable<Proyecto[]> {

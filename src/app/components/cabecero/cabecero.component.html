@@ -50,7 +50,7 @@
 
             <div class="dropdown">
                 <a class="nav-link dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false" style="position: relative; z-index: 10000; color: #fff;">
-                    <img [src]="photoUrl" alt="Profile" width="30" height="30" style="border-radius: 50%;">
+                    <img [ngSrc]="photoUrl" alt="Profile" width="30" height="30" style="border-radius: 50%;">
                     {{displayName}}
                 </a>
                 <ul class="dropdown-menu dropdown-menu-dark" style="position: absolute; right: 0; left: auto;">
@@ -60,5 +60,4 @@
             </div>
         </div>
     }
-
 </nav>

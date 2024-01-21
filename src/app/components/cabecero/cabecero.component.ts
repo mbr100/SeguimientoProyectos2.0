@@ -1,8 +1,8 @@
 import {Component} from '@angular/core';
 import {Router, RouterLink} from "@angular/router";
 import {NgClass, NgOptimizedImage} from "@angular/common";
-import firebase from "firebase/compat";
 import {AuthService} from "../../services/auth.service";
+import firebase from "firebase/compat";
 
 @Component({
     selector: 'app-cabecero',
@@ -32,22 +32,9 @@ export class CabeceroComponent {
         this.authService.logout();
     }
 
-    public recargar(): void {
-        this.router.navigateByUrl('/').then(_ => _);
-    }
-
     public iraHisotricos(): void {
         this.router.navigateByUrl('/historicos').then();
     }
-
-    public verPerfil(): void {
-        this.router.navigateByUrl('/user').then();
-    }
-
-    public iraEstadisticas(): void {
-        this.router.navigateByUrl('/estadisticas').then();
-    }
-
     public iraArchivados(): void {
         this.router.navigateByUrl('/archivados').then();
     }
