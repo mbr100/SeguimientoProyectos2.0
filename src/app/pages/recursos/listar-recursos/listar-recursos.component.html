@@ -2,7 +2,7 @@
     <div class="col-12">
         <div class="card">
             <div class="card-body">
-                <input type="text" class="form-control" placeholder="Buscar Proyecto....." #txtTermino (keyup)="buscar(txtTermino.value)">
+                <input type="text" class="form-control" placeholder="Buscar Recurso....." #txtTermino (keyup)="buscar(txtTermino.value)">
             </div>
         </div>
     </div>
@@ -10,9 +10,9 @@
 <br>
 @for (recurso of recursosMostar; track recurso){
     <div class="card animate__animated animate__backInDown">
-        <h5 class="card-header">{{ recurso.tipo }}</h5>
+        <h5 class="card-header">{{ recurso.tipoProyecto }}</h5>
         <div class="card-body">
-            <h5 class="card-title">{{recurso.tipoProyecto}}t</h5>
+            <h5 class="card-title">{{recurso.tipo}}</h5>
             <p class="card-text">{{recurso.contenido}}</p>
             <button type="button" class="btn btn-danger" (click)="eliminar(recurso)">Eliminar</button>
             <button type="button" class="btn btn-warning m-lg-2" (click)="editar(recurso)">Editar</button>
@@ -24,3 +24,7 @@
         No se encontraron recursos
     </div>
 }
+
+<div class="text-center animate__animated animate__backInDown">
+    <button type="button" class="btn btn-outline-primary" (click)="agregarRecurso()">Añadir Recurso</button>
+</div>

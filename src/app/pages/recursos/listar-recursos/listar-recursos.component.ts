@@ -48,4 +48,8 @@ export class ListarRecursosComponent implements OnInit{
     public editar(recurso: Recurso): void {
         this.router.navigateByUrl(`/recursos/editarRecurso/${recurso.id}`).then();
     }
+
+    public agregarRecurso(): void {
+        this.router.navigateByUrl(`/recursos/agregarRecurso`).then();
+    }
 }

@@ -2,14 +2,14 @@
     <div class="col-10">
         <div class="card">
             <div class="card-body">
-                <input type="text" class="form-control" placeholder="Buscar Consultor....." #txtTermino (keyup)="buscar(txtTermino.value)">
+                <input type="text" class="form-control" placeholder="Buscar Tipo Recurso....." #txtTermino (keyup)="buscar(txtTermino.value)">
             </div>
         </div>
     </div>
     <div class="col-2">
         <div class="card">
             <div class="card-body">
-                Comites {{ numeroTipoRecursos() }}
+                Tipos de Recuso {{ numeroTipoRecursos() }}
             </div>
         </div>
     </div>
@@ -44,5 +44,5 @@
 
 
 <div class="text-center animate__animated animate__backInDown">
-    <button type="button" class="btn btn-outline-primary" (click)="agregarTipoRecurso()">Añadir Comite</button>
+    <button type="button" class="btn btn-outline-primary" (click)="agregarTipoRecurso()">Añadir Tipo Recurso</button>
 </div>
