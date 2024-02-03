@@ -21,4 +21,12 @@ export class MostrarexpertoComponent implements OnInit{
             this.experto = value;
         });
     }
+
+    public llamarExperto(): void {
+        window.location.href = 'tel:' + this.experto.telefono;
+    }
+
+    public enviarEmailExperto() {
+        window.location.href = 'mailto:' + this.experto.email;
+    }
 }

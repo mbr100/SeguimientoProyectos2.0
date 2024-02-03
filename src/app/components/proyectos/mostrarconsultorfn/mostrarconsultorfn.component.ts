@@ -22,4 +22,12 @@ export class MostrarconsultorfnComponent implements OnInit{
         });
     }
 
+    public llamarConsultor(): void {
+        console.log('Llamando consultor');
+        window.location.href = 'tel:' + this.consultor.telefono;
+    }
+
+    public enviarCorreoConsultor(): void {
+        window.location.href = 'mailto:' + this.consultor.email;
+    }
 }

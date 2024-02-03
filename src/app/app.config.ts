@@ -19,7 +19,7 @@ export const appConfig: ApplicationConfig = {
         importProvidersFrom(AngularFireModule.initializeApp(environment.firebase, environment.nombreApp)),
         importProvidersFrom(provideAuth(() => getAuth())),
         importProvidersFrom(provideFirestore(() => getFirestore())),
-        { provide: USE_FIRESTORE_EMULATOR, useValue: !environment.production ? ['localhost', 8080] : undefined },
-        { provide: USE_AUTH_EMULATOR, useValue: !environment.production ? ['localhost', 9099] : undefined },
+        //{ provide: USE_FIRESTORE_EMULATOR, useValue: !environment.production ? ['localhost', 8080] : undefined },
+        //{ provide: USE_AUTH_EMULATOR, useValue: !environment.production ? ['localhost', 9099] : undefined },
     ]
 };

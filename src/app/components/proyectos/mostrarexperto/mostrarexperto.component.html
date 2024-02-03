@@ -1,3 +1,3 @@
 <div class="row">{{this.experto.nombre}}</div>
-<div class="row">{{this.experto.email}}</div>
-<div class="row">{{this.experto.telefono}}</div>
+<div class="row" style="cursor: pointer" (click)="enviarEmailExperto()">{{this.experto.email}}</div>
+<div class="row" style="cursor: pointer" (click)="llamarExperto()">{{this.experto.telefono}}</div>
