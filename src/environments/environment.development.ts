@@ -7,6 +7,7 @@ export const environment = {
         messagingSenderId: "366007956782",
         appId: "1:366007956782:web:04bc48099442e44043f6bf"
     },
-    nombreApp: 'seguimientoproyectos2mbr'
-
+    nombreApp: 'seguimientoproyectos2mbr',
+    production: false,
+    useEmulators: true,
 };
