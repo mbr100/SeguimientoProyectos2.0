@@ -1,0 +1,51 @@
+<div class="row animate__animated animate__backInDown">
+    <div class="col-10">
+        <div class="card">
+            <div class="card-body">
+                <input type="text" class="form-control" placeholder="Buscar Tramite....." #txtTermino (keyup)="buscar(txtTermino.value)">
+            </div>
+        </div>
+    </div>
+    <div class="col-2">
+        <div class="card">
+            <div class="card-body">
+                Proyectos en activo {{ numeroProyectos() }}
+            </div>
+        </div>
+    </div>
+</div>
+<table class="table table-striped animate__animated animate__backInDown" style="z-index: -2;">
+    <thead>
+    <tr>
+        <th scope="col">Codigo</th>
+        <th scope="col">Cliente</th>
+        <th scope="col">Fecha Inicio/Fin</th>
+        <th scope="col">Consultor</th>
+        <th scope="col">Experto</th>
+        <th class="text-center" scope="col">Acciones</th>
+    </tr>
+    </thead>
+    <tbody>
+        @for (tramite of tramites; track tramite){
+            <tr>
+                <td>{{ tramite.codigo }}</td>
+                <td>{{ tramite.cliente}}</td>
+                <td>
+                    {{ tramite.fechaInicioTramite| date:'dd/MM/yyyy' }}
+                    {{tramite.fechaFinTramite| date:'dd/MM/yyyy'}}
+                </td>
+                <td>
+                    <app-mostrarconsultorfn [idConsultor]="tramite.consultor"></app-mostrarconsultorfn>
+                </td>
+                <td>
+                    <app-mostrarexperto [idExperto]="tramite.expertoTecnico"></app-mostrarexperto>
+                </td>
+                <td>
+                    <button type="button" class="btn btn-outline-primary m-2" (click)="seguimientoTramite(tramite)">
+                        <i class="fa fa-pencil" aria-hidden="true"></i>
+                    </button>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

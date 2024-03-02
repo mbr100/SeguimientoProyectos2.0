@@ -24,6 +24,7 @@ import {ListarRecursosComponent} from "./pages/recursos/listar-recursos/listar-r
 import {AgregarRecursosComponent} from "./pages/recursos/agregar-recursos/agregar-recursos.component";
 import {UserComponent} from "./pages/user/user.component";
 import {EditarRecursosComponent} from "./pages/recursos/editar-recursos/editar-recursos.component";
+import {ListarTramitesComponent} from "./pages/tramites/listar-tramites/listar-tramites.component";
 
 // export const routes: Routes = [
 //     //Login
@@ -70,11 +71,11 @@ export const routes: Routes = [
         ]
     },
     // Historico
-    {path: 'historicos', canActivate: [authGuard], component: ListarProyectosCertificadosComponent},
-    {path: 'archivados', canActivate: [authGuard], component: ListarProyectosArchivadosComponent},
+    { path: 'historicos', canActivate: [authGuard], component: ListarProyectosCertificadosComponent},
+    { path: 'archivados', canActivate: [authGuard], component: ListarProyectosArchivadosComponent},
+    { path: `tramites`, canActivate:[authGuard], component:ListarTramitesComponent},
     // Mantenimientos
-    {
-        path: 'mantenimientos', canActivate: [authGuard], children: [
+    { path: 'mantenimientos', canActivate: [authGuard], children: [
             // Expertos Técnicos
             { path: 'expertos-tecnicos', children: [
                     {path: '', component: ListarETComponent},
@@ -111,14 +112,14 @@ export const routes: Routes = [
                 ]
             }]
     },
-    {path: 'recursos', canActivate: [authGuard], children: [
+    { path: 'recursos', canActivate: [authGuard], children: [
             {path: 'listarRecursos', component: ListarRecursosComponent, canActivate: [authGuard]},
             {path: 'agregarRecurso', component: AgregarRecursosComponent, canActivate: [authGuard]},
             {path: 'editarRecurso/:id', component: EditarRecursosComponent, canActivate: [authGuard]}
         ]},
     { path: 'user', component: UserComponent, canActivate: [authGuard] },
     // Default and fallback routes
-    {path: '', component:ListadoProyectosComponent, canActivate: [authGuard]},
-    {path: '**', redirectTo: ''}
+    { path: '', component:ListadoProyectosComponent, canActivate: [authGuard]},
+    { path: '**', redirectTo: ''}
 ];
 

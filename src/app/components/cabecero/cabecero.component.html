@@ -12,9 +12,6 @@
     @if (mostrarLogOut){
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                <li class="nav-item">
-                    <a class="nav-link" routerLink="/" aria-label="Home">Home</a>
-                </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="proyectosDesplegable" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                         Proyectos
@@ -22,7 +19,7 @@
                     <ul class="dropdown-menu" aria-labelledby="proyectosDesplegable">
                         <li><a class="dropdown-item" (click)="iraHisotricos()" aria-label="Proyectos Historico">Proyectos Historico</a></li>
                         <li><a class="dropdown-item" (click)="iraArchivados()" aria-label="Proyectos Historico">Proyectos Archivados</a></li>
-
+                        <li><a class="dropdown-item" (click)="irATramites()" aria-label="Proyectos">Tramites</a></li>
                     </ul>
                 </li>
                 <li class="nav-item dropdown">
@@ -42,7 +39,7 @@
                         <li><a class="dropdown-item" routerLink="/mantenimientos/expertos-tecnicos/listarET">Expertos Técnicos</a></li>
                         <li><a class="dropdown-item" routerLink="/mantenimientos/expertos-comite/listarEcomite">Expertos Comité</a></li>
                         <li><a class="dropdown-item" routerLink="/mantenimientos/consultores/listadoConsultores">Consultores</a></li>
-                        <li><a class="dropdown-item" routerLink="mantenimientos/comites/listarComites">Comités</a></li>
+                        <li><a class="dropdown-item" routerLink="/mantenimientos/comites/listarComites">Comités</a></li>
                         <li><a class="dropdown-item" routerLink="/mantenimientos/tipoRecurso/listarTipoRecurso">Tipo de Recurso</a></li>
                     </ul>
                 </li>

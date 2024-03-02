@@ -6,6 +6,8 @@ import {Router} from "@angular/router";
 import Swal from "sweetalert2";
 import {MostrarconsultorfnComponent} from "../../../../components/proyectos/mostrarconsultorfn/mostrarconsultorfn.component";
 import {MostrarexpertoComponent} from "../../../../components/proyectos/mostrarexperto/mostrarexperto.component";
+import {Tramites} from "../../../../models/tramites.model";
+import {TramiteService} from "../../../../services/tramite.service";
 
 @Component({
     selector: 'app-listar-proyectos-certificados',
@@ -23,7 +25,7 @@ export class ListarProyectosCertificadosComponent implements OnInit {
     public proyectosCertificadosMostar: Proyecto[];
     public numeroProyectosCertificados: WritableSignal<number> = signal<number>(0);
 
-    constructor(private proyectosService: ProyectoService, private router: Router) {
+    constructor(private proyectosService: ProyectoService, private router: Router, private tramiteService: TramiteService) {
         this.proyectosCertificados = [];
         this.proyectosCertificadosMostar = [];
     }
@@ -57,5 +59,34 @@ export class ListarProyectosCertificadosComponent implements OnInit {
 
     public buscar(value: string): void {
         this.proyectosCertificadosMostar = this.proyectosCertificados.filter(proyecto => proyecto.codigo!.includes(value));
+    }
+
+    public creartramite(proyecto: Proyecto):void {
+        Swal.fire({
+            title: '¿Estás seguro?',
+            text: '¿Estás seguro de que quieres crear un trámite para el proyecto?',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Sí, crear trámite',
+            cancelButtonText: 'No, cancelar',
+            reverseButtons: true
+        }).then((result) => {
+            if (result.isConfirmed) {
+                let tramite: Tramites = {
+                    id: proyecto.id,
+                    codigo: proyecto.codigo,
+                    titulo: proyecto.titulo,
+                    cliente: proyecto.cliente,
+                    fechaInicioTramite: new Date(),
+                    fechaFinTramite: null,
+                    fechaEntrega: null,
+                    expertoTecnico: proyecto.expertoTecnico,
+                    consultor: proyecto.consultor
+                };
+                this.tramiteService.agregarTramite(tramite).then(() => {
+                    this.router.navigate(['/']).then();
+                });
+            }
+        });
     }
 }

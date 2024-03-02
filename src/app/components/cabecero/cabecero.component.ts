@@ -50,4 +50,8 @@ export class CabeceroComponent {
     public irPerfil(): void {
         this.router.navigateByUrl('/user').then();
     }
+
+    public irATramites(): void {
+        this.router.navigateByUrl('/tramites').then();
+    }
 }
