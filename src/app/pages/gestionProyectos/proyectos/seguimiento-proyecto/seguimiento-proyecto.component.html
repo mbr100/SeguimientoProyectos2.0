@@ -41,7 +41,7 @@
             <div class="row mb-3">
                 <label for="ejercicio" class="col-sm-2 col-form-label">Ejercicio:</label>
                 <div class="col-sm-10">
-                    <input type="number" step="any" class="form-control" id="ejercicio" name="ejercicio" [(ngModel)]="proyecto.ejercicio">
+                    <input type="text" class="form-control" id="ejercicio" name="ejercicio" [(ngModel)]="proyecto.ejercicio">
                 </div>
             </div>
 
@@ -60,7 +60,7 @@
             <div class="row mb-3">
                 <label for="codigoUnesco" class="col-sm-2 col-form-label">Codigo Unesco:</label>
                 <div class="col-sm-10">
-                    <input type="number" class="form-control" id="codigoUnesco" name="codigoUnesco" [(ngModel)]="proyecto.codigoUnesco">
+                    <input type="text" class="form-control" id="codigoUnesco" name="codigoUnesco" [(ngModel)]="proyecto.codigoUnesco">
                 </div>
             </div>
             <div class="row mb-3">
@@ -108,11 +108,48 @@
                             <select class="form-select" aria-label="Default select example" id="consultores" [(ngModel)]="proyecto.expertoTecnico">
                                 <option selected>Selecciona un ET</option>
                                 @for (et of elegirET;track et) {
-                                    <option value="{{et.id}}">{{ et.nombre + "" + et.apellido1 }}</option>
+                                    <option value="{{et.id}}">{{ et.idexperto + "" + et.nombre + "" + et.apellido1 }}</option>
                                 }
                             </select>
                         </div>
                     }
+<!--
+                    <div class="card">
+                        @if (experto2Proyecto.id != undefined) {
+                            <div class="card w-100">
+                                <div class="card-header">
+                                    Experto Tecnico 2
+                                </div>
+                                <div class="card-body">
+                                    <p class="card-text">Nombre: {{ experto2Proyecto.nombre + " " + experto2Proyecto.apellido1 + " " + experto2Proyecto.apellido2 }}</p>
+                                    <p class="card-text">Telefono: {{ experto2Proyecto.telefono }}</p>
+                                    <p class="card-text">Email: {{ experto2Proyecto.email }}</p>
+                                </div>
+                            </div>
+                            <br>
+                            <div class="card w-100">
+                                <div class="card-header">
+                                    Experto Tecnico 2 emails
+                                </div>
+                                <div class="card-body">
+                                    <button class="btn btn-outline-success m-2" (click)="enviarEmailAperturaExpertoTecnico()">Enviar Email Apertura</button>
+                                    <button class="btn btn-outline-success m-2" (click)="enviarEmailCierreExpertoTecnico()">Enviar Email Cierre</button>
+                                </div>
+                            </div>
+                        } @else {
+                            <label class="col-form-label">Experto Tecnico 2:</label>
+                            <div class="row mb-3">
+                                <select class="form-select" aria-label="Default select example" id="experto2tecnico" (change)="actualizarproyecto()" [(ngModel)]="proyecto.experto2Tecnico">
+                                    <option selected>Selecciona un ET</option>
+                                    @for (et of elegirET;track et) {
+                                        <option value="{{et.id}}">{{ et.idexperto+ " "+ et.nombre + " " + et.apellido1 }}</option>
+                                    }
+                                </select>
+                            </div>
+                        }
+                    </div>
+-->
+
                 </div>
                 <div class="col-sm-6">
                     <div class="card w-100">
@@ -159,7 +196,7 @@
                         <div class="row mb-3">
                             <label for="coordinador" class="col-sm-2 col-form-label">Coordinador:</label>
                             <div class="col-sm-10">
-                                <select class="form-select" aria-label="Default select example" id="coordinador" [(ngModel)]="proyecto.coordinadorComite">
+                                <select class="form-select" aria-label="Default select example" id="coordinador" (change)="actualizarproyecto()" [(ngModel)]="proyecto.coordinadorComite">
                                     <option selected>Selecciona un Coordinador</option>
                                     @for (coordinador of coordinadoresComite;track coordinador) {
                                         <option value="{{coordinador.id}}">{{ coordinador.nombre }}</option>
@@ -200,7 +237,7 @@
                         <select class="form-select" aria-label="Default select example" id="experto4D" (change)="actualizarproyecto()" [(ngModel)]="proyecto.experto4D">
                             <option selected>Selecciona un Experto 4D</option>
                             @for (experto4D of expertos4D;track experto4D) {
-                                <option value="{{experto4D.id}}">{{ experto4D.nombre }}</option>
+                                <option value="{{experto4D.id}}">{{ experto4D.idexperto + " " + experto4D.nombre + " " + experto4D.apellido1 }}</option>
                             }
                         </select>
                     </div>
@@ -217,7 +254,38 @@
                 </div>
             }
         </div>
-
+    </div>
+<!--
+    <div class="card">
+        <div class="card-header">
+            Experto Comite 2
+        </div>
+        <div class="card-body">
+            @if (proyecto.experto4D2 === '') {
+                <div class="row mb-3">
+                    <label for="experto4D" class="col-sm-2 col-form-label">Experto 4D:</label>
+                    <div class="col-sm-10">
+                        <select class="form-select" aria-label="Default select example" id="experto4D2" (change)="actualizarproyecto()" [(ngModel)]="proyecto.experto4D2">
+                            <option selected>Selecciona un Experto 4D</option>
+                            @for (experto4D of expertos4D;track experto4D) {
+                                <option value="{{experto4D.id}}">{{experto4D.idexperto + " " + experto4D.nombre + " " + experto4D.apellido1}}</option>
+                            }
+                        </select>
+                    </div>
+                </div>
+            } @else {
+                <div class="card-body">
+                    <p class="card-text">Nombre: {{ expertoComite2.nombre + " " + expertoComite2.apellido1 + " " + expertoComite2.apellido2 }}</p>
+                    <p class="card-text">Telefono: {{ expertoComite2.telefono }}</p>
+                    <p class="card-text">Email: {{ expertoComite2.email }}</p>
+                </div>
+                <div class="card-body">
+                    <button class="btn btn-outline-success m-2" (click)="enviarEmailAperturaComite()">Enviar Email Apertura</button>
+                    <button class="btn btn-outline-success m-2" (click)="enviarEmailCycComite()">Enviar CYC</button>
+                </div>
+            }
+        </div>
         <button type="submit" class="btn btn-outline-success btn-lg btn-block" (click)="actualizarproyecto()">Actualizar</button>
     </div>
+-->
 </div>

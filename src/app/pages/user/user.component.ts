@@ -1,10 +1,12 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import Swal from "sweetalert2";
 import firebase from "firebase/compat";
 import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
 import {AuthService} from "../../services/auth.service";
 import {UploadFileService} from "../../services/upload-file.service";
 import {NgOptimizedImage} from "@angular/common";
+import {Proyecto} from "../../models/proyecto.model";
+import {ProyectoService} from "../../services/proyecto.service";
 
 @Component({
   selector: 'app-user',
@@ -16,12 +18,13 @@ import {NgOptimizedImage} from "@angular/common";
   templateUrl: './user.component.html',
   styles: ``
 })
-export class UserComponent {
+export class UserComponent implements OnInit{
     private _user?: firebase.User;
     public userForm!: FormGroup;
+    private proyectos: Proyecto[];
 
 
-    constructor(private userService: AuthService, private uploadFileService: UploadFileService, private fb: FormBuilder) {
+    constructor(private userService: AuthService, private uploadFileService: UploadFileService, private fb: FormBuilder, private proyectoService: ProyectoService) {
         this.userService.user$.subscribe(user => {
             if (user) {
                 this._user = user;
@@ -32,12 +35,16 @@ export class UserComponent {
                 });
             }
         });
+        this.proyectos = [];
     }
     ngOnInit(): void {
         this.userForm = this.fb.group({
             displayName: [this._user?.displayName, Validators.required],
             email: [this._user?.email, Validators.required],
             password: ['', Validators.required],
+        });
+        this.proyectoService.getProyectosBuckup().subscribe(proyectos => {
+            this.proyectos = proyectos;
         });
     }
 
@@ -169,5 +176,23 @@ export class UserComponent {
         Promise.all([updateDisplayName, updateEmail, updatePassword])
             .then(() => this.showSuccessMessage('Perfil actualizado'))
             .catch(() => this.showErrorMessage('Error al actualizar el perfil'));
+    }
+
+    public backup(): void {
+        const data = {
+            proyectos: this.proyectos,
+        }
+
+        const jsonString = JSON.stringify(data);
+        const blob = new Blob([jsonString], { type: 'application/json' });
+        const url = window.URL.createObjectURL(blob);
+
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'datos.json'; // Nombre del archivo JSON
+        a.click();
+
+        window.URL.revokeObjectURL(url);
+
     }
 }

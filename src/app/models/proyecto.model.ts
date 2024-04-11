@@ -12,7 +12,9 @@ export class Proyecto {
     coordinadorComite?: string;
     numeroVersionComite?: number;
     expertoTecnico?: string;
+    experto2Tecnico?: string;
     experto4D?: string;
+    experto4D2?: string;
     consultor?: string;
     estado?: string;
     IMV?: boolean;

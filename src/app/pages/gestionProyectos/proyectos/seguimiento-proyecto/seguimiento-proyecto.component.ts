@@ -28,7 +28,9 @@ export class SeguimientoProyectoComponent implements OnInit {
     public proyecto!: Proyecto;
     public consultorProyecto!: Consultores;
     public expertoProyecto!: ExpertoTecnico;
+    public experto2Proyecto!: ExpertoTecnico;
     public expertoComite!: ExpertoComite;
+    public expertoComite2!: ExpertoComite;
     public comiteProyecto!: Comite;
     public elegirET: ExpertoTecnico[] = [];
     public coordinadoresComite: Comite[] = [];
@@ -42,8 +44,10 @@ export class SeguimientoProyectoComponent implements OnInit {
         this.proyecto = new Proyecto();
         this.consultorProyecto = new Consultores();
         this.expertoProyecto = new ExpertoTecnico();
+        this.experto2Proyecto = new ExpertoTecnico();
         this.comiteProyecto = new Comite();
         this.expertoComite = new ExpertoComite();
+        this.expertoComite2 = new ExpertoComite();
     }
 
     ngOnInit() {
@@ -67,6 +71,13 @@ export class SeguimientoProyectoComponent implements OnInit {
                         });
                     }
                 }
+                if (value.experto2Tecnico != null) {
+                    if (value.experto2Tecnico != "") {
+                        this.expertoService.getExpertoTecnico(value.experto2Tecnico).subscribe(value => {
+                            this.experto2Proyecto = value;
+                        });
+                    }
+                }
                 if (value.coordinadorComite != null) {
                     if (value.coordinadorComite != "") {
                         this.comiteService.obtenerComite(value.coordinadorComite).subscribe(value => {
@@ -81,7 +92,13 @@ export class SeguimientoProyectoComponent implements OnInit {
                         });
                     }
                 }
-
+                if (value.experto4D2 != null) {
+                    if (value.experto4D2 != "") {
+                        this.expertocomiteService.getExpertoComite(value.experto4D2).subscribe(value => {
+                            this.expertoComite2 = value;
+                        });
+                    }
+                }
             },
             error: err => console.log(err)
         });

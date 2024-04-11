@@ -56,6 +56,9 @@
                 @if (proyecto.expertoTecnico) {
                     <td>
                         <app-mostrarexperto [idExperto]="proyecto.expertoTecnico"></app-mostrarexperto>
+                        @if (proyecto.experto2Tecnico) {
+                            <app-mostrarexperto [idExperto]="proyecto.experto2Tecnico"></app-mostrarexperto>
+                        }
                     </td>
                 } @else {
                     <td>No hay experto</td>

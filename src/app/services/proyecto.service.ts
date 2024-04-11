@@ -8,6 +8,7 @@ import {map, Observable} from "rxjs";
 })
 export class ProyectoService {
     private proyectosCollection: AngularFirestoreCollection<Proyecto>;
+    private proyectosBuckUp: AngularFirestoreCollection<Proyecto>;
     private proyectosCertificadosCollection: AngularFirestoreCollection<Proyecto>;
     private proyectosArchivadosCollection: AngularFirestoreCollection<Proyecto>;
     private proyectos!: Observable<Proyecto[]>;
@@ -21,6 +22,7 @@ export class ProyectoService {
             ref.where('estado', '==', 'Certificado').orderBy('codigo', 'asc'));
         this.proyectosArchivadosCollection = this.db.collection<Proyecto>('proyectos', ref =>
             ref.where('estado', '==', 'Archivado').orderBy('codigo', 'asc'));
+        this.proyectosBuckUp = this.db.collection<Proyecto>('proyectos');
     }
 
     public agregarProyecto(proyecto: Proyecto): Promise<DocumentReference<Proyecto>> {
@@ -58,6 +60,33 @@ export class ProyectoService {
 
     public getProyectos(): Observable<Proyecto[]> {
         this.proyectos = this.proyectosCollection.snapshotChanges().pipe(
+            map(accion => {
+                return accion.map(datos => {
+                    const data = datos.payload.doc.data() as Proyecto;
+                    const fechaini = datos.payload.doc.data().fechaInicioProyecto as any;
+                    const fechaf = datos.payload.doc.data().fechaFinProyecto as any;
+                    const fechac = datos.payload.doc.data().fechaComite as any;
+                    const fechafcomite = datos.payload.doc.data().fechaFinComite as any;
+                    data.fechaInicioProyecto = fechaini.toDate();
+                    if (fechaf != null) {
+                        data.fechaFinProyecto = fechaf.toDate();
+                    }
+                    if (fechac != null) {
+                        data.fechaComite = fechac.toDate();
+                    }
+                    if (fechafcomite != null) {
+                        data.fechaFinComite = fechafcomite.toDate();
+                    }
+                    data.id = datos.payload.doc.id;
+                    return data;
+                });
+            })
+        )
+        return this.proyectos;
+    }
+
+    public getProyectosBuckup(): Observable<Proyecto[]> {
+        this.proyectos = this.proyectosBuckUp.snapshotChanges().pipe(
             map(accion => {
                 return accion.map(datos => {
                     const data = datos.payload.doc.data() as Proyecto;

@@ -50,14 +50,16 @@ export class AgregarproyectoComponent implements OnInit {
             coordinadorComite: [''],
             numeroVersionComite: [null],
             expertoTecnico: [''],
+            experto2Tecnico: [''],
             experto4D: [''],
+            experto4D2: [''],
             consultor: [''],
             estado: ['ACTIVO'],
             IMV: [''],
             codigoUnesco: [''],
             anoCertificacion: [new Date().getFullYear()],
             precioOfertado: [0],
-            proyectoPrincipal: [],
+            proyectoPrincipal: [true],
             tipoProyecto: ['Deducciones']
         });
     }

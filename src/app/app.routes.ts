@@ -73,7 +73,9 @@ export const routes: Routes = [
     // Historico
     { path: 'historicos', canActivate: [authGuard], component: ListarProyectosCertificadosComponent},
     { path: 'archivados', canActivate: [authGuard], component: ListarProyectosArchivadosComponent},
-    { path: `tramites`, canActivate:[authGuard], component:ListarTramitesComponent},
+    { path: `tramites`, canActivate:[authGuard], component:ListarTramitesComponent, children:[
+            {path: 'seguimiento/:id', component: ListarTramitesComponent}
+            ]},
     // Mantenimientos
     { path: 'mantenimientos', canActivate: [authGuard], children: [
             // Expertos Técnicos

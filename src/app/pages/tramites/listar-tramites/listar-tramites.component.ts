@@ -4,6 +4,7 @@ import {Tramites} from "../../../models/tramites.model";
 import {MostrarconsultorfnComponent} from "../../../components/proyectos/mostrarconsultorfn/mostrarconsultorfn.component";
 import {MostrarexpertoComponent} from "../../../components/proyectos/mostrarexperto/mostrarexperto.component";
 import {DatePipe} from "@angular/common";
+import {Router} from "@angular/router";
 
 @Component({
     selector: 'app-listar-tramites',
@@ -19,7 +20,7 @@ import {DatePipe} from "@angular/common";
 export class ListarTramitesComponent implements OnInit {
     protected tramites: Tramites[];
     numeroProyectos: WritableSignal<number> = signal<number>(0);
-    constructor(private tramiteService: TramiteService) {
+    constructor(private tramiteService: TramiteService, private router: Router) {
         this.tramites = new Array<Tramites>();
     }
 
@@ -35,6 +36,6 @@ export class ListarTramitesComponent implements OnInit {
     }
 
     public seguimientoTramite(tramite: Tramites): void {
-
+        this.router.navigateByUrl(`/tramites/${tramite.id}`).then(r => {});
     }
 }

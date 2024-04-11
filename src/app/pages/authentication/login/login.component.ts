@@ -24,8 +24,7 @@ export class LoginComponent implements OnInit{
     public ngOnInit(): void {
         this.loginService.getAuth().subscribe(auth => {
             if (auth) {
-                console.log(auth);
-               //this.router.navigate([`/`]).then(r => console.log(r));
+               this.router.navigate([`/`]).then(r => console.log(r));
             }
         });
     }
@@ -33,14 +32,17 @@ export class LoginComponent implements OnInit{
     public login(): void {
         this.loginService.login(this.email, this.password)
             .then(res => {
-                console.log(res);
-                this.router.navigate([`/`]).then(r => console.log(r));
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Bienvenido '+res.user?.displayName,
+                    text: 'Inicio de sesión correcto',
+                }).then(()=>this.router.navigate([`/`]).then(r => console.log(r)))
+
             }).catch( error => {
-                console.log(error);
                 Swal.fire({
                     icon: 'error',
                     title: 'Oops...',
-                    text: 'Usuario o contraseña incorrectos',
+                    text: 'Usuario o contraseña incorrectos'+error,
                 }).then();
             });
     }
