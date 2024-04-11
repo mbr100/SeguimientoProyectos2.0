@@ -38,8 +38,8 @@ export class EditarConsultorComponent implements OnInit {
     public actualizar(): void {
         this.consultorService.actualizarConsultor(this.consultorForm.value).then(_ => {
             Swal.fire({
-                title: 'Experto técnico actualizado',
-                text: 'El experto técnico se ha actualizado correctamente',
+                title: 'Consultor actualizado',
+                text: 'El Consultor se ha actualizado correctamente',
                 icon: 'success',
                 confirmButtonText: 'Aceptar'
             }).then(_ => {
@@ -47,7 +47,7 @@ export class EditarConsultorComponent implements OnInit {
             }).catch(_ => {
                 Swal.fire({
                     title: 'Error',
-                    text: 'Ha ocurrido un error al actualizar el experto técnico',
+                    text: 'Ha ocurrido un error al actualizar el Consultor',
                     icon: 'error',
                     confirmButtonText: 'Aceptar'
                 }).then();

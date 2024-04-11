@@ -49,7 +49,7 @@ export class AgregarRecursosComponent implements OnInit{
     public agregar(): void {
         this.recursosService.agregarRecurso(this.recursosForm.value).then(_ => {
             Swal.fire({
-                title: 'Comité añadido',
+                title: 'Recurso añadido',
                 text: 'El comité se ha añadido correctamente',
                 icon: 'success',
                 confirmButtonText: 'Aceptar'
@@ -58,7 +58,7 @@ export class AgregarRecursosComponent implements OnInit{
             }).catch(_ => {
                 Swal.fire({
                     title: 'Error',
-                    text: 'Ha ocurrido un error al añadir el comité',
+                    text: 'Ha ocurrido un error al añadir el recurso',
                     icon: 'error',
                     confirmButtonText: 'Aceptar'
                 }).then();
@@ -66,7 +66,7 @@ export class AgregarRecursosComponent implements OnInit{
         }).catch(_ => {
             Swal.fire({
                 title: 'Error',
-                text: 'Ha ocurrido un error al añadir el comité',
+                text: 'Ha ocurrido un error al añadir el recursos',
                 icon: 'error',
                 confirmButtonText: 'Aceptar'
             }).then();

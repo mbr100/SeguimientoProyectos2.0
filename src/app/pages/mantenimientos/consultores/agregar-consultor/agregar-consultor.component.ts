@@ -43,8 +43,8 @@ export class AgregarConsultorComponent {
     public agregar(): void {
         this.consultorService.agregarConsultor(this.consultorForm.value).then(_ => {
             Swal.fire({
-                title: 'Experto técnico añadido',
-                text: 'El experto técnico se ha añadido correctamente',
+                title: 'Consultor añadido',
+                text: 'El Consultor se ha añadido correctamente',
                 icon: 'success',
                 confirmButtonText: 'Aceptar'
             }).then(_ => {
@@ -52,7 +52,7 @@ export class AgregarConsultorComponent {
             }).catch(_ => {
                 Swal.fire({
                     title: 'Error',
-                    text: 'Ha ocurrido un error al añadir el experto técnico',
+                    text: 'Ha ocurrido un error al añadir el Consultor',
                     icon: 'error',
                     confirmButtonText: 'Aceptar'
                 }).then();

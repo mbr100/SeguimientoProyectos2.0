@@ -46,7 +46,7 @@ export class AgregarEComiteComponent {
         console.log(this.expertoComiteForm.value);
         this.expertoComiteService.agregarExpertoComite(this.expertoComiteForm.value).then(_ => {
             Swal.fire({
-                title: 'Experto técnico añadido',
+                title: 'Experto Comité añadido',
                 text: 'El experto técnico se ha añadido correctamente',
                 icon: 'success',
                 confirmButtonText: 'Aceptar'
@@ -55,7 +55,7 @@ export class AgregarEComiteComponent {
             }).catch(_ => {
                 Swal.fire({
                     title: 'Error',
-                    text: 'Ha ocurrido un error al añadir el experto técnico',
+                    text: 'Ha ocurrido un error al añadir el experto comité',
                     icon: 'error',
                     confirmButtonText: 'Aceptar'
                 }).then();

@@ -56,7 +56,7 @@ export class EditarEComiteComponent implements OnInit{
         console.log(this.expertoComiteForm.value);
         this.expertoComiteService.actualizarExpertoComite(this.expertoComiteForm.value).then(_ => {
             Swal.fire({
-                title: 'Experto técnico Actualizado',
+                title: 'Experto Comité Actualizado',
                 text: 'El experto técnico se ha actualizado correctamente',
                 icon: 'success',
                 confirmButtonText: 'Aceptar'
@@ -65,7 +65,7 @@ export class EditarEComiteComponent implements OnInit{
             }).catch(_ => {
                 Swal.fire({
                     title: 'Error',
-                    text: 'Ha ocurrido un error al actualizar el experto técnico',
+                    text: 'Ha ocurrido un error al actualizar el experto comité',
                     icon: 'error',
                     confirmButtonText: 'Aceptar'
                 }).then();
