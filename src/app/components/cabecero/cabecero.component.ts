@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, signal} from '@angular/core';
 import {Router, RouterLink} from "@angular/router";
 import {NgClass, NgOptimizedImage} from "@angular/common";
 import {AuthService} from "../../services/auth.service";
@@ -53,5 +53,10 @@ export class CabeceroComponent {
 
     public irATramites(): void {
         this.router.navigateByUrl('/tramites').then();
+    }
+
+    public iraEstadisticas(): void {
+        this.router.navigateByUrl('/estadisticas').then();
+
     }
 }

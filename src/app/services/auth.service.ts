@@ -63,7 +63,7 @@ export class AuthService {
         });
     }
 
-    public updateDisplayName(displayName: string) {
+    public updateDisplayName(displayName: string): Promise<void>  {
         return new Promise<void>((resolve, reject) => {
             this.authService.currentUser.then(user => {
                 user?.updateProfile({
@@ -73,7 +73,7 @@ export class AuthService {
         });
     }
 
-    public updateEmail(email: string) {
+    public updateEmail(email: string): Promise<void> {
         return new Promise<void>((resolve, reject) => {
             this.authService.currentUser.then(user => {
                 user?.updateEmail(email).then(() => resolve(),
@@ -82,7 +82,7 @@ export class AuthService {
         });
     }
 
-    public updatePassword(password: string) {
+    public updatePassword(password: string): Promise<void> {
         return new Promise<void>((resolve, reject) => {
             this.authService.currentUser.then(user => {
                 user?.updatePassword(password).then(() => resolve(),

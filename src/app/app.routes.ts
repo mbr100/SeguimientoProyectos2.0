@@ -25,6 +25,7 @@ import {AgregarRecursosComponent} from "./pages/recursos/agregar-recursos/agrega
 import {UserComponent} from "./pages/user/user.component";
 import {EditarRecursosComponent} from "./pages/recursos/editar-recursos/editar-recursos.component";
 import {ListarTramitesComponent} from "./pages/tramites/listar-tramites/listar-tramites.component";
+import {MostrarEstadisticasComponent} from "./pages/estadisticas/mostrar-estadisticas/mostrar-estadisticas.component";
 
 // export const routes: Routes = [
 //     //Login
@@ -73,9 +74,10 @@ export const routes: Routes = [
     // Historico
     { path: 'historicos', canActivate: [authGuard], component: ListarProyectosCertificadosComponent},
     { path: 'archivados', canActivate: [authGuard], component: ListarProyectosArchivadosComponent},
+    { path: 'estadisticas', canActivate:[authGuard], component:MostrarEstadisticasComponent},
     { path: `tramites`, canActivate:[authGuard], component:ListarTramitesComponent, children:[
             {path: 'seguimiento/:id', component: ListarTramitesComponent}
-            ]},
+        ]},
     // Mantenimientos
     { path: 'mantenimientos', canActivate: [authGuard], children: [
             // Expertos Técnicos
