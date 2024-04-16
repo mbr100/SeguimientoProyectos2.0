@@ -6,6 +6,7 @@ export class Estadisticas {
     FechaFinProyecto!: Date ;
     FechaFinComite!: Date;
     diasComite!: number;
+    precioOferta!: number;
     diasCertificacion!: number;
     versionComite!: number;
 }

@@ -1,33 +1,36 @@
-import {Component, OnInit} from '@angular/core';
-import {ProyectoService} from "../../../services/proyecto.service";
-import {Proyecto} from "../../../models/proyecto.model";
+import { Component, OnInit } from '@angular/core';
+import { ProyectoService } from "../../../services/proyecto.service";
+import { Proyecto } from "../../../models/proyecto.model";
+import {CurrencyPipe, DatePipe, DecimalPipe} from "@angular/common";
+import { Estadisticas } from "../../../models/estadisticas.model";
 import Swal from "sweetalert2";
-import {DatePipe, DecimalPipe} from "@angular/common";
-import {Estadisticas} from "../../../models/estadisticas.model";
+import {FormsModule} from "@angular/forms";
 
 @Component({
-  selector: 'app-mostrar-estadisticas',
-  standalone: true,
-    imports: [
-        DatePipe,
-        DecimalPipe
-    ],
-  templateUrl: './mostrar-estadisticas.component.html',
-  styleUrl: './mostrar-estadisticas.component.css'
+    selector: 'app-mostrar-estadisticas',
+    standalone: true,
+    imports: [DatePipe, DecimalPipe, CurrencyPipe, FormsModule],
+    templateUrl: './mostrar-estadisticas.component.html',
+    styleUrl: './mostrar-estadisticas.component.css'
 })
-export class MostrarEstadisticasComponent implements OnInit{
+export class MostrarEstadisticasComponent implements OnInit {
     private proyectos: Proyecto[];
     public estadisticas: Estadisticas[];
     public mediaDiasComite: number;
     public mediaDiasCertificacion: number;
-    constructor(private proyectosService: ProyectoService) {
+    public precioMedioOferta: number;
+    public proyectosEquivalentes: number;
+
+    public constructor(private proyectosService: ProyectoService) {
         this.proyectos = [];
         this.estadisticas = [];
         this.mediaDiasComite = 0;
         this.mediaDiasCertificacion = 0;
+        this.precioMedioOferta = 0;
+        this.proyectosEquivalentes = 0;
     }
 
-    ngOnInit(): void {
+    public ngOnInit(): void {
         this.proyectosService.getProyectosCertificados().subscribe({
             next: (proyectos: Proyecto[]) => {
                 this.proyectos = proyectos;
@@ -42,8 +45,9 @@ export class MostrarEstadisticasComponent implements OnInit{
             }
         });
     }
+
     private generarEstadisticas(): void {
-        this.estadisticas = this.proyectos.map((proyecto: Proyecto) => {
+        this.estadisticas = this.proyectos.map((proyecto: Proyecto): Estadisticas => {
             const fecha1Comite: Date | undefined = proyecto.fechaComite ? new Date(proyecto.fechaComite) : undefined;
             const fecha2Comite: Date | undefined = proyecto.fechaFinComite ? new Date(proyecto.fechaFinComite) : undefined;
             const diferenciaEnMilisegundosComite: number = fecha2Comite!.getTime() - fecha1Comite!.getTime();
@@ -53,15 +57,16 @@ export class MostrarEstadisticasComponent implements OnInit{
             const diferenciaEnMilisegundosCertificacion: number = fecha2Certificacion!.getTime() - fecha1Certificacion!.getTime();
             const diasCertificacion: number = diferenciaEnMilisegundosCertificacion / 86400000;
             return {
-                Acronimo: proyecto.acronimo || "", // Asignar un valor predeterminado si es undefined
-                Codigo: proyecto.codigo || "", // Asignar un valor predeterminado si es undefined
-                FechaInicio: proyecto.fechaInicioProyecto || new Date(), // Asignar una fecha predeterminada si es undefined
-                FechaInicioComite: proyecto.fechaComite || new Date(), // Asignar una fecha predeterminada si es undefined
-                FechaFinComite: proyecto.fechaFinComite || new Date(), // Asignar una fecha predeterminada si es undefined
-                FechaFinProyecto: proyecto.fechaFinProyecto || new Date(), // Asignar una fecha predeterminada si es undefined
+                Acronimo: proyecto.acronimo!,
+                Codigo: proyecto.codigo!,
+                FechaInicio: proyecto.fechaInicioProyecto!,
+                FechaInicioComite: proyecto.fechaComite!,
+                FechaFinComite: proyecto.fechaFinComite!,
+                FechaFinProyecto: proyecto.fechaFinProyecto!,
                 diasComite: diasEnComite,
+                precioOferta: proyecto.precioOfertado!,
                 diasCertificacion: diasCertificacion,
-                versionComite: proyecto.numeroVersionComite !== undefined ? proyecto.numeroVersionComite : 0 // Asignar un valor predeterminado si es undefined
+                versionComite: proyecto.numeroVersionComite!
             };
         });
         if (this.estadisticas.length !== 0) {
@@ -81,4 +86,10 @@ export class MostrarEstadisticasComponent implements OnInit{
         return totalDias / estadisticas.length;
     }
 
+    public calcularProyectosMedios():void {
+        this.proyectosEquivalentes = this.estadisticas.reduce((total, proyecto) => {
+            return total + proyecto.precioOferta;
+        }, 0) / this.precioMedioOferta;
+
+    }
 }
