@@ -1,7 +1,8 @@
-import {CanActivateFn, Router} from '@angular/router';
-import {map} from "rxjs";
-import {AngularFireAuth} from "@angular/fire/compat/auth";
-import {inject} from "@angular/core";
+import { CanActivateFn, Router } from '@angular/router';
+import { map } from "rxjs";
+import { AngularFireAuth } from "@angular/fire/compat/auth";
+import { inject } from "@angular/core";
+
 import firebase from "firebase/compat";
 import Swal from "sweetalert2";
 

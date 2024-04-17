@@ -1,16 +1,16 @@
-import {Component, OnInit, signal} from '@angular/core';
-import {ActivatedRoute, Router} from "@angular/router";
-import {Proyecto} from "../../../../models/proyecto.model";
-import {ProyectoService} from "../../../../services/proyecto.service";
-import {Consultores} from "../../../../models/consultores.model";
-import {ConsultoresService} from "../../../../services/consultores.service";
-import {ExpertoTecnicoService} from "../../../../services/experto-tecnico.service";
-import {ExpertoComiteService} from "../../../../services/experto-comite.service";
-import {ComitesService} from "../../../../services/comites.service";
-import {ExpertoTecnico} from "../../../../models/expertoTecnico.model";
-import {Comite} from "../../../../models/comite.model";
-import {ExpertoComite} from "../../../../models/experto-comite.model";
-import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import { Component, OnInit, signal } from '@angular/core';
+import { ActivatedRoute, Router } from "@angular/router";
+import { Proyecto } from "@models/proyecto.model";
+import { ProyectoService } from "@services/proyecto.service";
+import { Consultores } from "@models/consultores.model";
+import { ConsultoresService } from "@services/consultores.service";
+import { ExpertoTecnicoService } from "@services/experto-tecnico.service";
+import { ExpertoComiteService } from "@services/experto-comite.service";
+import { ComitesService } from "@services/comites.service";
+import { ExpertoTecnico } from "@models/expertoTecnico.model";
+import { Comite } from "@models/comite.model";
+import { ExpertoComite } from "@models/experto-comite.model";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import Swal from "sweetalert2";
 
 @Component({
@@ -105,6 +105,7 @@ export class SeguimientoProyectoComponent implements OnInit {
         this.expertoService.getExpertosTecnicos().subscribe({
             next: value => {
                 this.elegirET = value;
+                this.elegirET.sort((a, b) => a.idexperto! - b.idexperto!)
             },
             error: err => console.log(err),
             complete: () => console.log('done')
@@ -118,6 +119,7 @@ export class SeguimientoProyectoComponent implements OnInit {
         this.expertocomiteService.getExpertosComite().subscribe({
             next: value => {
                 this.expertos4D = value;
+                this.expertos4D.sort((a, b) => a.idexperto! - b.idexperto!)
             },
             error: err => console.log(err),
         });

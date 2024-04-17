@@ -1,7 +1,7 @@
-import {Component, signal} from '@angular/core';
-import {Router, RouterLink} from "@angular/router";
-import {NgClass, NgOptimizedImage} from "@angular/common";
-import {AuthService} from "../../services/auth.service";
+import { Component } from '@angular/core';
+import { Router, RouterLink } from "@angular/router";
+import { NgClass, NgOptimizedImage } from "@angular/common";
+import { AuthService } from "@services/auth.service";
 import firebase from "firebase/compat";
 
 @Component({

@@ -26,6 +26,7 @@ export class ListadoConsultoresComponent implements OnInit{
     ngOnInit(): void {
         this.consultoresService.getConsultores().subscribe((consultores: Consultores[]): void => {
             this.consultores = consultores;
+            this.consultores.sort((a: Consultores, b: Consultores) => a.consultora!.toLowerCase().localeCompare(b.consultora!.toLowerCase()));
             this.numeroConsultores.set(consultores.length);
         });
     }

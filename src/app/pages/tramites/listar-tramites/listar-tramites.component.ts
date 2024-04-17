@@ -36,6 +36,12 @@ export class ListarTramitesComponent implements OnInit {
     }
 
     public seguimientoTramite(tramite: Tramites): void {
-        this.router.navigateByUrl(`/tramites/${tramite.id}`).then(r => {});
+        this.router.navigateByUrl(`/tramites/seguimiento/${tramite.id}`).then(r => {});
+    }
+
+    public eliminarTramite(tramite: Tramites) {
+        this.tramiteService.eliminarTramite(tramite.id!).then(r => {
+            this.tramites = this.tramites.filter(t => t.id !== tramite.id);
+        });
     }
 }

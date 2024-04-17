@@ -1,11 +1,12 @@
-import {Component, OnInit} from '@angular/core';
-import {FormBuilder, FormGroup, FormsModule, ReactiveFormsModule} from "@angular/forms";
-import {ProyectoService} from "../../../../services/proyecto.service";
-import {Router} from "@angular/router";
-import {Consultores} from "../../../../models/consultores.model";
-import {ConsultoresService} from "../../../../services/consultores.service";
-import {CheckListBonis} from "../../../../models/checkListBonis.model";
-import {CheckListBonisService} from "../../../../services/check-list-bonis.service";
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule } from "@angular/forms";
+import { ProyectoService } from "@services/proyecto.service";
+import { Router } from "@angular/router";
+import { Consultores } from "@models/consultores.model";
+import { ConsultoresService } from "@services/consultores.service";
+import { CheckListBonis } from "@models/checkListBonis.model";
+import { CheckListBonisService } from "@services/check-list-bonis.service";
+
 import Swal from "sweetalert2";
 
 @Component({

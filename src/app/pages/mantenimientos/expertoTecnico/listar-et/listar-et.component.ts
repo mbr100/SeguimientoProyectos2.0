@@ -25,6 +25,7 @@ export class ListarETComponent implements OnInit{
     ngOnInit(): void {
         this.eTservico.getExpertosTecnicos().subscribe((expertosTecnicos: ExpertoTecnico[]): void => {
             this.expertosTecnicos = expertosTecnicos;
+            this.expertosTecnicos.sort((a: ExpertoTecnico, b: ExpertoTecnico) => a.idexperto! - b.idexperto!);
         });
     }
 

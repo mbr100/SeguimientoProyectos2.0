@@ -12,7 +12,8 @@ export class TramiteService {
     private tramites!: Observable<Tramites[]>
 
     constructor(private db: AngularFirestore) {
-        this.tramitesCollection = this.db.collection<Tramites>('tramites');
+        this.tramitesCollection = this.db.collection<Tramites>('tramites', ref =>
+            ref.where('estado', '==', 'ACTIVO'));
     }
 
     public agregarTramite(tramite: Tramites): Promise<any> {
@@ -25,12 +26,8 @@ export class TramiteService {
                 const data = a.payload.doc.data() as Tramites;
                 const fechaInicio = a.payload.doc.data().fechaInicioTramite as any;
                 const fechaEntrega = a.payload.doc.data().fechaEntrega as any;
-                const fechaFinTramite = a.payload.doc.data().fechaFinTramite as any;
                 if (fechaEntrega != null) {
                     data.fechaEntrega = fechaEntrega.toDate();
-                }
-                if (fechaFinTramite != null) {
-                    data.fechaFinTramite = fechaFinTramite.toDate();
                 }
                 data.fechaInicioTramite = fechaInicio.toDate();
                 const id = a.payload.doc.id;
@@ -48,12 +45,8 @@ export class TramiteService {
                 const data = a.payload.data() as Tramites;
                 const fechaInicio = a.payload.data()!.fechaInicioTramite as any;
                 const fechaEntrega = a.payload.data()!.fechaEntrega as any;
-                const fechaFinTramite = a.payload.data()!.fechaFinTramite as any;
                 if (fechaEntrega != null) {
                     data.fechaEntrega = fechaEntrega.toDate();
-                }
-                if (fechaFinTramite != null) {
-                    data.fechaFinTramite = fechaFinTramite.toDate();
                 }
                 data.fechaInicioTramite = fechaInicio.toDate();
                 const id = a.payload.id;
@@ -64,4 +57,11 @@ export class TramiteService {
     }
 
 
+    public eliminarTramite(id: string): Promise<void> {
+        return this.tramitesCollection.doc(id).delete();
+    }
+
+    public actualizarTramite(tramite: Tramites): Promise<void> {
+        return this.tramitesCollection.doc(tramite.id).update(tramite);
+    }
 }

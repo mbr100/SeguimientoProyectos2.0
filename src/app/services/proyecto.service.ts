@@ -116,29 +116,29 @@ export class ProyectoService {
         this.proyectoDoc = this.proyectosCollection.doc<Proyecto>(id);
         return this.proyectoDoc.snapshotChanges().pipe(
             map(accion => {
-                const data = accion.payload.data() as Proyecto;
+                const proyecto = accion.payload.data() as Proyecto;
                 const fechaini = accion.payload.data()!.fechaInicioProyecto as any;
                 const fechaf = accion.payload.data()!.fechaFinProyecto as any;
                 const fechac = accion.payload.data()!.fechaComite as any;
                 const fechafcomite = accion.payload.data()!.fechaFinComite as any;
-                data.fechaInicioProyecto = fechaini.toDate();
+                proyecto.fechaInicioProyecto = fechaini.toDate();
                 if (fechaf != null) {
-                    data.fechaFinProyecto = fechaf.toDate();
+                    proyecto.fechaFinProyecto = fechaf.toDate();
                 } else {
-                    data.fechaFinProyecto = null;
+                    proyecto.fechaFinProyecto = null;
                 }
                 if (fechac != null) {
-                    data.fechaComite = fechac.toDate();
+                    proyecto.fechaComite = fechac.toDate();
                 } else {
-                    data.fechaComite = null;
+                    proyecto.fechaComite = null;
                 }
                 if (fechafcomite != null) {
-                    data.fechaFinComite = fechafcomite.toDate();
+                    proyecto.fechaFinComite = fechafcomite.toDate();
                 } else {
-                    data.fechaFinComite = null;
+                    proyecto.fechaFinComite = null;
                 }
-                data.id = accion.payload.data()!.id;
-                return data;
+                proyecto.id = accion.payload.data()!.id;
+                return proyecto;
             })
         )
     }

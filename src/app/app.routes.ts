@@ -1,31 +1,32 @@
-import {Routes} from '@angular/router';
-import {ListadoProyectosComponent} from "./pages/gestionProyectos/proyectos/listado-proyectos/listado-proyectos.component";
-import {LoginComponent} from "./pages/authentication/login/login.component";
-import {AgregarproyectoComponent} from "./pages/gestionProyectos/proyectos/agregarproyecto/agregarproyecto.component";
-import {SeguimientoProyectoComponent} from "./pages/gestionProyectos/proyectos/seguimiento-proyecto/seguimiento-proyecto.component";
-import {ListarProyectosCertificadosComponent} from "./pages/gestionProyectos/proyectosCertificados/listar-proyectos-certificados/listar-proyectos-certificados.component";
-import {ListarProyectosArchivadosComponent} from "./pages/gestionProyectos/proyectosArchivados/listar-proyectos-archivados/listar-proyectos-archivados.component";
-import {authGuard} from "./guards/auth.guard";
-import {AgregarTipoRecursoComponent} from "./pages/mantenimientos/tipoRecurso/agregar-tipo-recurso/agregar-tipo-recurso.component";
-import {ListarTipoRecursoComponent} from "./pages/mantenimientos/tipoRecurso/listar-tipo-recurso/listar-tipo-recurso.component";
-import {ListarETComponent} from "./pages/mantenimientos/expertoTecnico/listar-et/listar-et.component";
-import {AgregarETComponent} from "./pages/mantenimientos/expertoTecnico/agregar-et/agregar-et.component";
-import {EditarETComponent} from "./pages/mantenimientos/expertoTecnico/editar-et/editar-et.component";
-import {ListarEComiteComponent} from "./pages/mantenimientos/expertoComite/listar-ecomite/listar-ecomite.component";
-import {AgregarEComiteComponent} from "./pages/mantenimientos/expertoComite/agregar-ecomite/agregar-ecomite.component";
-import {EditarEComiteComponent} from "./pages/mantenimientos/expertoComite/editar-ecomite/editar-ecomite.component";
-import {ListadoConsultoresComponent} from "./pages/mantenimientos/consultores/listado-consultores/listado-consultores.component";
-import {AgregarConsultorComponent} from "./pages/mantenimientos/consultores/agregar-consultor/agregar-consultor.component";
-import {EditarConsultorComponent} from "./pages/mantenimientos/consultores/editar-consultor/editar-consultor.component";
-import {ListarComitesComponent} from "./pages/mantenimientos/comistes/listar-comites/listar-comites.component";
-import {AgregarComitesComponent} from "./pages/mantenimientos/comistes/agregar-comites/agregar-comites.component";
-import {EditarComitesComponent} from "./pages/mantenimientos/comistes/editar-comites/editar-comites.component";
-import {ListarRecursosComponent} from "./pages/recursos/listar-recursos/listar-recursos.component";
-import {AgregarRecursosComponent} from "./pages/recursos/agregar-recursos/agregar-recursos.component";
-import {UserComponent} from "./pages/user/user.component";
-import {EditarRecursosComponent} from "./pages/recursos/editar-recursos/editar-recursos.component";
-import {ListarTramitesComponent} from "./pages/tramites/listar-tramites/listar-tramites.component";
-import {MostrarEstadisticasComponent} from "./pages/estadisticas/mostrar-estadisticas/mostrar-estadisticas.component";
+import { Routes } from '@angular/router';
+import { ListadoProyectosComponent } from "@pages/gestionProyectos/proyectos/listado-proyectos/listado-proyectos.component";
+import { LoginComponent } from "@pages/authentication/login/login.component";
+import { AgregarproyectoComponent } from "@pages/gestionProyectos/proyectos/agregarproyecto/agregarproyecto.component";
+import { SeguimientoProyectoComponent } from "@pages/gestionProyectos/proyectos/seguimiento-proyecto/seguimiento-proyecto.component";
+import { ListarProyectosCertificadosComponent } from "@pages/gestionProyectos/proyectosCertificados/listar-proyectos-certificados/listar-proyectos-certificados.component";
+import { ListarProyectosArchivadosComponent } from "@pages/gestionProyectos/proyectosArchivados/listar-proyectos-archivados/listar-proyectos-archivados.component";
+import { authGuard } from "@guards/auth.guard";
+import { AgregarTipoRecursoComponent } from "@pages/mantenimientos/tipoRecurso/agregar-tipo-recurso/agregar-tipo-recurso.component";
+import { ListarTipoRecursoComponent } from "@pages/mantenimientos/tipoRecurso/listar-tipo-recurso/listar-tipo-recurso.component";
+import { ListarETComponent } from "@pages/mantenimientos/expertoTecnico/listar-et/listar-et.component";
+import { AgregarETComponent } from "@pages/mantenimientos/expertoTecnico/agregar-et/agregar-et.component";
+import { EditarETComponent } from "@pages/mantenimientos/expertoTecnico/editar-et/editar-et.component";
+import { ListarEComiteComponent } from "@pages/mantenimientos/expertoComite/listar-ecomite/listar-ecomite.component";
+import { AgregarEComiteComponent } from "@pages/mantenimientos/expertoComite/agregar-ecomite/agregar-ecomite.component";
+import { EditarEComiteComponent } from "@pages/mantenimientos/expertoComite/editar-ecomite/editar-ecomite.component";
+import { ListadoConsultoresComponent } from "@pages/mantenimientos/consultores/listado-consultores/listado-consultores.component";
+import { AgregarConsultorComponent } from "@pages/mantenimientos/consultores/agregar-consultor/agregar-consultor.component";
+import { EditarConsultorComponent } from "@pages/mantenimientos/consultores/editar-consultor/editar-consultor.component";
+import { ListarComitesComponent } from "@pages/mantenimientos/comistes/listar-comites/listar-comites.component";
+import { AgregarComitesComponent } from "@pages/mantenimientos/comistes/agregar-comites/agregar-comites.component";
+import { EditarComitesComponent } from "@pages/mantenimientos/comistes/editar-comites/editar-comites.component";
+import { ListarRecursosComponent } from "@pages/recursos/listar-recursos/listar-recursos.component";
+import { AgregarRecursosComponent } from "@pages/recursos/agregar-recursos/agregar-recursos.component";
+import { UserComponent } from "@pages/user/user.component";
+import { EditarRecursosComponent } from "@pages/recursos/editar-recursos/editar-recursos.component";
+import { ListarTramitesComponent } from "@pages/tramites/listar-tramites/listar-tramites.component";
+import { MostrarEstadisticasComponent } from "@pages/estadisticas/mostrar-estadisticas/mostrar-estadisticas.component";
+import { SeguimientoTramiteComponent } from "@pages/tramites/seguimiento-tramite/seguimiento-tramite.component";
 
 // export const routes: Routes = [
 //     //Login
@@ -75,8 +76,9 @@ export const routes: Routes = [
     { path: 'historicos', canActivate: [authGuard], component: ListarProyectosCertificadosComponent},
     { path: 'archivados', canActivate: [authGuard], component: ListarProyectosArchivadosComponent},
     { path: 'estadisticas', canActivate:[authGuard], component:MostrarEstadisticasComponent},
-    { path: `tramites`, canActivate:[authGuard], component:ListarTramitesComponent, children:[
-            {path: 'seguimiento/:id', component: ListarTramitesComponent}
+    { path: `tramites`, canActivate:[authGuard], children:[
+            {path: '', component: ListarTramitesComponent},
+            {path: 'seguimiento/:id', component: SeguimientoTramiteComponent}
         ]},
     // Mantenimientos
     { path: 'mantenimientos', canActivate: [authGuard], children: [

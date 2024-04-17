@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { ProyectoService } from "../../../services/proyecto.service";
-import { Proyecto } from "../../../models/proyecto.model";
-import {CurrencyPipe, DatePipe, DecimalPipe} from "@angular/common";
-import { Estadisticas } from "../../../models/estadisticas.model";
+import { ProyectoService } from "@services/proyecto.service";
+import { Proyecto } from "@models/proyecto.model";
+import { CurrencyPipe, DatePipe, DecimalPipe } from "@angular/common";
+import { Estadisticas } from "@models/estadisticas.model";
+import { FormsModule } from "@angular/forms";
+
 import Swal from "sweetalert2";
-import {FormsModule} from "@angular/forms";
 
 @Component({
     selector: 'app-mostrar-estadisticas',

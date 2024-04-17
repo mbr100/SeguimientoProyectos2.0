@@ -1,0 +1,88 @@
+<div class="container-fluid animate__animated animate__slideInDown">
+    <div class="row bg-secondary p-3">
+        <div class="col-6">
+            <h1 class="text-white">TA-RA-RS: {{ tramite.codigo }}</h1>
+        </div>
+        <div class="col-6 d-flex align-items-center justify-content-end">
+            <button class="btn btn-outline-primary m-2" (click)="entregar()">Entregar</button>
+            <button class="btn btn-outline-light" (click)="volver()">Volver</button>
+        </div>
+    </div>
+</div>
+<br>
+<div class="container-fluid animate__animated animate__slideInDown">
+    <div class="row">
+        <div class="col-7">
+            <div class="row mb-3">
+                <label for="codigo" class="col-sm-2 col-form-label">Código:</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" id="codigo" name="codigo" [(ngModel)]="tramite.codigo">
+                </div>
+            </div>
+            <div class="row mb-3">
+                <label for="codigo" class="col-sm-2 col-form-label">Titulo:</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" id="titulo" name="titulo" [(ngModel)]="tramite.titulo">
+                </div>
+            </div>
+            <div class="row mb-3">
+                <label for="codigo" class="col-sm-2 col-form-label">Cliente:</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" id="cliente" name="cliente" [(ngModel)]="tramite.cliente">
+                </div>
+            </div>
+            <div class="row mb-3">
+                <label for="codigo" class="col-sm-2 col-form-label">Estado:</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" id="estado" name="estado" [(ngModel)]="tramite.estado">
+                </div>
+            </div>
+            <div class="row mb-3">
+                <label for="codigo" class="col-sm-2 col-form-label">Fecha Inicio:</label>
+                <div class="col-sm-10">
+                    <p class="card-text">{{ tramite.fechaInicioTramite | date: "dd/MM/yyyy"}}</p>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <label for="codigo" class="col-sm-2 col-form-label">Fecha Fin:</label>
+                <div class="col-sm-10">
+                    <input type="date" class="form-control" id="fechaFinTramite" name="fechaFinTramite" [(ngModel)]="tramite.fechaFinTramite">
+                </div>
+            </div>
+            <div class="row mb-3">
+                <label for="codigo" class="col-sm-2 col-form-label">Analisis de causa:</label>
+                <div class="col-sm-10">
+                    <textarea type="text" class="form-control" rows="5" id="analisis" name="analisis" [(ngModel)]="tramite.analisis"></textarea>
+                </div>
+            </div>
+
+        </div>
+        <div class="col">
+            <div class="card w-100">
+                <div class="card-header">
+                    Consultor
+                </div>
+                <div class="card-body">
+                    <p class="card-text">Nombre: {{ consultorProyecto.nombre }}</p>
+                    <p class="card-text">Telefono: {{ consultorProyecto.telefono }}</p>
+                    <p class="card-text">Email: {{ consultorProyecto.email }}</p>
+                    <p class="card-text">Consultora: {{ consultorProyecto.consultora }}</p>
+                </div>
+            </div>
+            <br>
+            <div class="card w-100">
+                <div class="card-header">
+                    Experto Tecnico
+                </div>
+                <div class="card-body">
+                    <p class="card-text">Nombre: {{ expertoTecnico.nombre + " " + expertoTecnico.apellido1 + " " + expertoTecnico.apellido2 }}</p>
+                    <p class="card-text">Telefono: {{ expertoTecnico.telefono }}</p>
+                    <p class="card-text">Email: {{ expertoTecnico.email }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="card">
+    <button  class="btn btn-outline-success btn-lg btn-block"  (click)="actualizarTramite()">Actualizar</button>
+</div>

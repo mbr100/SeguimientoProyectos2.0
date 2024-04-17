@@ -1,8 +1,9 @@
-import {Component, OnInit} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { Router } from "@angular/router";
+import { AuthService } from "@services/auth.service";
+import { FormsModule } from "@angular/forms";
+
 import Swal from "sweetalert2";
-import {Router} from "@angular/router";
-import {AuthService} from "../../../services/auth.service";
-import {FormsModule} from "@angular/forms";
 
 @Component({
   selector: 'app-login',

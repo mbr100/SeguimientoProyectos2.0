@@ -1,13 +1,15 @@
-import {Component, OnInit, signal, WritableSignal} from '@angular/core';
-import {ProyectoService} from "../../../../services/proyecto.service";
-import {Proyecto} from "../../../../models/proyecto.model";
-import {DatePipe} from "@angular/common";
-import {Router} from "@angular/router";
+import { Component, OnInit, signal, WritableSignal } from '@angular/core';
+import { ProyectoService } from "@services/proyecto.service";
+import { Proyecto } from "@models/proyecto.model";
+import { DatePipe } from "@angular/common";
+import { Router } from "@angular/router";
+import { MostrarconsultorfnComponent } from "@components/proyectos/mostrarconsultorfn/mostrarconsultorfn.component";
+import { MostrarexpertoComponent } from "@components/proyectos/mostrarexperto/mostrarexperto.component";
+import { Tramites } from "@models/tramites.model";
+import { TramiteService } from "@services/tramite.service";
+
 import Swal from "sweetalert2";
-import {MostrarconsultorfnComponent} from "../../../../components/proyectos/mostrarconsultorfn/mostrarconsultorfn.component";
-import {MostrarexpertoComponent} from "../../../../components/proyectos/mostrarexperto/mostrarexperto.component";
-import {Tramites} from "../../../../models/tramites.model";
-import {TramiteService} from "../../../../services/tramite.service";
+
 
 @Component({
     selector: 'app-listar-proyectos-certificados',
@@ -81,10 +83,12 @@ export class ListarProyectosCertificadosComponent implements OnInit {
                     fechaFinTramite: null,
                     fechaEntrega: null,
                     expertoTecnico: proyecto.expertoTecnico,
-                    consultor: proyecto.consultor
+                    consultor: proyecto.consultor,
+                    analisis: "",
+                    estado: "ACTIVO"
                 };
                 this.tramiteService.agregarTramite(tramite).then(() => {
-                    this.router.navigate(['/']).then();
+                    this.router.navigate(['/tramites']).then();
                 });
             }
         });

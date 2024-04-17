@@ -1,6 +1,6 @@
-import {Component, Input, OnInit} from '@angular/core';
-import {ExpertoTecnicoService} from "../../../services/experto-tecnico.service";
-import {ExpertoTecnico} from "../../../models/expertoTecnico.model";
+import { Component, Input, OnInit } from '@angular/core';
+import { ExpertoTecnicoService } from "@services/experto-tecnico.service";
+import { ExpertoTecnico } from "@models/expertoTecnico.model";
 
 @Component({
   selector: 'app-mostrarexperto',

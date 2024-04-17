@@ -23,6 +23,7 @@ export class ListarEComiteComponent implements OnInit{
     ngOnInit(): void {
         this.expertoComiteService.getExpertosComite().subscribe(expertosTecnicos => {
             this.expertosComite = expertosTecnicos;
+            this.expertosComite.sort((a: ExpertoComite, b: ExpertoComite) => a.idexperto! - b.idexperto!);
         });
     }
 

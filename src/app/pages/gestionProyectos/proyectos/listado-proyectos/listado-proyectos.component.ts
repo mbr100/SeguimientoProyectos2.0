@@ -1,11 +1,11 @@
-import {Component, OnInit, signal, WritableSignal} from '@angular/core';
-import {DatePipe} from "@angular/common";
-import {Router, RouterLink} from "@angular/router";
-import {Proyecto} from "../../../../models/proyecto.model";
-import {ProyectoService} from "../../../../services/proyecto.service";
-import {Consultores} from "../../../../models/consultores.model";
-import {MostrarconsultorfnComponent} from "../../../../components/proyectos/mostrarconsultorfn/mostrarconsultorfn.component";
-import {MostrarexpertoComponent} from "../../../../components/proyectos/mostrarexperto/mostrarexperto.component";
+import { Component, OnInit, signal, WritableSignal } from '@angular/core';
+import { DatePipe } from "@angular/common";
+import { Router, RouterLink } from "@angular/router";
+import { Proyecto } from "@models/proyecto.model";
+import { ProyectoService } from "@services/proyecto.service";
+import { Consultores } from "@models/consultores.model";
+import { MostrarconsultorfnComponent } from "@components/proyectos/mostrarconsultorfn/mostrarconsultorfn.component";
+import { MostrarexpertoComponent } from "@components/proyectos/mostrarexperto/mostrarexperto.component";
 import Swal from "sweetalert2";
 
 @Component({

@@ -108,7 +108,7 @@
                             <select class="form-select" aria-label="Default select example" id="consultores" [(ngModel)]="proyecto.expertoTecnico">
                                 <option selected>Selecciona un ET</option>
                                 @for (et of elegirET;track et) {
-                                    <option value="{{et.id}}">{{ et.idexperto + "" + et.nombre + "" + et.apellido1 }}</option>
+                                    <option value="{{et.id}}">{{ et.idexperto + " " + et.nombre + " " + et.apellido1 }}</option>
                                 }
                             </select>
                         </div>

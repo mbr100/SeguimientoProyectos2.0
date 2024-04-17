@@ -1,9 +1,9 @@
-import {Component, OnInit, signal, WritableSignal} from '@angular/core';
-import {DatePipe} from "@angular/common";
-import {Proyecto} from "../../../../models/proyecto.model";
-import {ProyectoService} from "../../../../services/proyecto.service";
-import {MostrarconsultorfnComponent} from "../../../../components/proyectos/mostrarconsultorfn/mostrarconsultorfn.component";
-import {MostrarexpertoComponent} from "../../../../components/proyectos/mostrarexperto/mostrarexperto.component";
+import { Component, OnInit, signal, WritableSignal } from '@angular/core';
+import { DatePipe } from "@angular/common";
+import { Proyecto } from "@models/proyecto.model";
+import { ProyectoService } from "@services/proyecto.service";
+import { MostrarconsultorfnComponent } from "@components/proyectos/mostrarconsultorfn/mostrarconsultorfn.component";
+import { MostrarexpertoComponent } from "@components/proyectos/mostrarexperto/mostrarexperto.component";
 
 @Component({
     selector: 'app-listar-proyectos-archivados',
@@ -34,7 +34,7 @@ export class ListarProyectosArchivadosComponent implements OnInit {
         });
     }
 
-    public buscar(value: string): void {
+    /*public buscar(value: string): void {
         this.proyectosArchivadosMostar = this.proyectosArchivados.filter(proyecto => proyecto.codigo!.includes(value));
-    }
+    }*/
 }
