@@ -27,6 +27,7 @@ import { EditarRecursosComponent } from "@pages/recursos/editar-recursos/editar-
 import { ListarTramitesComponent } from "@pages/tramites/listar-tramites/listar-tramites.component";
 import { MostrarEstadisticasComponent } from "@pages/estadisticas/mostrar-estadisticas/mostrar-estadisticas.component";
 import { SeguimientoTramiteComponent } from "@pages/tramites/seguimiento-tramite/seguimiento-tramite.component";
+import {AgregarTramitesComponent} from "@pages/tramites/agregar-tramites/agregar-tramites.component";
 
 // export const routes: Routes = [
 //     //Login
@@ -78,6 +79,7 @@ export const routes: Routes = [
     { path: 'estadisticas', canActivate:[authGuard], component:MostrarEstadisticasComponent},
     { path: `tramites`, canActivate:[authGuard], children:[
             {path: '', component: ListarTramitesComponent},
+            {path: 'agregar-tramites', component: AgregarTramitesComponent},
             {path: 'seguimiento/:id', component: SeguimientoTramiteComponent}
         ]},
     // Mantenimientos

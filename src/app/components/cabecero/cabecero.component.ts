@@ -59,4 +59,9 @@ export class CabeceroComponent {
         this.router.navigateByUrl('/estadisticas').then();
 
     }
+
+    public irAgregarTramite(): void {
+        this.router.navigateByUrl('/tramites/agregar-tramites').then();
+
+    }
 }

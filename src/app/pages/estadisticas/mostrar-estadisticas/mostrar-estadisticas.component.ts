@@ -16,19 +16,28 @@ import Swal from "sweetalert2";
 })
 export class MostrarEstadisticasComponent implements OnInit {
     private proyectos: Proyecto[];
+    private proyectosAnualidad: Proyecto[];
     public estadisticas: Estadisticas[];
     public mediaDiasComite: number;
     public mediaDiasCertificacion: number;
     public precioMedioOferta: number;
     public proyectosEquivalentes: number;
+    public anualidades: number[];
+    public anualidad: number;
+    public estadisticasMostrar: Estadisticas[];
+
 
     public constructor(private proyectosService: ProyectoService) {
         this.proyectos = [];
+        this.proyectosAnualidad = [];
         this.estadisticas = [];
         this.mediaDiasComite = 0;
         this.mediaDiasCertificacion = 0;
         this.precioMedioOferta = 0;
         this.proyectosEquivalentes = 0;
+        this.anualidades = this.anualidadesDisponibles();
+        this.anualidad = new Date().getFullYear();
+        this.estadisticasMostrar = [];
     }
 
     public ngOnInit(): void {
@@ -47,16 +56,19 @@ export class MostrarEstadisticasComponent implements OnInit {
         });
     }
 
-    private generarEstadisticas(): void {
-        this.estadisticas = this.proyectos.map((proyecto: Proyecto): Estadisticas => {
-            const fecha1Comite: Date | undefined = proyecto.fechaComite ? new Date(proyecto.fechaComite) : undefined;
-            const fecha2Comite: Date | undefined = proyecto.fechaFinComite ? new Date(proyecto.fechaFinComite) : undefined;
-            const diferenciaEnMilisegundosComite: number = fecha2Comite!.getTime() - fecha1Comite!.getTime();
-            const diasEnComite: number = diferenciaEnMilisegundosComite / 86400000;
-            const fecha1Certificacion: Date | undefined = proyecto.fechaInicioProyecto ? new Date(proyecto.fechaInicioProyecto) : undefined;
-            const fecha2Certificacion: Date | undefined = proyecto.fechaFinProyecto ? new Date(proyecto.fechaFinProyecto) : undefined;
-            const diferenciaEnMilisegundosCertificacion: number = fecha2Certificacion!.getTime() - fecha1Certificacion!.getTime();
-            const diasCertificacion: number = diferenciaEnMilisegundosCertificacion / 86400000;
+    private anualidadesDisponibles(): Array<number> {
+        const anoActual: number = new Date().getFullYear();
+        const anualidadInicial: number = 2023;
+        return Array.from({ length: anoActual - anualidadInicial + 1 }, (_, index) => anualidadInicial + index);
+    }
+
+    public generarEstadisticas(): void {
+         this.proyectosAnualidad= this.proyectos.filter((proyecto: Proyecto) => {
+            return new Date(proyecto.fechaFinProyecto!).getFullYear() === Number(this.anualidad);
+        });
+        this.estadisticas = this.proyectosAnualidad.map((proyecto: Proyecto): Estadisticas => {
+            const diasEnComite: number = this.calcularDiasEntreFechas(proyecto.fechaComite!, proyecto.fechaFinComite!);
+            const diasCertificacion: number = this.calcularDiasEntreFechas(proyecto.fechaInicioProyecto, proyecto.fechaFinProyecto!);
             return {
                 Acronimo: proyecto.acronimo!,
                 Codigo: proyecto.codigo!,
@@ -73,16 +85,22 @@ export class MostrarEstadisticasComponent implements OnInit {
         if (this.estadisticas.length !== 0) {
             this.mediaDiasComite = this.calcularMediaDias(this.estadisticas, 'FechaInicioComite', 'FechaFinComite');
             this.mediaDiasCertificacion = this.calcularMediaDias(this.estadisticas, 'FechaInicio', 'FechaFinProyecto');
+        } else {
+            this.mediaDiasComite = 0;
+            this.mediaDiasCertificacion = 0;
         }
+    }
+
+    private calcularDiasEntreFechas(fechaInicio: Date | undefined, fechaFin: Date | undefined): number {
+        if (!fechaInicio || !fechaFin) return 0;
+        const diferenciaEnMilisegundos: number = fechaFin.getTime() - fechaInicio.getTime();
+        return diferenciaEnMilisegundos / (1000 * 60 * 60 * 24); // Convertir de milisegundos a días
     }
 
     private calcularMediaDias(estadisticas: any[], fechaInicioKey: string, fechaFinKey: string): number {
         const totalDias = estadisticas.reduce((total, proyecto) => {
-            const fechaInicio: Date = new Date(proyecto[fechaInicioKey]);
-            const fechaFin: Date = new Date(proyecto[fechaFinKey]);
-            const diferenciaEnMilisegundos: number = fechaFin.getTime() - fechaInicio.getTime();
-            const diferenciaEnDias: number = diferenciaEnMilisegundos / 86400000;
-            return total + diferenciaEnDias;
+            const dias: number = this.calcularDiasEntreFechas(new Date(proyecto[fechaInicioKey]), new Date(proyecto[fechaFinKey]));
+            return total + dias;
         }, 0);
         return totalDias / estadisticas.length;
     }

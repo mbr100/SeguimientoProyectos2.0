@@ -1,8 +1,8 @@
 import {Component, OnInit, signal, WritableSignal} from '@angular/core';
-import {TramiteService} from "../../../services/tramite.service";
-import {Tramites} from "../../../models/tramites.model";
-import {MostrarconsultorfnComponent} from "../../../components/proyectos/mostrarconsultorfn/mostrarconsultorfn.component";
-import {MostrarexpertoComponent} from "../../../components/proyectos/mostrarexperto/mostrarexperto.component";
+import {TramiteService} from "@services/tramite.service";
+import {Tramites} from "@models/tramites.model";
+import {MostrarconsultorfnComponent} from "@components/proyectos/mostrarconsultorfn/mostrarconsultorfn.component";
+import {MostrarexpertoComponent} from "@components/proyectos/mostrarexperto/mostrarexperto.component";
 import {DatePipe} from "@angular/common";
 import {Router} from "@angular/router";
 
@@ -19,15 +19,23 @@ import {Router} from "@angular/router";
 })
 export class ListarTramitesComponent implements OnInit {
     protected tramites: Tramites[];
-    numeroProyectos: WritableSignal<number> = signal<number>(0);
+    public numeroTramites: WritableSignal<number> = signal<number>(0);
     constructor(private tramiteService: TramiteService, private router: Router) {
         this.tramites = new Array<Tramites>();
     }
 
     ngOnInit(): void {
-        this.tramiteService.obtenerTramites().subscribe(tramites => {
-            this.tramites = tramites;
-            this.numeroProyectos.set(tramites.length);
+        this.tramiteService.obtenerTramites().subscribe({
+            next: (tramites: Tramites[]) => {
+                this.tramites = tramites;
+                this.numeroTramites.set(tramites.length);
+            },
+            error: (error: any) => {
+                console.error(error);
+            },
+            complete: () => {
+                console.log('Completado');
+            }
         });
     }
 
@@ -39,9 +47,13 @@ export class ListarTramitesComponent implements OnInit {
         this.router.navigateByUrl(`/tramites/seguimiento/${tramite.id}`).then(r => {});
     }
 
-    public eliminarTramite(tramite: Tramites) {
+    public eliminarTramite(tramite: Tramites): void {
         this.tramiteService.eliminarTramite(tramite.id!).then(r => {
             this.tramites = this.tramites.filter(t => t.id !== tramite.id);
         });
+    }
+
+    public agregarTramite(): void {
+        this.router.navigateByUrl('/tramites/agregar-tramites').then();
     }
 }

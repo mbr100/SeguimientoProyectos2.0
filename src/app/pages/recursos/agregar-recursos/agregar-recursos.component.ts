@@ -2,9 +2,9 @@ import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, ReactiveFormsModule} from "@angular/forms";
 import Swal, {SweetAlertResult} from "sweetalert2";
 import {Router} from "@angular/router";
-import {RecursosService} from "../../../services/recursos.service";
-import {TipoRecurso} from "../../../models/tipoRecurso.model";
-import {TipoRecusoService} from "../../../services/tipoRecuso.service";
+import {RecursosService} from "@services/recursos.service";
+import {TipoRecurso} from "@models/tipoRecurso.model";
+import {TipoRecusoService} from "@services/tipoRecuso.service";
 
 @Component({
   selector: 'app-agregar-recursos',

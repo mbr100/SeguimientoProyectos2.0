@@ -9,8 +9,11 @@ import { ConsultoresService } from "@services/consultores.service";
 import { ExpertoTecnicoService } from "@services/experto-tecnico.service";
 import { ExpertoTecnico } from "@models/expertoTecnico.model";
 import { DatePipe } from "@angular/common";
+import { ConsultorCardComponent } from "@components/cards/consultor-card/consultor-card.component";
+import { ExpertoTecnicoCardComponent } from "@components/cards/experto-tecnico-card/experto-tecnico-card.component";
 
 import Swal from "sweetalert2";
+
 @Component({
     selector: 'app-seguimiento-tramite',
     standalone: true,
@@ -18,7 +21,9 @@ import Swal from "sweetalert2";
         ReactiveFormsModule,
         FormsModule,
         MostrarconsultorfnComponent,
-        DatePipe
+        DatePipe,
+        ConsultorCardComponent,
+        ExpertoTecnicoCardComponent
     ],
     templateUrl: './seguimiento-tramite.component.html',
     styles: ``

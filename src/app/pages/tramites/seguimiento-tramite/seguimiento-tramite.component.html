@@ -4,7 +4,7 @@
             <h1 class="text-white">TA-RA-RS: {{ tramite.codigo }}</h1>
         </div>
         <div class="col-6 d-flex align-items-center justify-content-end">
-            <button class="btn btn-outline-primary m-2" (click)="entregar()">Entregar</button>
+            <button class="btn btn-outline-dark m-2" (click)="entregar()">Entregar</button>
             <button class="btn btn-outline-light" (click)="volver()">Volver</button>
         </div>
     </div>
@@ -58,28 +58,9 @@
 
         </div>
         <div class="col">
-            <div class="card w-100">
-                <div class="card-header">
-                    Consultor
-                </div>
-                <div class="card-body">
-                    <p class="card-text">Nombre: {{ consultorProyecto.nombre }}</p>
-                    <p class="card-text">Telefono: {{ consultorProyecto.telefono }}</p>
-                    <p class="card-text">Email: {{ consultorProyecto.email }}</p>
-                    <p class="card-text">Consultora: {{ consultorProyecto.consultora }}</p>
-                </div>
-            </div>
+            <app-consultor-card [consultor]="consultorProyecto"></app-consultor-card>
             <br>
-            <div class="card w-100">
-                <div class="card-header">
-                    Experto Tecnico
-                </div>
-                <div class="card-body">
-                    <p class="card-text">Nombre: {{ expertoTecnico.nombre + " " + expertoTecnico.apellido1 + " " + expertoTecnico.apellido2 }}</p>
-                    <p class="card-text">Telefono: {{ expertoTecnico.telefono }}</p>
-                    <p class="card-text">Email: {{ expertoTecnico.email }}</p>
-                </div>
-            </div>
+            <app-experto-tecnico-card [expertoTecnico]="expertoTecnico"></app-experto-tecnico-card>
         </div>
     </div>
 </div>

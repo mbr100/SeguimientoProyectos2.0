@@ -20,11 +20,17 @@
                     <h5 class="card-title">Numero de Proyectos Equivalentes</h5>
                     <p class="card-text">{{ proyectosEquivalentes | number:'1.0-2' }}</p>
                 }
+                <h5 class="card-title">Año:</h5>
+                <select id="yearSelect" class="form-control" [(ngModel)]="anualidad" (change)="generarEstadisticas()">
+                    @for ( anualidad of anualidades; track anualidad) {
+                        <option [value]="anualidad">{{anualidad}}</option>
+                    }
+                </select>
             </div>
         </div>
     </div>
 </div>
-
+<br>
 <div class="card">
     <div class="card-header">
         Estadísticas en proyectos

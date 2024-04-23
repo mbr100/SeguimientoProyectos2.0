@@ -9,7 +9,7 @@
     <div class="col-2">
         <div class="card">
             <div class="card-body">
-                Proyectos en activo {{ numeroProyectos() }}
+                Tramites en activo {{ numeroTramites() }}
             </div>
         </div>
     </div>
@@ -52,3 +52,6 @@
         }
     </tbody>
 </table>
+<div class="text-center animate__animated animate__backInDown">
+    <button type="button" class="btn btn-outline-primary" (click)="agregarTramite()"> Añadir Tramite</button>
+</div>
