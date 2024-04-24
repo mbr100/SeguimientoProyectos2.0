@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {AngularFirestore, AngularFirestoreCollection} from "@angular/fire/compat/firestore";
-import {Recurso} from "../models/recurso.model";
+import {Recurso} from "@models/recurso.model";
 import {map, Observable} from "rxjs";
 
 @Injectable({
@@ -16,7 +16,6 @@ export class RecursosService {
     public agregarRecurso(recurso: Recurso): Promise<any> {
         return this.recursosCollection.add(recurso);
     }
-
 
     public getRecursos(): Observable<Recurso[]> {
         this.recursos = this.recursosCollection.snapshotChanges().pipe(

@@ -90,4 +90,7 @@ export class AuthService {
             });
         });
     }
+    get isAuthenticated(): boolean {
+        return this.authService.currentUser !== null;
+    }
 }

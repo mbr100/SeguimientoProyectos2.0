@@ -1,5 +1,5 @@
 import { CanActivateFn, Router } from '@angular/router';
-import { map } from "rxjs";
+import {catchError, map, of} from "rxjs";
 import { AngularFireAuth } from "@angular/fire/compat/auth";
 import { inject } from "@angular/core";
 
@@ -23,6 +23,15 @@ export const authGuard: CanActivateFn = () => {
             }  else {
                 return true;
             }
+        }),
+        catchError(error => {
+            console.error('Error de autenticación:', error);
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Ha ocurrido un error de autenticación',
+            }).then();
+            return of(false);
         })
     )
 };
