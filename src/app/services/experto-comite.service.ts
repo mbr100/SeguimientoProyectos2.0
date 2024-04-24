@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from "@angular/fire/compat/firestore";
-import { ExpertoTecnico } from "../models/expertoTecnico.model";
+import { ExpertoTecnico } from "@models/expertoTecnico.model";
 import { map, Observable } from "rxjs";
 
 @Injectable({

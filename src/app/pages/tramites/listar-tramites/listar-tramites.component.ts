@@ -14,8 +14,7 @@ import {Router} from "@angular/router";
         MostrarexpertoComponent,
         DatePipe
     ],
-    templateUrl: './listar-tramites.component.html',
-    styleUrl: './listar-tramites.component.css'
+    templateUrl: './listar-tramites.component.html'
 })
 export class ListarTramitesComponent implements OnInit {
     protected tramites: Tramites[];
@@ -55,5 +54,17 @@ export class ListarTramitesComponent implements OnInit {
 
     public agregarTramite(): void {
         this.router.navigateByUrl('/tramites/agregar-tramites').then();
+    }
+
+    diasRestantes(fechaFinTramite: Date): number {
+        const fechaActual: number = new Date().getTime();
+        // Convertir el timestamp dado a milisegundos
+        const fechaDada: number = new Date(fechaFinTramite).getTime();
+
+        // Calcular la diferencia en milisegundos
+        const diferenciaEnMilisegundos: number = fechaActual - fechaDada;
+
+        // Convertir la diferencia en días
+        return Math.abs(Math.floor(diferenciaEnMilisegundos / (1000 * 60 * 60 * 24)));
     }
 }

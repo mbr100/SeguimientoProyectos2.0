@@ -18,7 +18,6 @@ import Swal from "sweetalert2";
         MostrarexpertoComponent
     ],
     templateUrl: './listado-proyectos.component.html',
-    styleUrl: './listado-proyectos.component.css'
 })
 export class ListadoProyectosComponent implements OnInit {
     private proyectos: Proyecto[];

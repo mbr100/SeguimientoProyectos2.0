@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {CheckListBonis} from "../models/checkListBonis.model";
+import {CheckListBonis} from "@models/checkListBonis.model";
 import {AngularFirestore, AngularFirestoreCollection} from "@angular/fire/compat/firestore";
 
 @Injectable({

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import {map, Observable} from "rxjs";
 import {AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument} from "@angular/fire/compat/firestore";
-import {Tramites} from "../models/tramites.model";
+import {Tramites} from "@models/tramites.model";
 
 @Injectable({
   providedIn: 'root'

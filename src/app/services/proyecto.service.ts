@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument, DocumentReference} from "@angular/fire/compat/firestore";
 import {Proyecto} from "../models/proyecto.model";
-import {map, Observable} from "rxjs";
+import {map, Observable, switchMap} from "rxjs";
 
 @Injectable({
     providedIn: 'root'
