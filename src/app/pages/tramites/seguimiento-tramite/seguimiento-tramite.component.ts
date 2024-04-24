@@ -13,6 +13,8 @@ import { ConsultorCardComponent } from "@components/cards/consultor-card/consult
 import { ExpertoTecnicoCardComponent } from "@components/cards/experto-tecnico-card/experto-tecnico-card.component";
 
 import Swal from "sweetalert2";
+import {CorreosConsultorComponent} from "@components/tramite/correos-consultor/correos-consultor.component";
+import {CorreosETComponent} from "@components/tramite/correos-et/correos-et.component";
 
 @Component({
     selector: 'app-seguimiento-tramite',
@@ -23,7 +25,9 @@ import Swal from "sweetalert2";
         MostrarconsultorfnComponent,
         DatePipe,
         ConsultorCardComponent,
-        ExpertoTecnicoCardComponent
+        ExpertoTecnicoCardComponent,
+        CorreosConsultorComponent,
+        CorreosETComponent
     ],
     templateUrl: './seguimiento-tramite.component.html',
     styles: ``
@@ -42,7 +46,7 @@ export class SeguimientoTramiteComponent implements OnInit {
         this.expertoTecnico = new ExpertoTecnico();
     }
 
-    ngOnInit() {
+    public ngOnInit(): void {
         this.TramiteService.obtenerTramite(this.idTramite).subscribe({
             next: (tramite: Tramites) => {
                 this.tramite = tramite

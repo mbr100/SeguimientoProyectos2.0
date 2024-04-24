@@ -32,6 +32,15 @@
                     </ul>
                 </li>
                 <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="tramitesDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Tramites
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="tramitesDropdown">
+                        <li><a class="dropdown-item" (click)="irATramites()">Listar Tramites</a></li>
+                        <li><a class="dropdown-item" (click)="irAgregarTramite()">Agregar Tramites</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="mantenimientosDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                         Mantenimientos
                     </a>
@@ -43,17 +52,7 @@
                         <li><a class="dropdown-item" routerLink="/mantenimientos/tipoRecurso/listarTipoRecurso">Tipo de Recurso</a></li>
                     </ul>
                 </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="tramitesDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        Tramites
-                    </a>
-                    <ul class="dropdown-menu" aria-labelledby="tramitesDropdown">
-                        <li><a class="dropdown-item" (click)="irATramites()">Listar Tramites</a></li>
-                        <li><a class="dropdown-item" (click)="irAgregarTramite()">Agregar Tramites</a></li>
-                    </ul>
-                </li>
             </ul>
-
             <div class="dropdown">
                 <a class="nav-link dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false" style="position: relative; z-index: 10000; color: #fff;">
                     <img [ngSrc]="photoUrl" alt="Profile" width="30" height="30" style="border-radius: 50%;">

@@ -27,7 +27,7 @@ export class ListarRecursosComponent implements OnInit{
 
     public buscar(value: string): void {
         this.recursosMostar = this.recursos.filter((recurso: Recurso) => {
-            return recurso.contenido!.toLowerCase().includes(value.toLowerCase());
+            return recurso.tipoProyecto!.toLowerCase().includes(value.toLowerCase());
         });
 
     }
