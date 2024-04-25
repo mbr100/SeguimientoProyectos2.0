@@ -13,14 +13,13 @@ import {Router} from "@angular/router";
 export class ListarComitesComponent {
     public comites!: Comite[];
     public comitesFiltrados!: Comite[];
-    public busqueda: boolean;
     public numerosComites: WritableSignal<number> = signal<number>(0);
 
     public constructor(private ComiteService: ComitesService, private router: Router) {
-        this.busqueda = false;
-        this.ComiteService.listarComites().subscribe((resp: Comite[]) => {
-            this.comites = resp;
-            this.numerosComites.set(resp.length);
+        this.ComiteService.listarComites().subscribe((comites: Comite[]) => {
+            this.comites = comites;
+            this.numerosComites.set(comites.length);
+            this.comitesFiltrados = comites;
         });
     }
 
@@ -28,6 +27,8 @@ export class ListarComitesComponent {
         this.comitesFiltrados = this.comites.filter((comite: Comite) => {
             return comite.nombre.toLowerCase().includes(value.toLowerCase());
         });
+        this.numerosComites.set(this.comitesFiltrados.length);
+        this.comitesFiltrados.sort((a: Comite, b: Comite) => a.nombre.toLowerCase().localeCompare(b.nombre.toLowerCase()));
     }
 
     public editarComite(comite: Comite): void {

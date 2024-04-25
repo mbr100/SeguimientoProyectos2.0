@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
-import {ExpertoTecnicoService} from "../../../../services/experto-tecnico.service";
-import {ExpertoTecnico} from "../../../../models/expertoTecnico.model";
+import {ExpertoTecnicoService} from "@services/experto-tecnico.service";
+import {ExpertoTecnico} from "@models/expertoTecnico.model";
 import {Router, RouterLink} from "@angular/router";
 import Swal from "sweetalert2";
 
@@ -16,22 +16,21 @@ import Swal from "sweetalert2";
 export class ListarETComponent implements OnInit{
     public expertosTecnicos!: ExpertoTecnico[];
     public expertosTecnicosBusqueda!: ExpertoTecnico[];
-    public buscando: boolean;
     constructor(private eTservico: ExpertoTecnicoService, private router: Router) {
-        this.buscando = false;
         this.expertosTecnicos = [];
     }
 
     ngOnInit(): void {
         this.eTservico.getExpertosTecnicos().subscribe((expertosTecnicos: ExpertoTecnico[]): void => {
             this.expertosTecnicos = expertosTecnicos;
-            this.expertosTecnicos.sort((a: ExpertoTecnico, b: ExpertoTecnico) => a.idexperto! - b.idexperto!);
+            this.expertosTecnicosBusqueda = expertosTecnicos;
+            this.expertosTecnicosBusqueda.sort((a: ExpertoTecnico, b: ExpertoTecnico) => a.idexperto! - b.idexperto!);
         });
     }
 
     public buscar(value: string): void {
-        this.buscando = true;
         this.expertosTecnicosBusqueda = this.expertosTecnicos.filter((experto: ExpertoTecnico) => experto.nombre!.includes(value));
+        this.expertosTecnicosBusqueda.sort((a: ExpertoTecnico, b: ExpertoTecnico) => a.idexperto! - b.idexperto!);
     }
 
     public get numeroExpertosTecnicos(): number {

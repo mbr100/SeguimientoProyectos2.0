@@ -34,7 +34,9 @@ export class ListarProyectosArchivadosComponent implements OnInit {
         });
     }
 
-    /*public buscar(value: string): void {
+    public buscar(value: string): void {
         this.proyectosArchivadosMostar = this.proyectosArchivados.filter(proyecto => proyecto.codigo!.includes(value));
-    }*/
+        this.numeroProyectosArchivados.set(this.proyectosArchivadosMostar.length);
+        this.proyectosArchivadosMostar.sort((a, b) => a.codigo!.localeCompare(b.codigo!));
+    }
 }

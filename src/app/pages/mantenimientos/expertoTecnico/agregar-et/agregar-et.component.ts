@@ -2,7 +2,7 @@ import {Component} from '@angular/core';
 import {Router} from "@angular/router";
 import Swal from "sweetalert2";
 import {FormBuilder, FormGroup, ReactiveFormsModule} from "@angular/forms";
-import {ExpertoTecnicoService} from "../../../../services/experto-tecnico.service";
+import {ExpertoTecnicoService} from "@services/experto-tecnico.service";
 
 @Component({
     selector: 'app-agregar-et',

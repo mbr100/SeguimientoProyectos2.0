@@ -61,6 +61,8 @@ export class ListarProyectosCertificadosComponent implements OnInit {
 
     public buscar(value: string): void {
         this.proyectosCertificadosMostar = this.proyectosCertificados.filter(proyecto => proyecto.codigo!.includes(value));
+        this.numeroProyectosCertificados.set(this.proyectosCertificadosMostar.length);
+        this.proyectosCertificadosMostar.sort((a, b) => a.codigo!.localeCompare(b.codigo!));
     }
 
     public creartramite(proyecto: Proyecto):void {

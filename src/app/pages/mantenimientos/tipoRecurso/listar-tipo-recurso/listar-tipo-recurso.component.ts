@@ -1,7 +1,7 @@
 import {Component, OnInit, signal, WritableSignal} from '@angular/core';
-import {TipoRecurso} from "../../../../models/tipoRecurso.model";
+import {TipoRecurso} from "@models/tipoRecurso.model";
 import {Router} from "@angular/router";
-import {TipoRecusoService} from "../../../../services/tipoRecuso.service";
+import {TipoRecusoService} from "@services/tipoRecuso.service";
 import Swal from "sweetalert2";
 
 @Component({

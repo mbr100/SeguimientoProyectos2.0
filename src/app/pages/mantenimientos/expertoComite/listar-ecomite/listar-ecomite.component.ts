@@ -1,8 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {Router} from "@angular/router";
 import Swal from "sweetalert2";
-import {ExpertoComite} from "../../../../models/experto-comite.model";
-import {ExpertoComiteService} from "../../../../services/experto-comite.service";
+import {ExpertoComite} from "@models/experto-comite.model";
+import {ExpertoComiteService} from "@services/experto-comite.service";
 
 @Component({
   selector: 'app-listar-ecomite',
@@ -14,22 +14,21 @@ import {ExpertoComiteService} from "../../../../services/experto-comite.service"
 export class ListarEComiteComponent implements OnInit{
     public expertosComite!: ExpertoComite[];
     public expertosComiteBusqueda!: ExpertoComite[];
-    public buscando: boolean;
     constructor(private expertoComiteService: ExpertoComiteService, private router: Router) {
-        this.buscando = false;
         this.expertosComite = [];
     }
 
     ngOnInit(): void {
         this.expertoComiteService.getExpertosComite().subscribe(expertosTecnicos => {
             this.expertosComite = expertosTecnicos;
-            this.expertosComite.sort((a: ExpertoComite, b: ExpertoComite) => a.idexperto! - b.idexperto!);
+            this.expertosComite.sort((a: ExpertoComite, b: ExpertoComite) => a.nombre!.toLowerCase().localeCompare(b.nombre!.toLowerCase()));
+            this.expertosComiteBusqueda = this.expertosComite;
         });
     }
 
     public buscar(value: string): void {
-        this.buscando = true;
         this.expertosComiteBusqueda = this.expertosComite.filter(experto => experto.nombre!.includes(value));
+        this.expertosComiteBusqueda.sort((a: ExpertoComite, b: ExpertoComite) => a.idexperto! - b.idexperto!);
     }
 
     public get numeroExpertosTecnicos(): number {

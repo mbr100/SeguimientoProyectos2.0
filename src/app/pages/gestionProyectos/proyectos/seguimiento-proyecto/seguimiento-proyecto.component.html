@@ -64,7 +64,7 @@
                 </div>
             </div>
             <div class="row mb-3">
-                <label for="proyectoPrincipal" class="col-sm-2 col-form-label">Proyecto Principal:</label>
+                <label class="col-sm-2 col-form-label">Proyecto Principal:</label>
                 <div class="col-sm-10">
                     <div class="form-check form-switch">
                     </div>
@@ -246,6 +246,7 @@
             </div>
         } @else {
             <div class="card-body">
+                <p class="card-text">ID: {{ expertoComite.idexperto }}</p>
                 <p class="card-text">Nombre: {{ expertoComite.nombre + " " + expertoComite.apellido1 + " " + expertoComite.apellido2 }}</p>
                 <p class="card-text">Telefono: {{ expertoComite.telefono }}</p>
                 <p class="card-text">Email: {{ expertoComite.email }}</p>

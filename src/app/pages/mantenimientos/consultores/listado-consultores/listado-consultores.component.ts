@@ -27,13 +27,16 @@ export class ListadoConsultoresComponent implements OnInit{
         this.consultoresService.getConsultores().subscribe((consultores: Consultores[]): void => {
             this.consultores = consultores;
             this.consultores.sort((a: Consultores, b: Consultores) => a.consultora!.toLowerCase().localeCompare(b.consultora!.toLowerCase()));
+            this.consultoresBusqueda = consultores;
+            this.consultoresBusqueda.sort((a: Consultores, b: Consultores) => a.consultora!.toLowerCase().localeCompare(b.consultora!.toLowerCase()));
             this.numeroConsultores.set(consultores.length);
         });
     }
 
     public buscar(value: string): void {
         this.buscando = true;
-        this.consultoresBusqueda = this.consultores.filter((consultores: Consultores) => consultores.nombre!.includes(value));
+        this.consultoresBusqueda = this.consultores.filter((consultores: Consultores) => consultores.consultora!.toLowerCase().includes(value.toLowerCase()));
+        this.consultoresBusqueda.sort((a: Consultores, b: Consultores) => a.consultora!.toLowerCase().localeCompare(b.consultora!.toLowerCase()));
     }
     public editarConsultor(consultor: Consultores): void {
         this.router.navigateByUrl(`mantenimientos/consultores/editarConsultor/${consultor.id}`).then(r => r);

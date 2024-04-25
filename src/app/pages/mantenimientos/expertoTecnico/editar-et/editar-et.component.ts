@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, ReactiveFormsModule} from "@angular/forms";
 import {ActivatedRoute, Router} from "@angular/router";
-import {ExpertoTecnicoService} from "../../../../services/experto-tecnico.service";
+import {ExpertoTecnicoService} from "@services/experto-tecnico.service";
 import Swal from "sweetalert2";
 
 @Component({

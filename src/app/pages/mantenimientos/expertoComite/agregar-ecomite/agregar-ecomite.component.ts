@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { Router} from "@angular/router";
-import { ExpertoComiteService } from "../../../../services/experto-comite.service";
+import { ExpertoComiteService } from "@services/experto-comite.service";
 import Swal from "sweetalert2";
 
 @Component({

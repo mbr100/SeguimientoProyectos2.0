@@ -23,14 +23,12 @@ export class ListadoProyectosComponent implements OnInit {
     private proyectos: Proyecto[];
     public proyectosMostrar: Proyecto[];
     public consultores: Consultores[];
-    public busqueda: boolean;
     public numeroProyectos: WritableSignal<number> = signal<number>(0);
 
 
     constructor(private proyectoService: ProyectoService, private router: Router) {
         this.proyectos = new Array<Proyecto>();
         this.consultores = new Array<Consultores>();
-        this.busqueda = false;
         this.proyectosMostrar = new Array<Proyecto>();
     }
     public ngOnInit(): void {
@@ -76,7 +74,8 @@ export class ListadoProyectosComponent implements OnInit {
         }
 
     public buscar(value: string): void {
-        this.busqueda = true;
         this.proyectosMostrar = this.proyectos.filter(proyecto => proyecto.codigo!.includes(value));
+        this.proyectosMostrar.sort((a, b) => a.codigo!.localeCompare(b.codigo!));
+        this.numeroProyectos.set(this.proyectosMostrar.length);
     }
 }
