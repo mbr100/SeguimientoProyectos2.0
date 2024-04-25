@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule } from "@angular/forms";
+import {AbstractControl, FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators} from "@angular/forms";
 import { ProyectoService } from "@services/proyecto.service";
 import { Router } from "@angular/router";
 import { Consultores } from "@models/consultores.model";
 import { ConsultoresService } from "@services/consultores.service";
 import { CheckListBonis } from "@models/checkListBonis.model";
 import { CheckListBonisService } from "@services/check-list-bonis.service";
-
 import Swal from "sweetalert2";
+import {Proyecto} from "@models/proyecto.model";
 
 @Component({
     selector: 'app-agregarproyecto',
@@ -39,9 +39,9 @@ export class AgregarproyectoComponent implements OnInit {
 
     ngOnInit() {
         this.proyectoForm = this.fb.group({
-            codigo: [''],
-            acronimo: [''],
-            titulo: [''],
+            codigo: ['', Validators.required, Validators.pattern(/^\d{3}\.\d{3}$/)],
+            acronimo: ['', Validators.required, Validators.pattern(/^.{10}$/)],
+            titulo: ['', Validators.required],
             cliente: [''],
             ejercicio: [''],
             fechaInicioProyecto: [new Date()],
@@ -70,27 +70,38 @@ export class AgregarproyectoComponent implements OnInit {
     }
 
     public agregar(): void {
-        if(this.proyectoForm.value.tipoProyecto=='Bonificaciones') {
-            this.proyectoService.agregarProyecto(this.proyectoForm.value).then(rest => {
-                this.checkListBonis.idProyecto = rest.id;
-                this.checkListBonisService.agregarCheckListBonis(this.checkListBonis).then(_ => {
+        if (this.proyectoForm.valid) {
+            if(this.proyectoForm.value.tipoProyecto=='Bonificaciones') {
+                this.proyectoService.agregarProyecto(this.proyectoForm.value).then(rest => {
+                    this.checkListBonis.idProyecto = rest.id;
+                    this.checkListBonisService.agregarCheckListBonis(this.checkListBonis).then(_ => {
+                        this.router.navigate(['/']).then();
+                    });
+                });
+            } else if(this.proyectoForm.value.tipoProyecto=='Deducciones') {
+                this.proyectoService.agregarProyecto(this.proyectoForm.value).then(_ => {
                     this.router.navigate(['/']).then();
                 });
-            });
-        } else if(this.proyectoForm.value.tipoProyecto=='Deducciones') {
-            this.proyectoService.agregarProyecto(this.proyectoForm.value).then(_ => {
-                this.router.navigate(['/']).then();
-            });
+            } else {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error',
+                    text: 'Tipo de proyecto no válido'
+                }).then();
+            }
         } else {
             Swal.fire({
                 icon: 'error',
                 title: 'Error',
-                text: 'Tipo de proyecto no válido'
+                text: 'Formulario no válido'
             }).then();
         }
     }
 
     public mostrarConsultores(consultora: HTMLSelectElement): void {
         this.consultoraSelecionado = this.consultores.filter(consultor => consultor.consultora === consultora.value);
+    }
+    get f(): { [key: string]: AbstractControl } {
+        return this.proyectoForm.controls;
     }
 }

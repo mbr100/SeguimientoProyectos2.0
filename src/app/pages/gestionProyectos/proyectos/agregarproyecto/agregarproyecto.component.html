@@ -5,23 +5,32 @@
             <i class="fa fa-arrow-left" aria-hidden="true"></i>
         </button>
     </div>
-    <form class="p-2" [formGroup]="proyectoForm"  (submit)="agregar()">
+    <form class="p-2" [formGroup]="proyectoForm" (ngSubmit)="agregar()">
         <div class="row mb-3">
             <label for="codigo" class="col-sm-2 col-form-label">Código:</label>
             <div class="col-sm-10">
                 <input type="text" class="form-control" id="codigo" name="codigo" formControlName="codigo">
+                @if (proyectoForm.get('codigo')!.invalid && proyectoForm.get('codigo')!.touched){
+                    <span class="text-danger">El código es obligatorio</span>
+                }
             </div>
         </div>
         <div class="row mb-3">
             <label for="acronimo" class="col-sm-2 col-form-label">Acrónimo:</label>
             <div class="col-sm-10">
                 <input type="text" class="form-control" id="acronimo" name="acronimo" formControlName="acronimo">
+                @if (proyectoForm.get('acronimo')!.invalid && proyectoForm.get('acronimo')!.touched){
+                    <span class="text-danger">El acrónimo es obligatorio</span>
+                }
             </div>
         </div>
         <div class="row mb-3">
             <label for="titulo" class="col-sm-2 col-form-label">Titulo:</label>
             <div class="col-sm-10">
                 <input type="text" class="form-control" id="titulo" name="titulo" formControlName="titulo">
+                @if (proyectoForm.get('titulo')!.invalid && proyectoForm.get('titulo')!.touched){
+                    <span class="text-danger">El título es obligatorio</span>
+                }
             </div>
         </div>
         <div class="row mb-3">
