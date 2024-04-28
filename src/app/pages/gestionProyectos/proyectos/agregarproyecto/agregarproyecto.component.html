@@ -50,7 +50,7 @@
             <div class="col-sm-10">
                 <select class="form-select" aria-label="Default select example" id="consultoras" #consultora (change)="mostrarConsultores(consultora)">
                     <option selected>Selecciona un consultor</option>
-                    @for (consultora of consultoras; track consultora){
+                    @for (consultora of consultoras; track consultora) {
                         <option value="{{consultora}}">{{consultora}}</option>
                     }
                 </select>
