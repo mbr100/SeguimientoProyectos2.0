@@ -19,6 +19,4 @@ export class CheckListBonis {
     recibirRevisarInformePreevalET!: boolean;
     NCET!: boolean;
     FechaAuditoriaFase1!: Date;
-
-
 }

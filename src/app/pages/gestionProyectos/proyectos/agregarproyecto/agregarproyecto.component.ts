@@ -7,7 +7,6 @@ import { ConsultoresService } from "@services/consultores.service";
 import { CheckListBonis } from "@models/checkListBonis.model";
 import { CheckListBonisService } from "@services/check-list-bonis.service";
 import Swal from "sweetalert2";
-import {Proyecto} from "@models/proyecto.model";
 
 @Component({
     selector: 'app-agregarproyecto',
@@ -70,7 +69,6 @@ export class AgregarproyectoComponent implements OnInit {
     }
 
     public agregar(): void {
-        if (this.proyectoForm.valid) {
             if(this.proyectoForm.value.tipoProyecto=='Bonificaciones') {
                 this.proyectoService.agregarProyecto(this.proyectoForm.value).then(rest => {
                     this.checkListBonis.idProyecto = rest.id;
@@ -89,13 +87,6 @@ export class AgregarproyectoComponent implements OnInit {
                     text: 'Tipo de proyecto no válido'
                 }).then();
             }
-        } else {
-            Swal.fire({
-                icon: 'error',
-                title: 'Error',
-                text: 'Formulario no válido'
-            }).then();
-        }
     }
 
     public mostrarConsultores(consultora: HTMLSelectElement): void {
