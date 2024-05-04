@@ -44,6 +44,7 @@ export class RecursosService {
     }
 
     public actualizarRecurso(recurso: Recurso): Promise<void> {
-        return this.recursosCollection.doc(recurso.id).update(recurso);
+        const {id, ...recursoSinId} = recurso;
+        return this.recursosCollection.doc(id).update(recursoSinId);
     }
 }

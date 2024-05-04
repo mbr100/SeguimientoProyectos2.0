@@ -17,20 +17,20 @@ import Swal from "sweetalert2";
 })
 export class AgregarTramitesComponent implements OnInit {
     public tramiteForm!: FormGroup;
-    public consultoras: string[];
+    public consultoras: String[];
     public consultores: Consultores[];
     public expertos: ExpertoTecnico[];
     public consultoraSelecionado: Consultores[];
 
     constructor(private fb: FormBuilder, private tramiteService: TramiteService, private etService: ExpertoTecnicoService, private consultoresService: ConsultoresService,
                 private router: Router) {
-        this.consultoras = [];
+        this.consultoras = new Array<String>();
         this.consultores = [];
         this.expertos = [];
         this.consultoraSelecionado = [];
     }
 
-    ngOnInit() {
+    public ngOnInit(): void {
         this.tramiteForm = this.fb.group({
             codigo: [''],
             titulo: [''],
@@ -47,7 +47,7 @@ export class AgregarTramitesComponent implements OnInit {
             next: consultores => {
                 this.consultores = consultores;
                 this.consultoras = Array.from(new Set(consultores
-                    .map(consultor => consultor.consultora)
+                    .map((consultor: Consultores) => consultor.consultora)
                     .filter(consultora => consultora !== undefined))) as string[];
             },
             error: err => {

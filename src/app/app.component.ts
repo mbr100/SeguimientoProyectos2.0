@@ -5,7 +5,7 @@ import {CabeceroComponent} from "@components/cabecero/cabecero.component";
 import {FooterComponent} from "@components/footer/footer.component";
 import {AvisoService} from "@services/aviso.service";
 import {Aviso} from "@models/aviso.model";
-import Swal from "sweetalert2";
+import Swal, {SweetAlertResult} from "sweetalert2";
 
 @Component({
     selector: 'app-root',
@@ -23,7 +23,7 @@ export class AppComponent implements OnInit {
 
     ngOnInit() {
         this.avisosService.listarAvisos().subscribe({
-            next: avisos => {
+            next: (avisos: Aviso[]): void => {
                 this.avisos = avisos;
                 console.log(this.avisos.length);
                 if (this.avisos.length > 0) {
@@ -33,7 +33,7 @@ export class AppComponent implements OnInit {
                         icon: 'info',
                         confirmButtonText: 'Aceptar',
                         showCancelButton: true,
-                    }).then(r => {
+                    }).then((r: SweetAlertResult): void => {
                         if (r.isConfirmed) {
                             console.log('Aceptado');
                             this.avisos.forEach(aviso => {

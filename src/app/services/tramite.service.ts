@@ -62,6 +62,7 @@ export class TramiteService {
     }
 
     public actualizarTramite(tramite: Tramites): Promise<void> {
-        return this.tramitesCollection.doc(tramite.id).update(tramite);
+        const {id, ...tramiteSinId} = tramite;
+        return this.tramitesCollection.doc(id).update(tramiteSinId);
     }
 }

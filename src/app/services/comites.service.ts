@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument} from "@angular/fire/compat/firestore";
-import {Comite} from "../models/comite.model";
+import {Comite} from "@models/comite.model";
 import {map, Observable} from "rxjs";
 
 @Injectable({
@@ -47,7 +47,8 @@ export class ComitesService {
     }
 
     public editarComite(comite: Comite): Promise<any> {
-        return this.comitesCollection.doc(comite.id).update(comite);
+        const {id, ...comiteActualizado} = comite;
+        return this.comitesCollection.doc(comite.id).update(comiteActualizado);
     }
 
 }

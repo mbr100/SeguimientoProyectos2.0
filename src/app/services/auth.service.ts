@@ -16,42 +16,37 @@ export class AuthService {
 
     constructor(private authService: AngularFireAuth, private router: Router) {
         this.user$ = authService.authState;
-        this.user$.subscribe(user => {
-            this.isLoggedIn = !!user; // Actualiza el estado de autenticación cuando cambia
+        this.user$.subscribe((user: firebase.User | null): void => {
+            this.isLoggedIn = !!user;
         });
     }
 
     public login(email: string, password: string): Promise<UserCredential> {
-        return new Promise((resolve, reject) => {
+        return new Promise((resolve, reject): void => {
             this.authService.signInWithEmailAndPassword(email, password)
-                .then(datos => resolve(datos),
+                .then((datos: UserCredential) => resolve(datos),
                     error => reject(error));
         });
     }
 
     public getAuth(): Observable<firebase.User| null> {
         return this.authService.authState.pipe(
-            map( auth => auth)
+            map( (auth: firebase.User | null) => auth)
         );
     }
 
     public updateImageProfile(image: string): Promise<void> {
-        return new Promise((resolve, reject) => {
-            this.authService.currentUser.then(user => {
-                user?.updateProfile({
-                    photoURL: image
-                }).then(() => resolve(),
-                    error => reject(error));
+        return new Promise((resolve, reject): void => {
+            this.authService.currentUser.then((user: firebase.User | null ) => {
+                user?.updateProfile({photoURL: image})
+                    .then(() => resolve(), error => reject(error))
+                    .catch(error => reject(error));
             });
         });
     }
 
-    public getUser(): Observable<firebase.User|null> {
-        return this.authService.user;
-    }
-
     public logout(): void {
-        this.authService.signOut().then(_ => {
+        this.authService.signOut().then((): void => {
             this.router.navigate(['/login']).then(() =>
                 Swal.fire({
                     icon: 'success',
@@ -64,29 +59,31 @@ export class AuthService {
     }
 
     public updateDisplayName(displayName: string): Promise<void>  {
-        return new Promise<void>((resolve, reject) => {
-            this.authService.currentUser.then(user => {
-                user?.updateProfile({
-                    displayName
-                }).then(() => resolve(), error => reject(error));
+        return new Promise<void>((resolve, reject): void => {
+            this.authService.currentUser.then((user: firebase.User | null): void => {
+                user?.updateProfile({displayName})
+                    .then(() => resolve(), error => reject(error))
+                    .catch(error => reject(error));
             });
         });
     }
 
     public updateEmail(email: string): Promise<void> {
-        return new Promise<void>((resolve, reject) => {
-            this.authService.currentUser.then(user => {
-                user?.updateEmail(email).then(() => resolve(),
-                    error => reject(error));
+        return new Promise<void>((resolve, reject): void => {
+            this.authService.currentUser.then((user: firebase.User | null): void => {
+                user?.updateEmail(email)
+                    .then(() => resolve(), error => reject(error))
+                    .catch(error => reject(error));
             });
         });
     }
 
     public updatePassword(password: string): Promise<void> {
-        return new Promise<void>((resolve, reject) => {
-            this.authService.currentUser.then(user => {
-                user?.updatePassword(password).then(() => resolve(),
-                    error => reject(error));
+        return new Promise<void>((resolve, reject): void => {
+            this.authService.currentUser.then((user: firebase.User | null): void => {
+                user?.updatePassword(password)
+                    .then(() => resolve(), error => reject(error))
+                    .catch((error) => reject(error));
             });
         });
     }

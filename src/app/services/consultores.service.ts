@@ -38,7 +38,8 @@ export class ConsultoresService {
     }
 
     public actualizarConsultor(consultor: Consultores): Promise<any> {
-        return this.consultoresCollection.doc(consultor.id).update(consultor);
+        const { id, ...consultorSinId } = consultor;
+        return this.consultoresCollection.doc(consultor.id).update(consultorSinId);
     }
 
     public getConsultor(idConsultor: string): Observable<Consultores> {

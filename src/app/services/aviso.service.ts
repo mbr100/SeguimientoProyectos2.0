@@ -1,7 +1,7 @@
-import {Injectable} from '@angular/core';
-import {AngularFirestore, AngularFirestoreCollection} from "@angular/fire/compat/firestore";
-import {Aviso} from "@models/aviso.model";
-import {map, Observable} from "rxjs";
+import { Injectable } from '@angular/core';
+import {AngularFirestore, AngularFirestoreCollection, DocumentChangeAction} from "@angular/fire/compat/firestore";
+import { Aviso } from "@models/aviso.model";
+import { map, Observable } from "rxjs";
 
 @Injectable({
     providedIn: 'root'
@@ -16,9 +16,9 @@ export class AvisoService {
 
     public listarAvisos(): Observable<Aviso[]> {
         this.avisos = this.avisoCollection.snapshotChanges().pipe(
-            map(accion => {
-                return accion.map(datos => {
-                    const data = datos.payload.doc.data() as Aviso;
+            map((accion:  DocumentChangeAction<Aviso>[]) => {
+                return accion.map((datos: DocumentChangeAction<Aviso>) => {
+                    const data: Aviso = datos.payload.doc.data() as Aviso;
                     data.idAviso = datos.payload.doc.id;
                     return data;
                 });

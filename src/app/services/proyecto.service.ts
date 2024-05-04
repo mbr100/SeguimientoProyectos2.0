@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument, DocumentReference} from "@angular/fire/compat/firestore";
-import {Proyecto} from "../models/proyecto.model";
-import {map, Observable, switchMap} from "rxjs";
+import {Proyecto} from "@models/proyecto.model";
+import {map, Observable} from "rxjs";
 
 @Injectable({
     providedIn: 'root'
@@ -15,7 +15,7 @@ export class ProyectoService {
     private proyectoDoc!: AngularFirestoreDocument<Proyecto>;
     private proyectosCollectionEstadisticas!: AngularFirestoreCollection<Proyecto>;
 
-    constructor(private db: AngularFirestore) {
+    public constructor(private db: AngularFirestore) {
         this.proyectosCollection = this.db.collection<Proyecto>('proyectos', ref =>
             ref.where('estado', '==', 'ACTIVO').orderBy('codigo', 'asc'));
         this.proyectosCertificadosCollection = this.db.collection<Proyecto>('proyectos', ref =>
@@ -147,17 +147,20 @@ export class ProyectoService {
         if (proyecto.fechaFinProyecto == undefined) {
             proyecto.fechaFinProyecto = null;
         }
-        return this.proyectosCollection.doc(proyecto.id).update(proyecto);
+        const {id, ...proyectoSinId} = proyecto;
+        return this.proyectosCollection.doc(proyecto.id).update(proyectoSinId);
     }
 
     public archivarProyecto(proyecto: Proyecto): Promise<void> {
         proyecto.estado = "Archivado";
-        return this.proyectosCollection.doc(proyecto.id).update(proyecto);
+        const {id, ...proyectoSinId} = proyecto;
+        return this.proyectosCollection.doc(proyecto.id).update(proyectoSinId);
     }
 
     public certificarProyecto(proyecto: Proyecto): Promise<void> {
         proyecto.estado = "Certificado";
-        return this.proyectosCollection.doc(proyecto.id).update(proyecto);
+        const {id, ...proyectoSinId} = proyecto;
+        return this.proyectosCollection.doc(proyecto.id).update(proyectoSinId);
     }
 
     public getProyectosCertificados(): Observable<Proyecto[]> {

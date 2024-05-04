@@ -59,7 +59,7 @@ export class EditarComitesComponent implements OnInit{
                     this.volverInicio();
                 }
             });
-        }).catch(() => {
+        }).catch(r => {
             Swal.fire({
                 title: 'Error',
                 text: 'Ha ocurrido un error al editar el comité',

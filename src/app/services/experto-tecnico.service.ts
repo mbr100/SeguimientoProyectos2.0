@@ -45,7 +45,8 @@ export class ExpertoTecnicoService {
     }
 
     public actualizarExpertoTecnico(expertoTecnico: ExpertoTecnico): Promise<void>{
-        return this.expertoTecnicoCollection.doc(expertoTecnico.id).update(expertoTecnico);
+        const {id, ...expertoTecnicoSinId} = expertoTecnico;
+        return this.expertoTecnicoCollection.doc(id).update(expertoTecnicoSinId);
     }
 
     public eliminarExpertoTecnico(expertoTecnico: ExpertoTecnico): Promise<void>{
