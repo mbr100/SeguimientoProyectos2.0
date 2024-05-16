@@ -105,7 +105,7 @@ export class MostrarEstadisticasComponent implements OnInit {
         return totalDias / estadisticas.length;
     }
 
-    public calcularProyectosMedios():void {
+    public calcularProyectosMedios(): void {
         this.proyectosEquivalentes = this.estadisticas.reduce((total, proyecto) => {
             return total + proyecto.precioOferta;
         }, 0) / this.precioMedioOferta;

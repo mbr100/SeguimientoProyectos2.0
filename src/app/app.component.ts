@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, inject, OnInit} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {RouterOutlet} from '@angular/router';
 import {CabeceroComponent} from "@components/cabecero/cabecero.component";
@@ -35,7 +35,6 @@ export class AppComponent implements OnInit {
                         showCancelButton: true,
                     }).then((r: SweetAlertResult): void => {
                         if (r.isConfirmed) {
-                            console.log('Aceptado');
                             this.avisos.forEach(aviso => {
                                 this.avisosService.eliminarAvisos(aviso).then(() => {
                                     console.log('Aviso '+ aviso.codigo +' eliminado');

@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument, DocumentReference} from "@angular/fire/compat/firestore";
+import {AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument, DocumentChangeAction, DocumentReference} from "@angular/fire/compat/firestore";
 import {Proyecto} from "@models/proyecto.model";
 import {map, Observable} from "rxjs";
 
@@ -37,7 +37,7 @@ export class ProyectoService {
         return this.proyectosCollectionEstadisticas.snapshotChanges().pipe(
             map(accion => {
                 return accion.map(datos => {
-                    const data = datos.payload.doc.data() as Proyecto;
+                    const data: Proyecto = datos.payload.doc.data() as Proyecto;
                     const fechaini = datos.payload.doc.data().fechaInicioProyecto as any;
                     const fechaf = datos.payload.doc.data().fechaFinProyecto as any;
                     const fechac = datos.payload.doc.data().fechaComite as any;
@@ -165,8 +165,8 @@ export class ProyectoService {
 
     public getProyectosCertificados(): Observable<Proyecto[]> {
         this.proyectos = this.proyectosCertificadosCollection.snapshotChanges().pipe(
-            map(accion => {
-                return accion.map(datos => {
+            map((accion: DocumentChangeAction<Proyecto>[]) => {
+                return accion.map((datos: DocumentChangeAction<Proyecto>) => {
                     const data = datos.payload.doc.data() as Proyecto;
                     const fechaini = datos.payload.doc.data().fechaInicioProyecto as any;
                     const fechaf = datos.payload.doc.data().fechaFinProyecto as any;
