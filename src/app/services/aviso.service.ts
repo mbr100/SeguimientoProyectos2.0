@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {AngularFirestore, AngularFirestoreCollection, DocumentChange, DocumentChangeAction, DocumentReference} from "@angular/fire/compat/firestore";
+import { AngularFirestore, AngularFirestoreCollection, DocumentChangeAction } from "@angular/fire/compat/firestore";
 import { Aviso } from "@models/aviso.model";
 import { map, Observable } from "rxjs";
 
