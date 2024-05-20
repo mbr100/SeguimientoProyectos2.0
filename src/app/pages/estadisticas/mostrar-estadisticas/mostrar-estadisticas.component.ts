@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import { ProyectoService } from "@services/proyecto.service";
 import { Proyecto } from "@models/proyecto.model";
 import { CurrencyPipe, DatePipe, DecimalPipe } from "@angular/common";
