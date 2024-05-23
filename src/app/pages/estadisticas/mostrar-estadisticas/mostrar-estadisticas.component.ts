@@ -1,16 +1,20 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, LOCALE_ID, OnInit} from '@angular/core';
 import { ProyectoService } from "@services/proyecto.service";
 import { Proyecto } from "@models/proyecto.model";
-import { CurrencyPipe, DatePipe, DecimalPipe } from "@angular/common";
+import {CurrencyPipe, DatePipe, DecimalPipe, registerLocaleData} from "@angular/common";
 import { Estadisticas } from "@models/estadisticas.model";
 import { FormsModule } from "@angular/forms";
 
 import Swal from "sweetalert2";
+import localeEs from '@angular/common/locales/es';
+registerLocaleData(localeEs, 'es-ES');
+
 
 @Component({
     selector: 'app-mostrar-estadisticas',
     standalone: true,
     imports: [DatePipe, DecimalPipe, CurrencyPipe, FormsModule],
+    providers: [{ provide: LOCALE_ID, useValue: 'es-ES' }],
     templateUrl: './mostrar-estadisticas.component.html',
     styleUrl: './mostrar-estadisticas.component.css'
 })
@@ -25,7 +29,6 @@ export class MostrarEstadisticasComponent implements OnInit {
     public anualidades: number[];
     public anualidad: number;
     public estadisticasMostrar: Estadisticas[];
-
 
     public constructor(private proyectosService: ProyectoService) {
         this.proyectos = [];
@@ -77,7 +80,7 @@ export class MostrarEstadisticasComponent implements OnInit {
                 FechaFinComite: proyecto.fechaFinComite!,
                 FechaFinProyecto: proyecto.fechaFinProyecto!,
                 diasComite: diasEnComite,
-                precioOferta: proyecto.precioOfertado!,
+                precioOferta: Number(proyecto.precioOfertado!),
                 diasCertificacion: diasCertificacion,
                 versionComite: proyecto.numeroVersionComite!
             };

@@ -4,6 +4,9 @@
     "newProjectRoot": "projects",
     "projects": {
         "SeguimientoProyecto2.0": {
+            "i18n": {
+                "sourceLocale": "es"
+            },
             "projectType": "application",
             "schematics": {},
             "root": "",

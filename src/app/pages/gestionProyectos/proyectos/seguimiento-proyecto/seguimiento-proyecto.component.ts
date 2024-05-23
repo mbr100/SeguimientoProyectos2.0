@@ -183,7 +183,7 @@ export class SeguimientoProyectoComponent implements OnInit {
     public enviarEmailAperturaComite(): void {
         const subject = 'Comité  ' + this.proyecto.codigo;
         const body ='Buenos días, ' + this.expertoComite.nombre+ '\n\n' +
-            'Mi nombre es Mario Borrego de EQA y seré el gestor del proyecto'+this.proyecto.codigo+' de la empresa' +this.proyecto.cliente+'. ' +
+            'Mi nombre es Mario Borrego de EQA y seré el gestor del proyecto '+this.proyecto.codigo+' de la empresa ' +this.proyecto.cliente+'. ' +
             'Le adjunto la documentación necesaria para su evaluación.\n\n' +
             'Si le surge alguna duda no dude en contactarme, quedo a su disposición.\n\n'+
             'Un saludo, Mario Borrego';

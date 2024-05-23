@@ -41,8 +41,8 @@ export class ProyectoService {
     // }
 
     private mapearProyectos(accion: DocumentChangeAction<Proyecto>[]): Proyecto[] {
-        return accion.map(datos => {
-            const data = datos.payload.doc.data() as Proyecto;
+        return accion.map((datos: DocumentChangeAction<Proyecto>) => {
+            const data: Proyecto = datos.payload.doc.data() as Proyecto;
             const fechaini = datos.payload.doc.data().fechaInicioProyecto as any;
             const fechaf = datos.payload.doc.data().fechaFinProyecto as any;
             const fechac = datos.payload.doc.data().fechaComite as any;
@@ -64,7 +64,7 @@ export class ProyectoService {
 
     public getProyectos(): Observable<Proyecto[]> {
         return this.proyectosCollection.snapshotChanges().pipe(
-            map(accion => {
+            map((accion: DocumentChangeAction<Proyecto>[]) => {
                 return this.mapearProyectos(accion);
             })
         )
@@ -72,7 +72,7 @@ export class ProyectoService {
 
     public getProyectosBuckup(): Observable<Proyecto[]> {
         this.proyectos = this.proyectosBuckUp.snapshotChanges().pipe(
-            map(accion => {
+            map((accion: DocumentChangeAction<Proyecto>[]) => {
                 return this.mapearProyectos(accion);
             })
         )
@@ -110,7 +110,7 @@ export class ProyectoService {
 
     public archivarProyecto(proyecto: Proyecto): Promise<void> {
         proyecto.estado = "Archivado";
-        const {id, ...proyectoSinId} = proyecto;
+        const {id: string, ...proyectoSinId} = proyecto;
         return this.proyectosCollection.doc(proyecto.id).update(proyectoSinId);
     }
 
@@ -131,7 +131,7 @@ export class ProyectoService {
 
     public getProyectosArchivados(): Observable<Proyecto[]> {
         this.proyectos = this.proyectosArchivadosCollection.snapshotChanges().pipe(
-            map(accion => {
+            map((accion: DocumentChangeAction<Proyecto>[]) => {
                 return this.mapearProyectos(accion);
             })
         )
