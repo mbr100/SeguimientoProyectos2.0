@@ -5,6 +5,9 @@ import {CurrencyPipe, DatePipe, DecimalPipe, registerLocaleData} from "@angular/
 import { Estadisticas } from "@models/estadisticas.model";
 import { FormsModule } from "@angular/forms";
 
+import * as XLSX from 'xlsx';
+import FileSaver from 'file-saver';
+
 import Swal from "sweetalert2";
 import localeEs from '@angular/common/locales/es';
 registerLocaleData(localeEs, 'es-ES');
@@ -29,6 +32,8 @@ export class MostrarEstadisticasComponent implements OnInit {
     public anualidades: number[];
     public anualidad: number;
     public estadisticasMostrar: Estadisticas[];
+    private EXCEL_TYPE: string;
+    private EXCEL_EXTENSION: string;
 
     public constructor(private proyectosService: ProyectoService) {
         this.proyectos = [];
@@ -41,6 +46,8 @@ export class MostrarEstadisticasComponent implements OnInit {
         this.anualidades = this.anualidadesDisponibles();
         this.anualidad = new Date().getFullYear();
         this.estadisticasMostrar = [];
+        this.EXCEL_TYPE = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8';
+        this.EXCEL_EXTENSION = '.xlsx';
     }
 
     public ngOnInit(): void {
@@ -114,4 +121,16 @@ export class MostrarEstadisticasComponent implements OnInit {
         }, 0) / this.precioMedioOferta;
 
     }
+    public descargarExcel(): void {
+        const worksheet: XLSX.WorkSheet = XLSX.utils.json_to_sheet(this.estadisticas);
+        const workbook: XLSX.WorkBook = { Sheets: { 'Estadísticas': worksheet }, SheetNames: ['Estadísticas'] };
+        const excelBuffer: any = XLSX.write( workbook, { bookType: 'xlsx', type: 'array' });
+        this.guardarArchivoExcel(excelBuffer, 'Estadísticas_Proyectos');
+    }
+
+    private guardarArchivoExcel(buffer: any, nombreArchivo: string): void {
+        const data: Blob = new Blob([buffer], { type: this.EXCEL_TYPE });
+        FileSaver.saveAs(data, `${nombreArchivo}_${new Date().getTime()}${this.EXCEL_EXTENSION}`);
+    }
+
 }

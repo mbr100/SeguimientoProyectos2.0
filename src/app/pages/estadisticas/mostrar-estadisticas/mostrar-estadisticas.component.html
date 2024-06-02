@@ -8,11 +8,18 @@
                 <h5 class="card-title">Total de proyectos certificados</h5>
                 <p class="card-text">{{ estadisticas.length }} Proyectos</p>
                 <h5 class="card-title">Media de dias en Comite</h5>
-                <p class="card-text">{{ mediaDiasComite | number:'1.0-0' }} Días</p>
+                <p class="card-text">{{ mediaDiasComite | number:'1.2-2' }} Días</p>
                 <h5 class="card-title">Media de dias en Certificar</h5>
                 <p class="card-text">{{ mediaDiasCertificacion | number:'1.0-0' }} Días</p>
             </div>
             <div class="col">
+                <h5 class="card-title">Año:</h5>
+                <select id="yearSelect" class="form-control" [(ngModel)]="anualidad" (change)="generarEstadisticas()">
+                    @for ( anualidad of anualidades; track anualidad) {
+                        <option [value]="anualidad">{{anualidad}}</option>
+                    }
+                </select>
+                <br>
                 <h5 class="card-title">Precio Medio Oferta</h5>
                 <input class="form-control" [(ngModel)]="precioMedioOferta" (ngModelChange)="calcularProyectosMedios()" type="number">
                 @if( precioMedioOferta != 0 ){
@@ -20,12 +27,7 @@
                     <h5 class="card-title">Numero de Proyectos Equivalentes</h5>
                     <p class="card-text">{{ proyectosEquivalentes | number:'1.0-2' }}</p>
                 }
-                <h5 class="card-title">Año:</h5>
-                <select id="yearSelect" class="form-control" [(ngModel)]="anualidad" (change)="generarEstadisticas()">
-                    @for ( anualidad of anualidades; track anualidad) {
-                        <option [value]="anualidad">{{anualidad}}</option>
-                    }
-                </select>
+
             </div>
         </div>
     </div>
@@ -62,6 +64,7 @@
             </table>
 
         </div>
+        <button class="btn btn-primary" (click)="descargarExcel()">Descargar Excel</button>
     </div>
 </div>
 
