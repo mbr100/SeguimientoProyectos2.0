@@ -64,4 +64,9 @@ export class CabeceroComponent {
         this.router.navigateByUrl('/tramites/agregar-tramites').then();
 
     }
+
+    public irATramitesHistorico(): void {
+        this.router.navigateByUrl('/tramites/historico').then();
+
+    }
 }

@@ -8,12 +8,16 @@ import {Tramites} from "@models/tramites.model";
 })
 export class TramiteService {
     private tramitesCollection: AngularFirestoreCollection<Tramites>;
+    private tramitesCollectionHistorico: AngularFirestoreCollection<Tramites>;
     private tramiteDoc!: AngularFirestoreDocument<Tramites>;
     private tramites!: Observable<Tramites[]>
+    private tramitesHisorico!: Observable<Tramites[]>
 
     constructor(private db: AngularFirestore) {
         this.tramitesCollection = this.db.collection<Tramites>('tramites', ref =>
             ref.where('estado', '==', 'ACTIVO'));
+        this.tramitesCollectionHistorico= this.db.collection<Tramites>('tramites', ref =>
+            ref.where('estado', '==', 'Entregado'));
     }
 
     public agregarTramite(tramite: Tramites): Promise<any> {
@@ -64,5 +68,23 @@ export class TramiteService {
     public actualizarTramite(tramite: Tramites): Promise<void> {
         const {id, ...tramiteSinId} = tramite;
         return this.tramitesCollection.doc(id).update(tramiteSinId);
+    }
+
+    public obtenerTramitesHistorico() {
+        this.tramitesHisorico = this.tramitesCollectionHistorico.snapshotChanges().pipe(
+            map(actions => actions.map(a => {
+                const data = a.payload.doc.data() as Tramites;
+                const fechaInicio = a.payload.doc.data().fechaInicioTramite as any;
+                const fechaEntrega = a.payload.doc.data().fechaEntrega as any;
+                if (fechaEntrega != null) {
+                    data.fechaEntrega = fechaEntrega.toDate();
+                }
+                data.fechaInicioTramite = fechaInicio.toDate();
+                const id = a.payload.doc.id;
+                data.id = id;
+                return data;
+            }))
+        );
+        return this.tramitesHisorico;
     }
 }

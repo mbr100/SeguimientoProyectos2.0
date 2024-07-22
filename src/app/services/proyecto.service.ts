@@ -23,6 +23,7 @@ export class ProyectoService {
         this.proyectosArchivadosCollection = this.db.collection<Proyecto>('proyectos', ref =>
             ref.where('estado', '==', 'Archivado').orderBy('codigo', 'asc'));
         this.proyectosBuckUp = this.db.collection<Proyecto>('proyectos');
+        
     }
 
     public agregarProyecto(proyecto: Proyecto): Promise<DocumentReference<Proyecto>> {
