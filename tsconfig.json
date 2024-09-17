@@ -5,12 +5,24 @@
         "outDir": "./dist/out-tsc",
         "forceConsistentCasingInFileNames": true,
         "paths": {
-            "@components/*": ["./src/app/components/*"],
-            "@guards/*": ["./src/app/guards/*"],
-            "@models/*": ["./src/app/models/*"],
-            "@services/*": ["./src/app/services/*"],
-            "@pages/*": ["./src/app/pages/*"],
-            "@environments/*": ["./src/environments/*"],
+            "@components/*": [
+                "./src/app/components/*"
+            ],
+            "@guards/*": [
+                "./src/app/guards/*"
+            ],
+            "@models/*": [
+                "./src/app/models/*"
+            ],
+            "@services/*": [
+                "./src/app/services/*"
+            ],
+            "@pages/*": [
+                "./src/app/pages/*"
+            ],
+            "@environments/*": [
+                "./src/environments/*"
+            ]
         },
         "strict": true,
         "noImplicitOverride": true,

@@ -1,27 +1,38 @@
-# SeguimientoProyecto20
+# Seguimiento Proyecto 2.0
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.0.6.
+## Descripción
+Seguimiento Proyecto 2.0 es una aplicación desarrollada para gestionar y realizar seguimiento a proyectos en tiempo real. Construida con Angular y Firebase, ofrece una interfaz moderna y herramientas para la integración y manejo eficiente de datos.
 
-## Development server
+## Características
+- Interfaz interactiva desarrollada con Angular.
+- Integración con Firebase para manejo de bases de datos y autenticación.
+- Implementación de Bootstrap para un diseño responsivo.
+- Alertas visuales integradas con SweetAlert2.
+- Generación y descarga de reportes en Excel utilizando xlsx.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+## Tecnologías utilizadas
+Este proyecto utiliza las siguientes tecnologías y bibliotecas:
 
-## Code scaffolding
+### Frontend
+- **Angular** (v18.0.1): Framework para construir interfaces web dinámicas.
+- **RxJS** (v7.8.0): Biblioteca para programación reactiva y manejo de eventos asincrónicos.
+- **Bootstrap** (v5.3.2): Framework de diseño para crear interfaces responsivas.
+- **SweetAlert2** (v11.6.13): Biblioteca para mostrar alertas modales estilizadas.
+- **FileSaver** (v2.0.5): Para la descarga de archivos generados en el navegador.
+- **XLSX** (v0.18.5): Para manipular y generar archivos Excel.
+- **Zone.js** (v0.14.2): Biblioteca para manejar la detección de cambios en Angular.
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+### Backend y Servicios
+- **Firebase**: Utilizado para la autenticación, la base de datos en tiempo real, y el hosting. No se usa Express en el backend.
 
-## Build
+### Herramientas de Desarrollo
+- **Angular CLI** (v18.0.2): Herramienta de línea de comandos para gestionar proyectos Angular.
+- **Typescript** (v5.4.5): Lenguaje de programación para desarrollo con tipado estático.
+- **Karma y Jasmine**: Herramientas para la ejecución de pruebas unitarias.
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+## Instalación
+Para instalar y configurar el proyecto localmente, sigue estos pasos:
 
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+1. Clona el repositorio:
+   ```bash
+   git clone https://github.com/mbr100/SeguimientoProyectos2.0.git
