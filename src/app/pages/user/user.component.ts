@@ -23,7 +23,6 @@ import {ExpertoTecnico} from "@models/expertoTecnico.model";
 import {Recurso} from "@models/recurso.model";
 import {TipoRecurso} from "@models/tipoRecurso.model";
 import {Tramites} from "@models/tramites.model";
-import {forkJoin} from "rxjs";
 import {Aviso} from "@models/aviso.model";
 
 @Component({
@@ -90,29 +89,104 @@ export class UserComponent implements OnInit {
             email: [this._user?.email, Validators.required],
             password: ['', Validators.required],
         });
-        forkJoin({
-            proyectos: this.proyectoService.getProyectosBuckup(),
-            comites: this.comiteService.listarComites(),
-            consultores: this.consultorService.getConsultores(),
-            expertosComite: this.expertorComiteService.getExpertosComite(),
-            expertosTecnicos: this.etService.getExpertosTecnicos(),
-            recursos: this.recursosService.getRecursos(),
-            tiposRecursos: this.tipoRecusoService.listarTipoRecursos(),
-            tramites: this.tramiteService.obtenerTramites(),
-            avisos: this.avisoService.listarAvisos()
-        }).subscribe({
-            next: ({proyectos, comites, consultores, expertosComite, expertosTecnicos, recursos, tiposRecursos, tramites, avisos}) => {
-                this.proyectos = proyectos;
-                this.comites = comites;
-                this.consultores = consultores;
-                this.expertosComite = expertosComite;
-                this.expertosTecnicos = expertosTecnicos;
-                this.recursos = recursos;
-                this.tiposRecursos = tiposRecursos;
-                this.tramites = tramites;
-                this.avisos = avisos;
-            },
-            error: (err) => this.showMessage(`Error al cargar datos: ${err}`, 'error')
+        this.proyectoService.getProyectosBuckup().subscribe({
+            next: (proyectos: Proyecto[]) => this.proyectos = proyectos,
+            error: (error) => {
+                Swal.fire({
+                    title: 'Error al cargar los proyectos ' + error,
+                    icon: 'error',
+                    showConfirmButton: false,
+                    timer: 1500
+                }).then();
+            }
+        });
+        this.comiteService.listarComites().subscribe({
+            next: (comites: Comite[]) => this.comites = comites,
+            error: (error) => {
+                Swal.fire({
+                    title: 'Error al cargar los comites ' + error,
+                    icon: 'error',
+                    showConfirmButton: false,
+                    timer: 1500
+                }).then();
+            }
+        });
+        this.consultorService.getConsultores().subscribe({
+            next: (consultores: Consultores[]) => this.consultores = consultores,
+            error: (error) => {
+                Swal.fire({
+                    title: 'Error al cargar los consultores ' + error,
+                    icon: 'error',
+                    showConfirmButton: false,
+                    timer: 1500
+                }).then();
+            }
+        });
+        this.expertorComiteService.getExpertosComite().subscribe({
+            next: (expertosComite: ExpertoComite[]) => this.expertosComite = expertosComite,
+            error: (error) => {
+                Swal.fire({
+                    title: 'Error al cargar los expertos de comite ' + error,
+                    icon: 'error',
+                    showConfirmButton: false,
+                    timer: 1500
+                }).then();
+            }
+        });
+        this.etService.getExpertosTecnicos().subscribe({
+            next: (expertosTecnicos: ExpertoTecnico[]) => this.expertosTecnicos = expertosTecnicos,
+            error: (error) => {
+                Swal.fire({
+                    title: 'Error al cargar los expertos tecnicos ' + error,
+                    icon: 'error',
+                    showConfirmButton: false,
+                    timer: 1500
+                }).then();
+            }
+        });
+        this.recursosService.getRecursos().subscribe({
+            next: (recursos: Recurso[]) => this.recursos = recursos,
+            error: (error) => {
+                Swal.fire({
+                    title: 'Error al cargar los recursos ' + error,
+                    icon: 'error',
+                    showConfirmButton: false,
+                    timer: 1500
+                }).then();
+            }
+        });
+        this.tipoRecusoService.listarTipoRecursos().subscribe({
+            next: (tiposRecursos: TipoRecurso[]) => this.tiposRecursos = tiposRecursos,
+            error: (error) => {
+                Swal.fire({
+                    title: 'Error al cargar los tipos de recursos ' + error,
+                    icon: 'error',
+                    showConfirmButton: false,
+                    timer: 1500
+                }).then();
+            }
+        });
+        this.tramiteService.obtenerTramites().subscribe({
+            next: (tramites: Tramites[]) => this.tramites = tramites,
+            error: (error) => {
+                Swal.fire({
+                    title: 'Error al cargar los tramites ' + error,
+                    icon: 'error',
+                    showConfirmButton: false,
+                    timer: 1500
+                }).then();
+            }
+        });
+        this.avisoService.listarAvisos().subscribe({
+            next: (avisos: Aviso[]) => this.avisos = avisos,
+            error: (error) => {
+                Swal.fire({
+                    title: 'Error al cargar los avisos ' + error,
+                    icon: 'error',
+                    showConfirmButton: false,
+                    timer: 1500
+                }).then();
+            }
         });
     }
 
