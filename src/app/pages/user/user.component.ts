@@ -24,6 +24,7 @@ import {Recurso} from "@models/recurso.model";
 import {TipoRecurso} from "@models/tipoRecurso.model";
 import {Tramites} from "@models/tramites.model";
 import {Aviso} from "@models/aviso.model";
+import {combineLatest} from "rxjs";
 
 @Component({
     selector: 'app-user',
@@ -38,16 +39,17 @@ import {Aviso} from "@models/aviso.model";
 export class UserComponent implements OnInit {
     private _user?: firebase.User;
     public userForm!: FormGroup;
-    private proyectos: Proyecto[];
-    private comites: Comite[];
-    private consultores: Consultores[];
-    private expertosComite: ExpertoComite[];
-    private expertosTecnicos: ExpertoTecnico[];
-    private recursos: Recurso[];
-    private tiposRecursos: TipoRecurso[];
-    private tramites: Tramites[];
-    private avisos: Aviso[];
-
+    private data: {
+        proyectos: Proyecto[],
+        comites: Comite[],
+        consultores: Consultores[],
+        expertosComite: ExpertoComite[],
+        expertosTecnicos: ExpertoTecnico[],
+        recursos: Recurso[],
+        tiposRecursos: TipoRecurso[],
+        tramites: Tramites[],
+        avisos: Aviso[]
+    };
 
     constructor(private userService: AuthService, private uploadFileService: UploadFileService, private fb: FormBuilder, private proyectoService: ProyectoService,
                 private comiteService: ComitesService, private consultorService: ConsultoresService, private expertorComiteService: ExpertoComiteService, private avisoService: AvisoService,
@@ -64,128 +66,44 @@ export class UserComponent implements OnInit {
                 }
             },
             error: (error): void => {
-                Swal.fire({
-                    title: 'Error al cargar el usuario ' + error,
-                    icon: 'error',
-                    showConfirmButton: false,
-                    timer: 1500
-                }).then();
+                this.showErrorMessage('Error al cargar el usuario: ' + error);
             },
         });
-        this.proyectos = [];
-        this.comites = [];
-        this.consultores = [];
-        this.expertosComite = [];
-        this.expertosTecnicos = [];
-        this.recursos = [];
-        this.tiposRecursos = [];
-        this.tramites = [];
-        this.avisos = [];
+        this.data = { proyectos: [], comites: [], consultores: [], expertosComite: [], expertosTecnicos: [], recursos: [], tiposRecursos: [], tramites: [], avisos: [] };
     }
 
-    ngOnInit(): void {
+    public ngOnInit(): void {
         this.userForm = this.fb.group({
             displayName: [this._user?.displayName, Validators.required],
             email: [this._user?.email, Validators.required],
             password: ['', Validators.required],
         });
-        this.proyectoService.getProyectosBuckup().subscribe({
-            next: (proyectos: Proyecto[]) => this.proyectos = proyectos,
+        combineLatest([
+            this.proyectoService.getProyectosBuckup(),
+            this.comiteService.listarComites(),
+            this.consultorService.getConsultores(),
+            this.expertorComiteService.getExpertosComite(),
+            this.etService.getExpertosTecnicos(),
+            this.recursosService.getRecursos(),
+            this.tipoRecusoService.listarTipoRecursos(),
+            this.tramiteService.obtenerTramites(),
+            this.avisoService.listarAvisos()
+        ]).subscribe({
+            next: ([proyectos, comites, consultores, expertosComite, expertosTecnicos, recursos, tiposRecursos, tramites, avisos]) => {
+                this.data = {
+                    proyectos,
+                    comites,
+                    consultores,
+                    expertosComite,
+                    expertosTecnicos,
+                    recursos,
+                    tiposRecursos,
+                    tramites,
+                    avisos
+                };
+            },
             error: (error) => {
-                Swal.fire({
-                    title: 'Error al cargar los proyectos ' + error,
-                    icon: 'error',
-                    showConfirmButton: false,
-                    timer: 1500
-                }).then();
-            }
-        });
-        this.comiteService.listarComites().subscribe({
-            next: (comites: Comite[]) => this.comites = comites,
-            error: (error) => {
-                Swal.fire({
-                    title: 'Error al cargar los comites ' + error,
-                    icon: 'error',
-                    showConfirmButton: false,
-                    timer: 1500
-                }).then();
-            }
-        });
-        this.consultorService.getConsultores().subscribe({
-            next: (consultores: Consultores[]) => this.consultores = consultores,
-            error: (error) => {
-                Swal.fire({
-                    title: 'Error al cargar los consultores ' + error,
-                    icon: 'error',
-                    showConfirmButton: false,
-                    timer: 1500
-                }).then();
-            }
-        });
-        this.expertorComiteService.getExpertosComite().subscribe({
-            next: (expertosComite: ExpertoComite[]) => this.expertosComite = expertosComite,
-            error: (error) => {
-                Swal.fire({
-                    title: 'Error al cargar los expertos de comite ' + error,
-                    icon: 'error',
-                    showConfirmButton: false,
-                    timer: 1500
-                }).then();
-            }
-        });
-        this.etService.getExpertosTecnicos().subscribe({
-            next: (expertosTecnicos: ExpertoTecnico[]) => this.expertosTecnicos = expertosTecnicos,
-            error: (error) => {
-                Swal.fire({
-                    title: 'Error al cargar los expertos tecnicos ' + error,
-                    icon: 'error',
-                    showConfirmButton: false,
-                    timer: 1500
-                }).then();
-            }
-        });
-        this.recursosService.getRecursos().subscribe({
-            next: (recursos: Recurso[]) => this.recursos = recursos,
-            error: (error) => {
-                Swal.fire({
-                    title: 'Error al cargar los recursos ' + error,
-                    icon: 'error',
-                    showConfirmButton: false,
-                    timer: 1500
-                }).then();
-            }
-        });
-        this.tipoRecusoService.listarTipoRecursos().subscribe({
-            next: (tiposRecursos: TipoRecurso[]) => this.tiposRecursos = tiposRecursos,
-            error: (error) => {
-                Swal.fire({
-                    title: 'Error al cargar los tipos de recursos ' + error,
-                    icon: 'error',
-                    showConfirmButton: false,
-                    timer: 1500
-                }).then();
-            }
-        });
-        this.tramiteService.obtenerTramites().subscribe({
-            next: (tramites: Tramites[]) => this.tramites = tramites,
-            error: (error) => {
-                Swal.fire({
-                    title: 'Error al cargar los tramites ' + error,
-                    icon: 'error',
-                    showConfirmButton: false,
-                    timer: 1500
-                }).then();
-            }
-        });
-        this.avisoService.listarAvisos().subscribe({
-            next: (avisos: Aviso[]) => this.avisos = avisos,
-            error: (error) => {
-                Swal.fire({
-                    title: 'Error al cargar los avisos ' + error,
-                    icon: 'error',
-                    showConfirmButton: false,
-                    timer: 1500
-                }).then();
+                this.showErrorMessage('Error al cargar los datos: ' + error);
             }
         });
     }
@@ -221,71 +139,8 @@ export class UserComponent implements OnInit {
         }).then();
     }
 
-
-    // public actualizarPerfil(): void {
-    //     const {displayName, email, password} = this.userForm.value;
-    //     if (displayName != this._user?.displayName) {
-    //         this.userService.updateDisplayName(displayName).then(() => {
-    //             Swal.fire({
-    //                 title: 'Nombre actualizado',
-    //                 icon: 'success',
-    //                 showConfirmButton: false,
-    //                 timer: 1500
-    //             }).then();
-    //         }).catch((_) => {
-    //             Swal.fire({
-    //                 title: 'Error al actualizar el nombre',
-    //                 icon: 'error',
-    //                 showConfirmButton: false,
-    //                 timer: 1500
-    //             }).then();
-    //         });
-    //     }
-    //     if (email != this._user?.email) {
-    //         this.userService.updateEmail(email).then(() => {
-    //             Swal.fire({
-    //                 title: 'Email actualizado',
-    //                 icon: 'success',
-    //                 showConfirmButton: false,
-    //                 timer: 1500
-    //             }).then();
-    //         }).catch((_) => {
-    //             Swal.fire({
-    //                 title: 'Error al actualizar el email',
-    //                 icon: 'error',
-    //                 showConfirmButton: false,
-    //                 timer: 1500
-    //             }).then();
-    //         });
-    //     }
-    //     if (password != '') {
-    //         this.userService.updatePassword(password).then(() => {
-    //             Swal.fire({
-    //                 title: 'Contraseña actualizada',
-    //                 icon: 'success',
-    //                 showConfirmButton: false,
-    //                 timer: 1500
-    //             }).then();
-    //         }).catch((_) => {
-    //             Swal.fire({
-    //                 title: 'Error al actualizar la contraseña',
-    //                 icon: 'error',
-    //                 showConfirmButton: false,
-    //                 timer: 1500
-    //             }).then();
-    //         });
-    //     } else {
-    //         Swal.fire({
-    //             title: 'No hay cambios',
-    //             icon: 'info',
-    //             showConfirmButton: false,
-    //             timer: 1500
-    //         }).then(e=> console.log(e));
-    //     }
-    // }
-
     public actualizarPerfil(): void {
-        const { displayName, email, password } = this.userForm.value;
+        const {displayName, email, password} = this.userForm.value;
 
         const updateDisplayName: Promise<void> = displayName !== this._user?.displayName ? this.userService.updateDisplayName(displayName) : Promise.resolve();
         const updateEmail: Promise<void> = email !== this._user?.email ? this.userService.updateEmail(email) : Promise.resolve();
@@ -297,20 +152,7 @@ export class UserComponent implements OnInit {
     }
 
     public backup(): void {
-        const data = {
-            proyectos: this.proyectos,
-            comites: this.comites,
-            consultores: this.consultores,
-            expertosComite: this.expertosComite,
-            expertosTecnicos: this.expertosTecnicos,
-            recursos: this.recursos,
-            tiposRecursos: this.tiposRecursos,
-            tramites: this.tramites,
-            avisos: this.avisos,
-
-        }
-
-        const jsonString = JSON.stringify(data);
+        const jsonString = JSON.stringify(this.data);
         const blob = new Blob([jsonString], {type: 'application/json'});
         const url = window.URL.createObjectURL(blob);
 
@@ -320,6 +162,5 @@ export class UserComponent implements OnInit {
         a.click();
 
         window.URL.revokeObjectURL(url);
-
     }
 }

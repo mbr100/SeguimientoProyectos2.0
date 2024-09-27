@@ -1,18 +1,18 @@
 import { Injectable } from '@angular/core';
-import {AngularFireAuth} from "@angular/fire/compat/auth";
+import { AngularFireAuth } from "@angular/fire/compat/auth";
 import firebase from "firebase/compat";
 import UserCredential = firebase.auth.UserCredential;
-import {map, Observable} from "rxjs";
-import {Router} from "@angular/router";
+import { map, Observable } from "rxjs";
+import { Router } from "@angular/router";
 import Swal from "sweetalert2";
 
 @Injectable({
-  providedIn: 'root'
+    providedIn: 'root'
 })
 export class AuthService {
 
     public user$!: Observable<firebase.User|null>;
-    public isLoggedIn:boolean = false;
+    public isLoggedIn: boolean = false;
 
     constructor(private authService: AngularFireAuth, private router: Router) {
         this.user$ = authService.authState;
