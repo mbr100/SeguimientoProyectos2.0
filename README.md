@@ -10,6 +10,18 @@ Seguimiento Proyecto 2.0 es una aplicación desarrollada para gestionar y realiz
 - Implementación de Bootstrap para un diseño responsivo.
 - Alertas visuales integradas con SweetAlert2.
 - Generación y descarga de reportes en Excel utilizando xlsx.
+- Manejo de eventos asincrónicos con RxJS.
+- Protección de rutas con Guards y autenticación con Firebase.
+- Despliegue en Firebase Hosting.
+- Uso de servicios para la gestión de datos y lógica de negocio.
+
+## Funcionalidades
+- **Inicio de Sesión**: Inicio de sesión con correo electrónico y contraseña.
+- **Mantenimiento de Actores**: Creación, edición y eliminación de actores.
+- **Mantenimiento de Proyectos**: Creación, edición y eliminación de proyectos.
+- **Estadísticas de Proyectos**: Visualización de estadísticas de proyectos.
+- **Descarga de Reportes**: Descarga de reportes en formato Excel.
+- **Administración de Tramites**: Creación, edición y eliminación de trámites.
 
 ## Tecnologías utilizadas
 
