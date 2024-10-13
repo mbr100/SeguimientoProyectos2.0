@@ -11,6 +11,7 @@ registerLocaleData(localeEs, 'es-ES');
 
 import { USE_EMULATOR as USE_FIRESTORE_EMULATOR } from '@angular/fire/compat/firestore'
 import { USE_EMULATOR as USE_AUTH_EMULATOR } from '@angular/fire/compat/auth';
+import {initializeApp, provideFirebaseApp} from "@angular/fire/app";
 
 export const appConfig: ApplicationConfig = {
     providers: [
@@ -19,10 +20,9 @@ export const appConfig: ApplicationConfig = {
         provideFirestore(()=>getFirestore()),
         provideAuth(() => getAuth()),
         provideFirestore(() => getFirestore()),
-        { provide: LOCALE_ID, useValue: 'es-ES' }
-        //provideFirebaseApp(() => initializeApp(environment.firebase), environment.nombreApp),
-        //{ provide: USE_FIRESTORE_EMULATOR, useValue: !environment.production ? ['http://localhost', 8080] : undefined },
+        { provide: LOCALE_ID, useValue: 'es-ES' },
+        provideFirebaseApp(() => initializeApp(environment.firebase), environment.nombreApp),
+        { provide: USE_FIRESTORE_EMULATOR, useValue: !environment.production ? ['http://localhost', 8080] : undefined },
         //{ provide: USE_AUTH_EMULATOR, useValue: !environment.production ? ['http://localhost', 9099] : undefined },
     ]
-
 };
