@@ -1,8 +1,8 @@
-# Seguimiento Proyecto 2.0
+# Seguimiento de Proyectos 2.0
 
 ## Descripción
 
-Seguimiento Proyecto 2.0 es una aplicación desarrollada para gestionar y realizar seguimiento a proyectos de I+D+i en certificación. La aplicación permite que el Gestor del Proyecto tenga a todos los actores de una certificación, teniendo su información de contacto y pudiendo sacar estadísticas acerca de sus proyectos. Toda la información de los distintos acores se almacena por separado pudiéndose actualizar y mantenerse al día.
+Seguimiento Proyecto 2.0 es una aplicación desarrollada para gestionar y realizar seguimiento a proyectos de I+D+i en certificación. La aplicación permite que el Gestor del Proyecto tenga a toda la información de los actores de una certificación a simple vista y pueda sacar estadísticas acerca de sus proyectos. Toda la información se puede actualizar reflejandose en los proyectos.
 ## Características
 
 - Interfaz interactiva desarrollada con Angular.
